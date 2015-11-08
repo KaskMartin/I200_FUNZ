@@ -1,4 +1,8 @@
 import javafx.application.Application;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.Group;
@@ -27,15 +31,58 @@ public class Game extends Application
     {
         theStage.setTitle( "Püüa ainult tervislikku toitu!" );
         Group root = new Group();
-        // Scene theMenu = new Scene (root);
-        // theStage.setScene( theMenu )  <- v6ta komment 2ra kui menyy valmis
-        // SIIA TULEB MENYY jama. Nupp "Start Game" = theStage.setScene( theGame )
+        Scene theMenu = new Scene (root);
+        theStage.setScene( theMenu );
 
-        Scene theGame = new Scene( root );
+        Group root1 = new Group();
+        Scene theGame = new Scene( root1 );
+        //-------------------------------------------------------------------------menu start
+        //Stage menuwindow;
+        Canvas canvas = new Canvas(200, 200);
+        //Scene theMenu = new Scene;
 
-        theStage.setScene( theGame ); // kustuta see siit ära kui menyy valmis
+        Label label1 = new Label("Pyya ainult tervislikku toitu!"); //Tekst ekraanil
+        Button Start = new Button("Start");
+        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
+        Start.setFont(theFont);
+        Button Highscores = new Button("Highscores");
+        Highscores.setFont(theFont);
+        Button Settings = new Button("Settings");
+        Settings.setFont(theFont);
+        Button Exit = new Button("Exit");
+        Exit.setFont(theFont);
+        //final Scene finalTheGame = theGame;
+        //Start.setOnAction(e -> theStage.setScene(finalTheGame));
+        //button5.setOnAction(event -> theStage.setScene(finalTheGame));
 
-        Canvas canvas = new Canvas( 800, 600);
+        //Layout 1- cildren are laid out in vertical column
+        Pane layout1 = new Pane();
+        Start.setTranslateY(100);
+        Start.setTranslateX(300);
+        Highscores.setTranslateY(200);
+        Highscores.setTranslateX(300);
+        Settings.setTranslateY(300);
+        Settings.setTranslateX(300);
+        Exit.setTranslateY(400);
+        Exit.setTranslateX(300);
+        layout1.getChildren().addAll(label1, Start, Highscores, Settings, Exit);
+        theMenu = new Scene(layout1, 800, 600);
+
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
+        final Scene finalTheMenu = theGame;
+        Start.setOnAction(e -> theStage.setScene(theGame));
+
+        //tekitab akna 1, sellest alustame näitamist
+        theStage.setScene(theMenu);
+        theStage.setTitle("Pyya ainult tervislikku toitu!");
+        label1.setFont(theFont);
+        theStage.show();
+
+        //------------------------------------------------------------------endmenu
+
+
+        canvas = new Canvas( 800, 600);
         root.getChildren().add( canvas );
 
         ArrayList<String> input = new ArrayList<String>();
@@ -62,9 +109,9 @@ public class Game extends Application
                     }
                 });
 
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        //GraphicsContext gc = canvas.getGraphicsContext2D();
 
-        Font theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
+        //Font theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
         gc.setFill( Color.GREEN );
         gc.setStroke( Color.BLACK );
