@@ -68,29 +68,33 @@ import java.util.Iterator;
 
             //GraphicsContext gc = canvas.getGraphicsContext2D();
 
-            //theSettings ekraanil kuvatavate nuppude asukohad
-            Label label3 = new Label("Settings");
-            TextField textField = new TextField ();
+            //theSettings scene nupp
+            Label label3 = new Label("Pyya ainult tervislikku toitu!"); //Tekst ekraanil
+            Button Tagasi = new Button("Tagasi");
+            Tagasi.setFont(theFont);
+            Start.setOnAction(event -> window.setScene(theMenu)); //viib theMenu scenele.
+
+            //theSettings scene nupu asukoht ja toimimine
+            Pane layout3 = new Pane();
+            Button mineTagasi = new Button("Go back to Menu");
+            mineTagasi.setTranslateY(300);
+            mineTagasi.setTranslateX(300);
+            mineTagasi.setFont(theFont);
+            mineTagasi.setOnAction(event -> window.setScene(theMenu));  //viib theMenu scenele.
+            TextField textField = new TextField (); //tekstiväli kasutajanime sisestamiseks
             HBox hb = new HBox();
             hb.getChildren().addAll(label3, textField);
             hb.setSpacing(10);
-
-            Pane layout3 = new Pane();
-            Settings.setTranslateY(300);
-            Settings.setTranslateX(300);
+            layout3.getChildren().addAll(label3, mineTagasi, textField);
             theSettings = new Scene(layout3, 800, 600);
-
-            //Button 2 - vajutades viib tagasi theMenu.
-            //Button button2 = new Button("Mine tagasi esimesele ekraanile");
-            //button2.setOnAction(e -> window.setScene(theMenu));
 
             // Layout 2
             StackPane layout2 = new StackPane();
-            //layout2.getChildren().add(button2);
             theGame = new Scene(layout2, 800, 600);
 
             ArrayList<String> input = new ArrayList<String>();
 
+            /*
             // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
             theGame.setOnKeyPressed(
                     new EventHandler<KeyEvent>()
@@ -220,7 +224,7 @@ import java.util.Iterator;
 
                 }
             }.start();
-
+            */
             //tekitab akna 1, sellest alustame näitamist
             window.setScene(theMenu);
             window.setTitle("Pyya ainult tervislikku toitu!");
