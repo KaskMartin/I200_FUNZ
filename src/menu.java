@@ -21,7 +21,7 @@ import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-//Menyy kirjutamine, testin
+//Menyy kirjutamine
 
     public class menu extends Application {
         Stage window;
