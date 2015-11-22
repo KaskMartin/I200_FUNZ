@@ -21,7 +21,7 @@ import javafx.stage.WindowEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-//Menyy kirjutamine
+//Menyy kirjutamine.lol
 
     public class menu extends Application {
         Stage window;
@@ -94,7 +94,6 @@ import java.util.Iterator;
 
             ArrayList<String> input = new ArrayList<String>();
 
-            /*
             // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
             theGame.setOnKeyPressed(
                     new EventHandler<KeyEvent>()
@@ -224,7 +223,7 @@ import java.util.Iterator;
 
                 }
             }.start();
-            */
+
             //tekitab akna 1, sellest alustame näitamist
             window.setScene(theMenu);
             window.setTitle("Pyya ainult tervislikku toitu!");
@@ -233,8 +232,8 @@ import java.util.Iterator;
 
         }
 
-        public static void theGameScene(Stage primaryStage) {
+        //public static void theGameScene(Stage primaryStage) {
 
 
         }
-    }
+
