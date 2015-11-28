@@ -425,7 +425,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448733531105</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="eventhandlerite muudatused - lyhemad. Kas ok?">
+      <created>1448734419267</created>
+      <option name="number" value="00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1448734419267</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -471,7 +477,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="images added 32x32px" />
     <MESSAGE value="back to menu nupud" />
-    <option name="LAST_COMMIT_MESSAGE" value="back to menu nupud" />
+    <MESSAGE value="eventhandlerite muudatused - lyhemad. Kas ok?" />
+    <option name="LAST_COMMIT_MESSAGE" value="eventhandlerite muudatused - lyhemad. Kas ok?" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
