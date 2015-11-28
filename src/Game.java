@@ -37,17 +37,10 @@ public class Game extends Application
         String user1KeyRight = "RIGHT";
 
         //New scene for high scores
-        Group rootHighscore = new Group();
-        Scene theHighscore = new Scene (rootHighscore, 800, 600);
-
-
-        Group rootSettings = new Group();
-        Scene theSettings = new Scene(rootSettings, 800, 600);
-
+        //Group rootHighscore = new Group();
+        //Scene theHighscore = new Scene (rootHighscore, 800, 600);
 
         //-------------------------------------------------------------------------menu start
-
-
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!"); //Tekst ekraanil
         Button startButton = new Button("Start");
         Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
@@ -57,19 +50,14 @@ public class Game extends Application
         highscoresButton.setFont(theFont);
         Button settingsButton = new Button("Settings");
         settingsButton.setFont(theFont);
-            Button changeKeysButton = new Button("Change game keys");
-            changeKeysButton.setFont(theFontSmall);
+        Button changeKeysButton = new Button("Change game keys");
+        changeKeysButton.setFont(theFontSmall);
         Button exitButton = new Button("Exit");
         exitButton.setFont(theFont);
         Button backMenuButton = new Button("Back to Menu");
         backMenuButton.setFont(theFontSmall);
 
-        //final Scene finalTheGame = theGame;
-        //Start.setOnAction(e -> theStage.setScene(finalTheGame));
-        //button5.setOnAction(event -> theStage.setScene(finalTheGame));
-
-        //Layout 1- cildren are laid out in vertical column
-
+       //Layout 1- cildren are laid out in vertical column
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
         highscoresButton.setTranslateY(200);
@@ -80,34 +68,27 @@ public class Game extends Application
         exitButton.setTranslateX(300);
         //backMenuButton.setTranslateY(0);
         //backMenuButton.setTranslateX(0);
-        changeKeysButton.setTranslateY(20);
-        changeKeysButton.setTranslateX(0);
+        changeKeysButton.setTranslateY(500);
+        changeKeysButton.setTranslateX(300);
 
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
 
-        //Group rootSettings = new Group();
-        //rootSettings.getChildren().addAll(changeKeysButton, backMenuButton);
-        //theSettings = new Scene(rootSettings, 800, 600);
+        Group rootHighscore = new Group();
+        rootHighscore.getChildren().addAll(backMenuButton, changeKeysButton);
+        theHighscores = new Scene (rootHighscore, 800, 600);
 
-        startButton.setOnAction(e -> {
-            stage.setScene(theGame);
-        });
+        Group rootSettings = new Group();
+        rootSettings.getChildren().addAll(backMenuButton, changeKeysButton);
+        theSettings = new Scene(rootSettings, 800, 600);
 
-        backMenuButton.setOnAction(e -> {
-            stage.setScene(theMenu);
-        });
-
-        highscoresButton.setOnAction(e -> {
-            stage.setScene(theHighscores);
-        });
-
-        settingsButton.setOnAction(e -> {
-            rootSettings.getChildren().addAll(backMenuButton, changeKeysButton);
-            stage.setScene(theSettings);
-        });
-
+        startButton.setOnAction(e -> stage.setScene(theGame));
+        backMenuButton.setOnAction(e -> stage.setScene(theMenu));
+        highscoresButton.setOnAction(e -> stage.setScene(theHighscores));
+        settingsButton.setOnAction(e -> stage.setScene(theSettings));
+        changeKeysButton.setOnAction(e -> stage.setScene(theMenu)); //the settingu option sinna
+        exitButton.setOnAction(e -> System.exit(0));
 
         //------------------------------------------------------------------endmenu
 
