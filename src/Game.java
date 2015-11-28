@@ -126,15 +126,15 @@ public class Game extends Application
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
-        // int maksimumFoodAllowed = 10;
-
+        int maksimumFoodAllowed = 25;
+        ArrayList<Food> foodList = new ArrayList<Food>();
 
         AnimationTimer animationTimer = new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
                 // calculate time since last update.
-                ArrayList<Food> foodList = new ArrayList<Food>();
+
                 gc.clearRect(0, 0, 800, 600);
 
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
@@ -148,20 +148,6 @@ public class Game extends Application
                     kasutaja1Sprite.addVelocity(150,0);
 
                 kasutaja1Sprite.update(elapsedTime);
-
-             //   if (foodList.size() < maksimumFoodAllowed)
-             //       foodList.add(new Food());
-                foodList.add(new Food());
-
-             //  Timer timer = new Timer();
-             //  TimerTask task = new TimerTask() {
-             //      @Override
-             //      public void run() {
-             //          foodList.add(new Food());
-             //      }
-             //  };
-
-             //   timer.scheduleAtFixedRate(task, 0, 200);
 
                 // kokkupõrgete avastamine
                 Iterator<Food> foodIter = foodList.iterator();
@@ -180,7 +166,7 @@ public class Game extends Application
                     else if ( food.intersects(maapinnas)) {
                         foodIter.remove();
                     }
-                    // food.update(elapsedTime);
+                    food.update(elapsedTime);
 
                 }
 
@@ -206,6 +192,17 @@ public class Game extends Application
 
             }
         };
+
+        Timer timer = new Timer();
+        TimerTask task = new TimerTask() {
+            @Override
+            public void run() {
+                if (foodList.size() < maksimumFoodAllowed)
+                    foodList.add(new Food());
+            }
+        };
+
+        timer.scheduleAtFixedRate(task, 0, 800);
 
         animationTimer.start();
 
