@@ -7,13 +7,12 @@ public class Food extends Sprite {
     String[] goodFood = {"images/carrot.png"};
     String[] badFood = {"images/burger.png"};
     public Boolean good;
+    Random random = new Random();
 
     public Food() {
-        Random random = new Random();
-
         good = random.nextBoolean();
-        this.setPosition((800 / 16) * random.nextInt(16), 0); //positioon 0-750
-        this.setVelocity(0, 110);
+        this.setPosition( 5+random.nextInt(790), 0 ); //positioon 5-790
+        this.setVelocity(0, 20);
         if (good)
             this.setImage(goodFood[random.nextInt(goodFood.length)]);
         else

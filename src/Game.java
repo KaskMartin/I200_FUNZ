@@ -1,7 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.Label;;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -75,6 +75,7 @@ public class Game extends Application
         theMenu = new Scene(rootMenu, 800, 600);
 
         //------------------------------------------------------------------endmenu
+
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Group rootGame = new Group();
@@ -104,9 +105,7 @@ public class Game extends Application
                     }
                 });
 
-        //GraphicsContext gc = canvas.getGraphicsContext2D();
-
-        //Font theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
+        theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
         gc.setFill( Color.GREEN );
         gc.setStroke( Color.BLACK );
@@ -115,11 +114,12 @@ public class Game extends Application
         Sprite basket = new Sprite();
         basket.setImage("images/basket.png");
         basket.setPosition(50, 400);
-
-        ArrayList<Food> foodList = new ArrayList<Food>();
-
+        Sprite maapinnas =  new Sprite();
+        maapinnas.setImage("images/maapind.png");
+        maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
+        // int maksimumFoodAllowed = 10;
 
 
         new AnimationTimer()
@@ -127,26 +127,32 @@ public class Game extends Application
             public void handle(long currentNanoTime)
             {
                 // calculate time since last update.
+                ArrayList<Food> foodList = new ArrayList<Food>();
+
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
 
                 //püüdmis korvi liigutamine
                 basket.setVelocity(0,0);
                 if (input.contains(user1KeyLeft))
-                    basket.addVelocity(-130,0);
+                    basket.addVelocity(-150,0);
                 if (input.contains(user1KeyRight))
-                    basket.addVelocity(130,0);
+                    basket.addVelocity(150,0);
 
                 basket.update(elapsedTime);
 
+             //   if (foodList.size() < maksimumFoodAllowed)
+             //       foodList.add(new Food());
+
                 Timer timer = new Timer();
-                timer.scheduleAtFixedRate(new TimerTask() {
+                TimerTask task = new TimerTask() {
                     @Override
                     public void run() {
                         foodList.add(new Food());
                     }
-                }, 0, 2000);
+                };
 
+                timer.scheduleAtFixedRate(task, 0, 200);
 
                 // kokkupõrgete avastamine
                 Iterator<Food> foodIter = foodList.iterator();
@@ -161,15 +167,18 @@ public class Game extends Application
                             badScore++;
                         foodIter.remove(); //viska toit minema
                     }
+                    if ( maapinnas.intersects(food)) {
+                        foodIter.remove();
+                    }
                     food.update(elapsedTime);
                 }
 
                 // render
-
-                gc.clearRect(0, 0, 800,600);
+                gc.clearRect(0, 0, 800, 600);
+                maapinnas.render( gc );
                 basket.render( gc );
 
-                for (Food food : foodList )
+                for ( Food food : foodList )
                     food.render(gc);
 
                 // Näita halva skoori suurust
