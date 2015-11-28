@@ -31,7 +31,6 @@ public class Game extends Application
     @Override
     public void start(Stage stage)
     {
-
         stage.setTitle("Püüa ainult tervislikku toitu!");
         String user1KeyLeft = "LEFT";
         String user1KeyRight = "RIGHT";
@@ -72,10 +71,10 @@ public class Game extends Application
         settingsButton.setTranslateX(300);
         exitButton.setTranslateY(400);
         exitButton.setTranslateX(300);
-        backMenuAButton.setTranslateY(10);
-        backMenuAButton.setTranslateX(20);
-        changeKeysButton.setTranslateY(10);
-        changeKeysButton.setTranslateX(30);
+        backMenuAButton.setTranslateY(0);
+        backMenuAButton.setTranslateX(0);
+        changeKeysButton.setTranslateY(30);
+        changeKeysButton.setTranslateX(0);
 
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
@@ -109,7 +108,8 @@ public class Game extends Application
         ArrayList<String> input = new ArrayList<String>();
 
         // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
-        theGame.setOnKeyPressed(
+        /**
+        // theGame.setOnKeyPressed(
                 new EventHandler<KeyEvent>()
                 {
                     public void handle(KeyEvent e)
@@ -119,16 +119,27 @@ public class Game extends Application
                             input.add( code );
                     }
                 });
+        */
 
+        theGame.setOnKeyPressed(e -> {
+            String code = e.getCode().toString();
+            if ( !input.contains(code) )
+                input.add(code);
+        });
+        /**
         theGame.setOnKeyReleased(
-                new EventHandler<KeyEvent>()
-                {
-                    public void handle(KeyEvent e)
-                    {
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
                         input.remove( code );
                     }
                 });
+        */
+
+        theGame.setOnKeyReleased(e -> {
+            String code = e.getCode().toString();
+            input.remove(code);
+        });
 
         theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
