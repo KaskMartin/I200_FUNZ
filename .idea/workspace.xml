@@ -3,11 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="938f6c95-8780-4f2d-b51e-3eef0b5c3735" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$1.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$1.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\Game$2.class" afterPath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\Game$2.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\Game$3$1.class" afterPath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\Game$3$1.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\Game$3.class" afterPath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\Game$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Food.java" afterPath="$PROJECT_DIR$/src/Food.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="I200_FUNZ.iws" />
@@ -431,7 +426,13 @@
       <option name="project" value="LOCAL" />
       <updated>1448734419267</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="eventhandlerite muudatused - lyhemad. Kas ok?">
+      <created>1448734429958</created>
+      <option name="number" value="00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1448734429958</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
