@@ -1,7 +1,8 @@
 import javafx.application.Application;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,8 +20,7 @@ import java.util.TimerTask;
 
 public class Game extends Application
 {
-    Scene theMenu, theGame;
-    //rootHighScore, rootSettings
+    Scene theMenu, theGame, theHighscores, theSettings;
     int badScore, goodScore;
 
     public static void main(String[] args)
@@ -40,19 +40,30 @@ public class Game extends Application
         Group rootHighscore = new Group();
         Scene theHighscore = new Scene (rootHighscore, 800, 600);
 
+
+        Group rootSettings = new Group();
+        Scene theSettings = new Scene(rootSettings, 800, 600);
+
+
         //-------------------------------------------------------------------------menu start
 
 
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!"); //Tekst ekraanil
         Button startButton = new Button("Start");
         Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
+        Font theFontSmall = Font.font("Helvetica", FontWeight.NORMAL, 12);
         startButton.setFont(theFont);
         Button highscoresButton = new Button("Highscores");
         highscoresButton.setFont(theFont);
         Button settingsButton = new Button("Settings");
         settingsButton.setFont(theFont);
+            Button changeKeysButton = new Button("Change game keys");
+            changeKeysButton.setFont(theFontSmall);
         Button exitButton = new Button("Exit");
         exitButton.setFont(theFont);
+        Button backMenuButton = new Button("Back to Menu");
+        backMenuButton.setFont(theFontSmall);
+
         //final Scene finalTheGame = theGame;
         //Start.setOnAction(e -> theStage.setScene(finalTheGame));
         //button5.setOnAction(event -> theStage.setScene(finalTheGame));
@@ -67,19 +78,36 @@ public class Game extends Application
         settingsButton.setTranslateX(300);
         exitButton.setTranslateY(400);
         exitButton.setTranslateX(300);
-
-        startButton.setOnAction(event -> {
-            stage.setScene(theGame);
-        });
-
-        highscoresButton.setOnAction(event1 -> {
-            stage.setScene(theHighscore);
-
-        });
+        //backMenuButton.setTranslateY(0);
+        //backMenuButton.setTranslateX(0);
+        changeKeysButton.setTranslateY(20);
+        changeKeysButton.setTranslateX(0);
 
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
+
+        //Group rootSettings = new Group();
+        //rootSettings.getChildren().addAll(changeKeysButton, backMenuButton);
+        //theSettings = new Scene(rootSettings, 800, 600);
+
+        startButton.setOnAction(e -> {
+            stage.setScene(theGame);
+        });
+
+        backMenuButton.setOnAction(e -> {
+            stage.setScene(theMenu);
+        });
+
+        highscoresButton.setOnAction(e -> {
+            stage.setScene(theHighscores);
+        });
+
+        settingsButton.setOnAction(e -> {
+            rootSettings.getChildren().addAll(backMenuButton, changeKeysButton);
+            stage.setScene(theSettings);
+        });
+
 
         //------------------------------------------------------------------endmenu
 
@@ -88,6 +116,7 @@ public class Game extends Application
         Group rootGame = new Group();
         rootGame.getChildren().add( canvas );
         theGame = new Scene (rootGame);
+        rootGame.getChildren().addAll(backMenuButton);
         ArrayList<String> input = new ArrayList<String>();
 
         // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
