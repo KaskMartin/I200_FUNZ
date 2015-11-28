@@ -1,7 +1,11 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -19,8 +23,7 @@ import java.util.TimerTask;
 
 public class Game extends Application
 {
-    Scene theMenu, theGame;
-    //rootHighScore, rootSettings
+    Scene theMenu, theGame, theHighscores, theSettings;
     int badScore, goodScore;
 
     public static void main(String[] args)
@@ -31,34 +34,31 @@ public class Game extends Application
     @Override
     public void start(Stage stage)
     {
-
         stage.setTitle("Püüa ainult tervislikku toitu!");
         String user1KeyLeft = "LEFT";
         String user1KeyRight = "RIGHT";
 
-        //New scene for high scores
-        Group rootHighscore = new Group();
-        Scene theHighscore = new Scene (rootHighscore, 800, 600);
-
         //-------------------------------------------------------------------------menu start
-
-
-        Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!"); //Tekst ekraanil
+        Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
         Button startButton = new Button("Start");
         Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
+        Font theFontSmall = Font.font("Helvetica", FontWeight.NORMAL, 12);
         startButton.setFont(theFont);
+
         Button highscoresButton = new Button("Highscores");
-        highscoresButton.setFont(theFont);
+            highscoresButton.setFont(theFont);
         Button settingsButton = new Button("Settings");
-        settingsButton.setFont(theFont);
+            settingsButton.setFont(theFont);
         Button exitButton = new Button("Exit");
-        exitButton.setFont(theFont);
-        //final Scene finalTheGame = theGame;
-        //Start.setOnAction(e -> theStage.setScene(finalTheGame));
-        //button5.setOnAction(event -> theStage.setScene(finalTheGame));
+            exitButton.setFont(theFont);
+        Button backMenuAButton = new Button("Back to Menu");
+            backMenuAButton.setFont(theFontSmall);
+        Button backMenuBButton = new Button("Back to Menu");
+            backMenuBButton.setFont(theFontSmall);
+        Button backMenuCButton = new Button("Back to Menu");
+            backMenuCButton.setFont(theFontSmall);
 
-        //Layout 1- cildren are laid out in vertical column
-
+        //Layout
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
         highscoresButton.setTranslateY(200);
@@ -67,19 +67,61 @@ public class Game extends Application
         settingsButton.setTranslateX(300);
         exitButton.setTranslateY(400);
         exitButton.setTranslateX(300);
-
-        startButton.setOnAction(event -> {
-            stage.setScene(theGame);
-        });
-
-        highscoresButton.setOnAction(event1 -> {
-            stage.setScene(theHighscore);
-
-        });
+        backMenuAButton.setTranslateY(0);
+        backMenuAButton.setTranslateX(0);
+        backMenuCButton.setTranslateY(120);
+        backMenuCButton.setTranslateX(0);
 
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
+
+        Group rootHighscore = new Group();
+        rootHighscore.getChildren().addAll(backMenuBButton);
+        theHighscores = new Scene (rootHighscore, 800, 600);
+
+        Group rootSettings = new Group();
+        rootSettings.getChildren().addAll(backMenuCButton);
+        theSettings = new Scene(rootSettings, 800, 600);
+        //----------------------------------------------------------------start settingnupp
+        final ToggleGroup group = new ToggleGroup();
+
+        RadioButton var1 = new RadioButton("<- ->");
+            var1.setToggleGroup(group);
+            var1.setUserData("<- ->");
+
+        RadioButton var2 = new RadioButton("Q W");
+            var2.setToggleGroup(group);
+            var2.setUserData("Q W");
+
+        RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
+            var3.setToggleGroup(group);
+            var3.setUserData("Muu");
+
+        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        });
+
+        HBox hbox = new HBox();
+        VBox vbox = new VBox();
+
+        vbox.getChildren().add(var1);
+        vbox.getChildren().add(var2);
+        vbox.getChildren().add(var3);
+        vbox.setSpacing(10);
+
+        hbox.getChildren().add(vbox);
+        hbox.setSpacing(50);
+        hbox.setPadding(new Insets(20, 10, 10, 20));
+
+        ((Group) theSettings.getRoot()).getChildren().add(hbox);
+        //------------------------------------------------------------------end settingnupp
+        startButton.setOnAction(e -> stage.setScene(theGame));
+        backMenuAButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuCButton.setOnAction(e -> stage.setScene(theMenu));
+        highscoresButton.setOnAction(e -> stage.setScene(theHighscores));
+        settingsButton.setOnAction(e -> stage.setScene(theSettings));
+        exitButton.setOnAction(e -> System.exit(0));
 
         //------------------------------------------------------------------endmenu
 
@@ -88,10 +130,12 @@ public class Game extends Application
         Group rootGame = new Group();
         rootGame.getChildren().add( canvas );
         theGame = new Scene (rootGame);
+        rootGame.getChildren().addAll(backMenuAButton);
         ArrayList<String> input = new ArrayList<String>();
 
         // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
-        theGame.setOnKeyPressed(
+        /**
+        // theGame.setOnKeyPressed(
                 new EventHandler<KeyEvent>()
                 {
                     public void handle(KeyEvent e)
@@ -101,16 +145,27 @@ public class Game extends Application
                             input.add( code );
                     }
                 });
+        */
 
+        theGame.setOnKeyPressed(e -> {
+            String code = e.getCode().toString();
+            if ( !input.contains(code) )
+                input.add(code);
+        });
+        /**
         theGame.setOnKeyReleased(
-                new EventHandler<KeyEvent>()
-                {
-                    public void handle(KeyEvent e)
-                    {
+                new EventHandler<KeyEvent>() {
+                    public void handle(KeyEvent e) {
                         String code = e.getCode().toString();
                         input.remove( code );
                     }
                 });
+        */
+
+        theGame.setOnKeyReleased(e -> {
+            String code = e.getCode().toString();
+            input.remove(code);
+        });
 
         theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
