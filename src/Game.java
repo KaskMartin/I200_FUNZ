@@ -1,8 +1,11 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
-import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
+import javafx.scene.control.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -35,12 +38,8 @@ public class Game extends Application
         String user1KeyLeft = "LEFT";
         String user1KeyRight = "RIGHT";
 
-        //New scene for high scores
-        //Group rootHighscore = new Group();
-        //Scene theHighscore = new Scene (rootHighscore, 800, 600);
-
         //-------------------------------------------------------------------------menu start
-        Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!"); //Tekst ekraanil
+        Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
         Button startButton = new Button("Start");
         Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
         Font theFontSmall = Font.font("Helvetica", FontWeight.NORMAL, 12);
@@ -49,8 +48,6 @@ public class Game extends Application
         highscoresButton.setFont(theFont);
         Button settingsButton = new Button("Settings");
         settingsButton.setFont(theFont);
-        Button changeKeysButton = new Button("Change game keys");
-        changeKeysButton.setFont(theFontSmall);
         Button exitButton = new Button("Exit");
         exitButton.setFont(theFont);
         Button backMenuAButton = new Button("Back to Menu");
@@ -60,9 +57,7 @@ public class Game extends Application
         Button backMenuCButton = new Button("Back to Menu");
         backMenuCButton.setFont(theFontSmall);
 
-
-
-       //Layout 1- cildren are laid out in vertical column
+        //Layout
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
         highscoresButton.setTranslateY(200);
@@ -73,8 +68,8 @@ public class Game extends Application
         exitButton.setTranslateX(300);
         backMenuAButton.setTranslateY(0);
         backMenuAButton.setTranslateX(0);
-        changeKeysButton.setTranslateY(30);
-        changeKeysButton.setTranslateX(0);
+        backMenuCButton.setTranslateY(120);
+        backMenuCButton.setTranslateX(0);
 
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
@@ -85,16 +80,46 @@ public class Game extends Application
         theHighscores = new Scene (rootHighscore, 800, 600);
 
         Group rootSettings = new Group();
-        rootSettings.getChildren().addAll(changeKeysButton, backMenuCButton);
+        rootSettings.getChildren().addAll(backMenuCButton);
         theSettings = new Scene(rootSettings, 800, 600);
+        //----------------------------------------------------------------start settingnupp
+        final ToggleGroup group = new ToggleGroup();
 
+        RadioButton var1 = new RadioButton("<- ->");
+        var1.setToggleGroup(group);
+        var1.setUserData("<- ->");
+
+        RadioButton var2 = new RadioButton("Q W");
+        var2.setToggleGroup(group);
+        var2.setUserData("Q W");
+
+        RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
+        var3.setToggleGroup(group);
+        var3.setUserData("Muu");
+
+        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        });
+
+        HBox hbox = new HBox();
+        VBox vbox = new VBox();
+
+        vbox.getChildren().add(var1);
+        vbox.getChildren().add(var2);
+        vbox.getChildren().add(var3);
+        vbox.setSpacing(10);
+
+        hbox.getChildren().add(vbox);
+        hbox.setSpacing(50);
+        hbox.setPadding(new Insets(20, 10, 10, 20));
+
+        ((Group) theSettings.getRoot()).getChildren().add(hbox);
+        //------------------------------------------------------------------end settingnupp
         startButton.setOnAction(e -> stage.setScene(theGame));
         backMenuAButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuCButton.setOnAction(e -> stage.setScene(theMenu));
         highscoresButton.setOnAction(e -> stage.setScene(theHighscores));
         settingsButton.setOnAction(e -> stage.setScene(theSettings));
-        changeKeysButton.setOnAction(e -> stage.setScene(theMenu)); //the settingu option sinna
         exitButton.setOnAction(e -> System.exit(0));
 
         //------------------------------------------------------------------endmenu
@@ -168,7 +193,7 @@ public class Game extends Application
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
 
-                //püüdmis korvi liigutamine
+                //püüdmiskorvi liigutamine
                 basket.setVelocity(0,0);
                 if (input.contains(user1KeyLeft))
                     basket.addVelocity(-150,0);
