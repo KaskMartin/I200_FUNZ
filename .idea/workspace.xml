@@ -2,14 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="938f6c95-8780-4f2d-b51e-3eef0b5c3735" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\KeM\IdeaProjects\I200_FUNZ\out\production\I200_FUNZ\menu.class" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Food.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Food.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$1.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$2.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$2.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$3$1.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$3$1.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$3.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Game$3.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Game.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/HighScores.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/HighScores.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="I200_FUNZ.iws" />
@@ -381,6 +373,13 @@
       <option name="number" value="Default" />
       <updated>1448662246227</updated>
     </task>
+    <task id="LOCAL-00001" summary="images added 32x32px">
+      <created>1448716879562</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1448716879562</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -422,6 +421,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="images added 32x32px" />
+    <option name="LAST_COMMIT_MESSAGE" value="images added 32x32px" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
