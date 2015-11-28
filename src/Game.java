@@ -54,8 +54,14 @@ public class Game extends Application
         changeKeysButton.setFont(theFontSmall);
         Button exitButton = new Button("Exit");
         exitButton.setFont(theFont);
-        Button backMenuButton = new Button("Back to Menu");
-        backMenuButton.setFont(theFontSmall);
+        Button backMenuAButton = new Button("Back to Menu");
+        backMenuAButton.setFont(theFontSmall);
+        Button backMenuBButton = new Button("Back to Menu");
+        backMenuBButton.setFont(theFontSmall);
+        Button backMenuCButton = new Button("Back to Menu");
+        backMenuCButton.setFont(theFontSmall);
+
+
 
        //Layout 1- cildren are laid out in vertical column
         startButton.setTranslateY(100);
@@ -66,25 +72,27 @@ public class Game extends Application
         settingsButton.setTranslateX(300);
         exitButton.setTranslateY(400);
         exitButton.setTranslateX(300);
-        //backMenuButton.setTranslateY(0);
-        //backMenuButton.setTranslateX(0);
-        changeKeysButton.setTranslateY(500);
-        changeKeysButton.setTranslateX(300);
+        backMenuAButton.setTranslateY(10);
+        backMenuAButton.setTranslateX(20);
+        changeKeysButton.setTranslateY(10);
+        changeKeysButton.setTranslateX(30);
 
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
 
         Group rootHighscore = new Group();
-        rootHighscore.getChildren().addAll(backMenuButton, changeKeysButton);
+        rootHighscore.getChildren().addAll(backMenuBButton);
         theHighscores = new Scene (rootHighscore, 800, 600);
 
         Group rootSettings = new Group();
-        rootSettings.getChildren().addAll(backMenuButton, changeKeysButton);
+        rootSettings.getChildren().addAll(changeKeysButton, backMenuCButton);
         theSettings = new Scene(rootSettings, 800, 600);
 
         startButton.setOnAction(e -> stage.setScene(theGame));
-        backMenuButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuAButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuCButton.setOnAction(e -> stage.setScene(theMenu));
         highscoresButton.setOnAction(e -> stage.setScene(theHighscores));
         settingsButton.setOnAction(e -> stage.setScene(theSettings));
         changeKeysButton.setOnAction(e -> stage.setScene(theMenu)); //the settingu option sinna
@@ -97,7 +105,7 @@ public class Game extends Application
         Group rootGame = new Group();
         rootGame.getChildren().add( canvas );
         theGame = new Scene (rootGame);
-        rootGame.getChildren().addAll(backMenuButton);
+        rootGame.getChildren().addAll(backMenuAButton);
         ArrayList<String> input = new ArrayList<String>();
 
         // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
