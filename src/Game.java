@@ -36,7 +36,9 @@ public class Game extends Application
         String user1KeyLeft = "LEFT";
         String user1KeyRight = "RIGHT";
 
-        // Scene theHighscore = new Scene ( rootHighscore );
+        //New scene for high scores
+        Group rootHighscore = new Group();
+        Scene theHighscore = new Scene (rootHighscore, 800, 600);
 
         //-------------------------------------------------------------------------menu start
 
@@ -68,6 +70,11 @@ public class Game extends Application
 
         startButton.setOnAction(event -> {
             stage.setScene(theGame);
+        });
+
+        highscoresButton.setOnAction(event1 -> {
+            stage.setScene(theHighscore);
+
         });
 
         Group rootMenu = new Group();
