@@ -44,18 +44,19 @@ public class Game extends Application
         Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
         Font theFontSmall = Font.font("Helvetica", FontWeight.NORMAL, 12);
         startButton.setFont(theFont);
+
         Button highscoresButton = new Button("Highscores");
-        highscoresButton.setFont(theFont);
+            highscoresButton.setFont(theFont);
         Button settingsButton = new Button("Settings");
-        settingsButton.setFont(theFont);
+            settingsButton.setFont(theFont);
         Button exitButton = new Button("Exit");
-        exitButton.setFont(theFont);
+            exitButton.setFont(theFont);
         Button backMenuAButton = new Button("Back to Menu");
-        backMenuAButton.setFont(theFontSmall);
+            backMenuAButton.setFont(theFontSmall);
         Button backMenuBButton = new Button("Back to Menu");
-        backMenuBButton.setFont(theFontSmall);
+            backMenuBButton.setFont(theFontSmall);
         Button backMenuCButton = new Button("Back to Menu");
-        backMenuCButton.setFont(theFontSmall);
+            backMenuCButton.setFont(theFontSmall);
 
         //Layout
         startButton.setTranslateY(100);
@@ -86,16 +87,16 @@ public class Game extends Application
         final ToggleGroup group = new ToggleGroup();
 
         RadioButton var1 = new RadioButton("<- ->");
-        var1.setToggleGroup(group);
-        var1.setUserData("<- ->");
+            var1.setToggleGroup(group);
+            var1.setUserData("<- ->");
 
         RadioButton var2 = new RadioButton("Q W");
-        var2.setToggleGroup(group);
-        var2.setUserData("Q W");
+            var2.setToggleGroup(group);
+            var2.setUserData("Q W");
 
         RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
-        var3.setToggleGroup(group);
-        var3.setUserData("Muu");
+            var3.setToggleGroup(group);
+            var3.setUserData("Muu");
 
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
         });
@@ -181,7 +182,6 @@ public class Game extends Application
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
         // int maksimumFoodAllowed = 10;
-
 
         new AnimationTimer()
         {
