@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public class HighScores {
     private static final String fileName = "scores.dat"; //Faili nimi
-    public int maxScores = 10; //näitab 10 tulemust
+    public int maxScores = 10; //n2itab 10 tulemust
 
     private ArrayList<HighScores> scores;
     public String name;
@@ -34,7 +34,7 @@ public class HighScores {
             object.close();
         } catch (FileNotFoundException e) {e.printStackTrace();}
         catch (IOException e) {
-            System.out.println("Error");}
+            System.out.println("Error: scores.dat file not found!");}
     }
 
     //Faili muutmine
@@ -81,8 +81,8 @@ public class HighScores {
         return score >= lowestHighScore.score;
     }
 
-    //Uue tulemuse lisamine ja kasutajalt nime küsimine
-    public void newHighScore() {
+    //Uue tulemuse lisamine ja kasutajalt nime kï¿½simine
+    public void newHighScore(int currentGamesScore) {
         if (this.checkScore(score)) {
             TextInputDialog dialog = new TextInputDialog();
             dialog.setContentText("Palun sisesta oma nimi");

@@ -118,9 +118,9 @@ public class Game extends Application
         gc.setStroke( Color.BLACK );
         gc.setLineWidth(1);
 
-        Sprite basket = new Sprite();
-        basket.setImage("images/basket.png");
-        basket.setPosition(50, 400);
+        Sprite kasutaja1Sprite = new Sprite();
+        kasutaja1Sprite.setImage("images/basket.png");
+        kasutaja1Sprite.setPosition(50, 400);
         Sprite maapinnas =  new Sprite();
         maapinnas.setImage("images/maapind.png");
         maapinnas.setPosition(0, 550);
@@ -129,44 +129,47 @@ public class Game extends Application
         // int maksimumFoodAllowed = 10;
 
 
-        new AnimationTimer()
+        AnimationTimer animationTimer = new AnimationTimer()
         {
             public void handle(long currentNanoTime)
             {
                 // calculate time since last update.
                 ArrayList<Food> foodList = new ArrayList<Food>();
+                gc.clearRect(0, 0, 800, 600);
 
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
 
                 //püüdmis korvi liigutamine
-                basket.setVelocity(0,0);
+                kasutaja1Sprite.setVelocity(0,0);
                 if (input.contains(user1KeyLeft))
-                    basket.addVelocity(-150,0);
+                    kasutaja1Sprite.addVelocity(-150,0);
                 if (input.contains(user1KeyRight))
-                    basket.addVelocity(150,0);
+                    kasutaja1Sprite.addVelocity(150,0);
 
-                basket.update(elapsedTime);
+                kasutaja1Sprite.update(elapsedTime);
 
              //   if (foodList.size() < maksimumFoodAllowed)
              //       foodList.add(new Food());
+                foodList.add(new Food());
 
-                Timer timer = new Timer();
-                TimerTask task = new TimerTask() {
-                    @Override
-                    public void run() {
-                        foodList.add(new Food());
-                    }
-                };
+             //  Timer timer = new Timer();
+             //  TimerTask task = new TimerTask() {
+             //      @Override
+             //      public void run() {
+             //          foodList.add(new Food());
+             //      }
+             //  };
 
-                timer.scheduleAtFixedRate(task, 0, 200);
+             //   timer.scheduleAtFixedRate(task, 0, 200);
 
                 // kokkupõrgete avastamine
                 Iterator<Food> foodIter = foodList.iterator();
                 while ( foodIter.hasNext() )
                 {
                     Food food = foodIter.next();
-                    if ( basket.intersects(food) )
+                    food.render(gc);
+                    if ( kasutaja1Sprite.intersects(food) )
                     {
                         if (food.good)
                             goodScore++;
@@ -174,19 +177,18 @@ public class Game extends Application
                             badScore++;
                         foodIter.remove(); //viska toit minema
                     }
-                    if ( maapinnas.intersects(food)) {
+                    else if ( food.intersects(maapinnas)) {
                         foodIter.remove();
                     }
-                    food.update(elapsedTime);
+                    // food.update(elapsedTime);
+
                 }
 
                 // render
-                gc.clearRect(0, 0, 800, 600);
-                maapinnas.render( gc );
-                basket.render( gc );
 
-                for ( Food food : foodList )
-                    food.render(gc);
+                maapinnas.render( gc );
+                kasutaja1Sprite.render( gc );
+
 
                 // Näita halva skoori suurust
                 gc.setFill( Color.RED );
@@ -203,7 +205,14 @@ public class Game extends Application
                 gc.strokeText( goodPointsText, 360, 72 );
 
             }
-        }.start();
+        };
+
+        animationTimer.start();
+
+        if (badScore > 10) {
+            animationTimer.stop();
+            // HighScores.newHighScore(goodScore);
+        }
 
         //tekitab akna 1, sellest alustame näitamist
         stage.setTitle("Püüa ainult tervislikku toitu!");
