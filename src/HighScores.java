@@ -1,11 +1,13 @@
 
+import javafx.scene.control.TextInputDialog;
 import java.io.*;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
+import java.util.Optional;
+
 
 public class HighScores {
-    private static final String fileName = "scores.dat";
-    public int maxScores = 10;
+    private static final String fileName = "scores.dat"; //Faili nimi
+    public int maxScores = 10; //näitab 10 tulemust
 
     private ArrayList<HighScores> scores;
     public String name;
@@ -18,6 +20,7 @@ public class HighScores {
     return score + " " + name;
     }
 
+    //Faili laadimine
     private static void loadFile()
     {
         HighScores[] h = {new HighScores(0," "),new HighScores(0," "),new HighScores(0," "),
@@ -34,12 +37,7 @@ public class HighScores {
             System.out.println("Error");}
     }
 
-    public boolean checkScore(int score) {
-        HighScores lowestHighScore = scores.get(scores.size() - 1);
-
-        return score >= lowestHighScore.score;
-    }
-
+    //Faili muutmine
     public void changeFile() {
         loadFile();
         try{
@@ -55,6 +53,7 @@ public class HighScores {
         }
     }
 
+    //Sorteerimine
     public void addHighScore(String name, int score) {
         scores.add(new HighScores(score, name));
         int s;
@@ -76,15 +75,29 @@ public class HighScores {
             }
         }
     }
+    public boolean checkScore(int score) {
+        HighScores lowestHighScore = scores.get(scores.size() - 1);
 
-    public void newHighScore(int score) {
+        return score >= lowestHighScore.score;
+    }
+
+    //Uue tulemuse lisamine ja kasutajalt nime küsimine
+    public void newHighScore() {
         if (this.checkScore(score)) {
-            String name =  JOptionPane.showInputDialog("Sisesta oma nimi");
-            if (name == null)
-                return;
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setContentText("Palun sisesta oma nimi");
+            String name = String.valueOf(dialog.showAndWait());
+            /*
+            if (user.isPresent()){
+                return user;
+            } */
+
+
+
             this.addHighScore(name, score);
             changeFile();
         }
+
     }
 
     public ArrayList<HighScores> getHighScores() {
