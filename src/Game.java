@@ -16,7 +16,6 @@ import javafx.scene.text.FontWeight;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-
 import javax.swing.plaf.basic.BasicComboBoxUI;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class Game extends Application
     }
 
     public static Kasutaja kasutaja; //Kasutajaseaded - Hoiab kasutaja seadeid
-    public static Edetabel edetabel; //Edetabel - väljastab tulemused
+    public static HighScores edetabel; //Edetabel - väljastab tulemused
 
 
     @Override
@@ -55,37 +54,51 @@ public class Game extends Application
         startButton.setFont(theFont);
 
         Button highscoresButton = new Button("Highscores");
-            highscoresButton.setFont(theFont);
+        highscoresButton.setFont(theFont);
+
         Button settingsButton = new Button("Settings");
-            settingsButton.setFont(theFont);
+        settingsButton.setFont(theFont);
+
         Button helpButton = new Button("Help");
-            helpButton.setFont(theFont);
+        helpButton.setFont(theFont);
+
         Button exitButton = new Button("Exit");
-            exitButton.setFont(theFont);
+        exitButton.setFont(theFont);
+
         Button backMenuAButton = new Button("Back to Menu");
-            backMenuAButton.setFont(theFontSmall);
+        backMenuAButton.setFont(theFontSmall);
+
         Button backMenuBButton = new Button("Back to Menu");
-            backMenuBButton.setFont(theFontSmall);
+        backMenuBButton.setFont(theFontSmall);
+
         Button backMenuCButton = new Button("Back to Menu");
-            backMenuCButton.setFont(theFontSmall);
+        backMenuCButton.setFont(theFontSmall);
+
         Button backMenuDButton = new Button("Back to Menu");
-            backMenuDButton.setFont(theFontSmall);
+        backMenuDButton.setFont(theFontSmall);
 
         //Layout
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
+
         highscoresButton.setTranslateY(200);
         highscoresButton.setTranslateX(300);
+
         settingsButton.setTranslateY(300);
         settingsButton.setTranslateX(300);
+
         helpButton.setTranslateY(400);
         helpButton.setTranslateX(300);
+
         exitButton.setTranslateY(500);
         exitButton.setTranslateX(300);
+
         backMenuAButton.setTranslateY(0);
         backMenuAButton.setTranslateX(0);
+
         backMenuCButton.setTranslateY(120);
         backMenuCButton.setTranslateX(0);
+
         backMenuDButton.setTranslateY(0);
         backMenuDButton.setTranslateX(0);
 
