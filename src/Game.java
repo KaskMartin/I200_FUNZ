@@ -16,8 +16,8 @@ import javafx.scene.text.FontWeight;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import java.io.FileOutputStream;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -38,8 +38,7 @@ public class Game extends Application
 
 
     @Override
-    public void start(Stage stage)
-    {
+    public void start(Stage stage) {
         stage.setTitle("Püüa ainult tervislikku toitu!");
         String user1KeyLeft = "LEFT";
         String user1KeyRight = "RIGHT";
@@ -109,7 +108,7 @@ public class Game extends Application
         Group rootHighscore = new Group();
 
         rootHighscore.getChildren().addAll(backMenuBButton);
-        theHighscores = new Scene (rootHighscore, 800, 600);
+        theHighscores = new Scene(rootHighscore, 800, 600);
 
 
         Group rootSettings = new Group();
@@ -117,11 +116,26 @@ public class Game extends Application
         rootSettings.getChildren().addAll(settingsInfo, backMenuCButton);
         theSettings = new Scene(rootSettings, 800, 600);
 
+        //---
+        Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja kaks saab kasutada klahve A ja D.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4. Halva toidu püüdmine annab sulle miinuspunkte.\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
+        juhend.setStyle("-fx-font-size: 12; -fx-fill: black;");
+        juhend.setTranslateX(50);
+        juhend.setTranslateY(150);
+        //---
 
         Group rootHelp = new Group();
         Label settingsHelp = new Label("Mängujuhis");
-        rootHelp.getChildren().addAll(settingsHelp, backMenuDButton);
+        rootHelp.getChildren().addAll(settingsHelp, backMenuDButton, juhend);
         theHelp = new Scene(rootHelp, 800, 600);
+        settingsHelp.setTranslateX(50);
+        settingsHelp.setTranslateY(100);
+
+
+
+
+
+
+
         //----------------------------------------------------------------start settingnupp
         final ToggleGroup group = new ToggleGroup();
 
