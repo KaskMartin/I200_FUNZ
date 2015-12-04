@@ -129,18 +129,6 @@ public class Game extends Application
             var1.setToggleGroup(group);
             var1.setUserData("<- ->");
 
-        //___________________________________________________edetabel algus
-
-        //try {
-            //FileOutputStream edetabel = new FileOutputStream("Edetabel");
-            //object outputstream
-            //write object (this);
-            //close();
-
-
-        //_________________________________________________
-
-
         RadioButton var2 = new RadioButton("A D");
             var2.setToggleGroup(group);
             var2.setUserData("A A");
