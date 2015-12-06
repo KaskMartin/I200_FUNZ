@@ -4,8 +4,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -130,7 +130,7 @@ public class Game extends Application
         settingsHelp.setTranslateX(50);
         settingsHelp.setTranslateY(100);
 
-        //----------------------------------------------------------------start settingnupp
+        //--------------------------------------------------------start settingnupp
         final ToggleGroup group = new ToggleGroup();
 
         RadioButton var1 = new RadioButton("<- ->");
@@ -161,7 +161,7 @@ public class Game extends Application
         hbox.setPadding(new Insets(20, 10, 10, 20));
 
         ((Group) theSettings.getRoot()).getChildren().add(hbox);
-        //------------------------------------------------------------------end settingnupp
+        //--------------------------------------------------------end settingnupp
         startButton.setOnAction(e -> stage.setScene(theGame));
         backMenuAButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
@@ -183,34 +183,11 @@ public class Game extends Application
         ArrayList<String> input = new ArrayList<String>();
 
         // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
-        /**
-        // theGame.setOnKeyPressed(
-                new EventHandler<KeyEvent>()
-                {
-                    public void handle(KeyEvent e)
-                    {
-                        String code = e.getCode().toString();
-                        if ( !input.contains(code) )
-                            input.add( code );
-                    }
-                });
-        */
-
         theGame.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
             if ( !input.contains(code) )
                 input.add(code);
         });
-        /**
-        theGame.setOnKeyReleased(
-                new EventHandler<KeyEvent>() {
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-                        input.remove( code );
-                    }
-                });
-        */
-
         theGame.setOnKeyReleased(e -> {
             String code = e.getCode().toString();
             input.remove(code);
@@ -222,16 +199,22 @@ public class Game extends Application
         gc.setStroke( Color.BLACK );
         gc.setLineWidth(1);
 
+        // Mänguekraanil olevad kujutised ja pildid
+
         Sprite kasutaja1Sprite = new Sprite();
         kasutaja1Sprite.setImage("images/basket.png");
         kasutaja1Sprite.setPosition(50, 400);
+
         Sprite maapinnas =  new Sprite();
         maapinnas.setImage("images/maapind.png");
         maapinnas.setPosition(0, 550);
-        Sprite taevas =  new Sprite();
-        taevas.setImage("images/taevas.png");
-        taevas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
+
+        //Sprite taevas =  new Sprite();
+        //taevas.setImage("images/taevas.png");
+        //taevas.setPosition(0, 0);
+
+
 
         int maksimumFoodAllowed = 25;
         ArrayList<Food> foodList = new ArrayList<Food>();
@@ -281,6 +264,7 @@ public class Game extends Application
 
                 maapinnas.render( gc );
                 kasutaja1Sprite.render( gc );
+                //taevas.render( gc );
 
 
                 // Näita halva skoori suurust
