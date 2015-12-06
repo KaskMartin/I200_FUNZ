@@ -130,12 +130,6 @@ public class Game extends Application
         settingsHelp.setTranslateX(50);
         settingsHelp.setTranslateY(100);
 
-
-
-
-
-
-
         //----------------------------------------------------------------start settingnupp
         final ToggleGroup group = new ToggleGroup();
 
