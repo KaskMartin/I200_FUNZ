@@ -228,6 +228,9 @@ public class Game extends Application
         Sprite maapinnas =  new Sprite();
         maapinnas.setImage("images/maapind.png");
         maapinnas.setPosition(0, 550);
+        Sprite taevas =  new Sprite();
+        taevas.setImage("images/taevas.png");
+        taevas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
         int maksimumFoodAllowed = 25;
