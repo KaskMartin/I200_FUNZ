@@ -106,9 +106,13 @@ public class Game extends Application
         theMenu = new Scene(rootMenu, 800, 600);
 
         Group rootHighscore = new Group();
-
         rootHighscore.getChildren().addAll(backMenuBButton);
         theHighscores = new Scene(rootHighscore, 800, 600);
+        Label settingsHighscore = new Label("Edetabel");
+        settingsHighscore.setTranslateX(50);
+        settingsHighscore.setTranslateY(100);
+        Text edetabel = new Text();
+        //edetabel.setText(HighScores.scoresToText());
 
 
         Group rootSettings = new Group();

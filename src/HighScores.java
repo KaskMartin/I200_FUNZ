@@ -1,108 +1,81 @@
-
 import javafx.scene.control.TextInputDialog;
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Optional;
-
-
 public class HighScores {
+    private ArrayList<Results> scores;
     private static final String fileName = "scores.dat"; //Faili nimi
     public int maxScores = 10; //n2itab 10 tulemust
+    ObjectOutputStream outputStream = null;
+    ObjectInputStream inputStream = null;
 
-    private ArrayList<HighScores> scores;
-    public String name;
-    public int score;
-    public HighScores(int score, String name) {
-        this.name = name;
-        this.score = score;
-    }
-    public String toString() {
-    return score + " " + name;
-    }
+    //Peaks kontrollima, et mänguskoor on piisavalt suur, et edetabelisse pääseda
+    public void checkScore(int score) {
+        if (scores != null && !scores.isEmpty()) {
+            int lowestHighScore = scores.size() - 1; //vale praegu
+        }
 
-    //Faili laadimine
-    private static void loadFile()
-    {
-        HighScores[] h = {new HighScores(0," "),new HighScores(0," "),new HighScores(0," "),
-                new HighScores(0," "),new HighScores(0," "),new HighScores(0," "),
-                new HighScores(0," "),new HighScores(0," "),new HighScores(0," "),
-                new HighScores(0," ")};
-        try
-        {
-            ObjectOutputStream object = new ObjectOutputStream(new FileOutputStream("scores.dat"));
-            object.writeObject(h);
-            object.close();
-        } catch (FileNotFoundException e) {e.printStackTrace();}
-        catch (IOException e) {
-            System.out.println("Error: scores.dat file not found!");}
+
     }
 
-    //Faili muutmine
-    public void changeFile() {
+    public HighScores() {
+        scores = new  ArrayList<Results>();
+    }
+
+    public ArrayList<Results> getScores() {
         loadFile();
-        try{
-            FileWriter write = new FileWriter(fileName);
-            PrintWriter out = new PrintWriter(write);
-
-            for (int i = 0; i < scores.size() && i < 10; i++){
-                out.println(scores.get(i));
-            }
-            out.close();
-        } catch(IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    //Sorteerimine
-    public void addHighScore(String name, int score) {
-        scores.add(new HighScores(score, name));
-        int s;
-        int i;
-        int tempScore;
-        String tempName;
-
-        for(s = scores.size() - 1; s >= 0; s --) {
-            for(i = 0; i <= s - 1; i++){
-                if(scores.get(i).score < scores.get(i + 1).score) {
-                    tempScore = scores.get(i).score;
-                    scores.get(i).score = scores.get(i + 1).score;
-                    scores.get(i + 1).score = tempScore;
-
-                    tempName = scores.get(i).name;
-                    scores.get(i).name = scores.get(i + 1).name;
-                    scores.get(i+1).name = tempName;
-                }
-            }
-        }
-    }
-    public boolean checkScore(int score) {
-        HighScores lowestHighScore = scores.get(scores.size() - 1);
-
-        return score >= lowestHighScore.score;
-    }
-
-    //Uue tulemuse lisamine ja kasutajalt nime kï¿½simine
-    public void newHighScore(int currentGamesScore) {
-        if (this.checkScore(score)) {
-            TextInputDialog dialog = new TextInputDialog();
-            dialog.setContentText("Palun sisesta oma nimi");
-            String name = String.valueOf(dialog.showAndWait());
-            /*
-            if (user.isPresent()){
-                return user;
-            } */
-
-
-
-            this.addHighScore(name, score);
-            changeFile();
-        }
-
-    }
-
-    public ArrayList<HighScores> getHighScores() {
+        sortScores();
         return scores;
     }
 
+    private void sortScores() {
+        SortScores comparator = new SortScores();
+        Collections.sort(scores, comparator);
+    }
+
+    public void addNewScore(String name, int score) {
+        loadFile();
+        scores.add(new Results(name, score));
+        updateFile();
+    }
+
+    public void loadFile() {
+        try {
+            inputStream = new ObjectInputStream(new FileInputStream(fileName));
+            scores = (ArrayList<Results>) inputStream.readObject();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: scores.dat file not found!");
+        } catch (IOException e) {
+            System.out.println("Error: scores.dat file not found!");
+        }
+    }
+
+    public void updateFile() {
+        try {
+            outputStream = new ObjectOutputStream(new FileOutputStream(fileName));
+            outputStream.writeObject(scores);
+        } catch (FileNotFoundException e) {
+            System.out.println("Error: scores.dat file not found!");
+        } catch (IOException e) {
+            System.out.println("Error: scores.dat file not found!");
+        }
+    }
+    //faili sisu tekstiks muutmine, et seda edetabelina näidata
+    public String scoresToText() {
+
+        String textToDisplay = "";
+        ArrayList<Results> scores;
+        scores = getScores();
+
+        for (int i = 0; i < scores.size(); i++) {
+            textToDisplay += (i + 1) + ". " + scores.get(i).getName() + " " + scores.get(i).getScore() + "\n";
+        }
+
+        return textToDisplay;
+    }
 
 }
