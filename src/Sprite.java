@@ -1,5 +1,8 @@
 /**
  * Created by martin on 18.10.15.
+ * Algkood on laenatud siit: https://github.com/tutsplus/Introduction-to-JavaFX-for-Game-Development/blob/master/Sprite.java
+ * Kuid kogu klassi on veidike modifitseeritud
+ *
  */
 import javafx.scene.image.Image;
 import javafx.scene.canvas.GraphicsContext;
@@ -8,12 +11,12 @@ import javafx.geometry.Rectangle2D;
 public class Sprite
 {
     private Image image;
-    private double positionX;
-    private double positionY;
+    protected double positionX;
+    protected double positionY;
     private double velocityX;
     private double velocityY;
-    private double width;
-    private double height;
+    protected double width;
+    protected double height;
 
     public Sprite()
     {
@@ -41,6 +44,14 @@ public class Sprite
         positionX = x;
         positionY = y;
     }
+
+    public double getPositionX (){
+        return this.positionX;
+    }
+
+ //  public double getPositionY (){
+ //      return this.positionY;
+ //  }
 
     public void setVelocity(double x, double y)
     {

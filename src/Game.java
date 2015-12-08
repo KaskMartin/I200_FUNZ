@@ -1,6 +1,4 @@
 import javafx.application.Application;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.*;
@@ -14,8 +12,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.animation.AnimationTimer;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -24,7 +21,8 @@ import java.util.TimerTask;
 public class Game extends Application
 {
     Scene theMenu, theGame, theHighscores, theSettings;
-    int badScore, goodScore;
+    int goodScore;
+    int healthRemaining = 20; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
 
     public static void main(String[] args)
     {
@@ -37,6 +35,8 @@ public class Game extends Application
         stage.setTitle("Püüa ainult tervislikku toitu!");
         String user1KeyLeft = "LEFT";
         String user1KeyRight = "RIGHT";
+        String user2KeyLeft = "Q";
+        String user2KeyRight = "W";
 
         //-------------------------------------------------------------------------menu start
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
@@ -173,9 +173,14 @@ public class Game extends Application
         gc.setStroke( Color.BLACK );
         gc.setLineWidth(1);
 
-        Sprite kasutaja1Sprite = new Sprite();
-        kasutaja1Sprite.setImage("images/basket.png");
-        kasutaja1Sprite.setPosition(50, 400);
+        Sprite kasutaja1Sprite = new User();
+        kasutaja1Sprite.setImage("images/userSkin1.png");
+        kasutaja1Sprite.setPosition(200, 400);
+
+        Sprite kasutaja2Sprite = new User();
+        kasutaja2Sprite.setImage("images/userSkin2.png");
+        kasutaja2Sprite.setPosition(50, 400);
+
         Sprite maapinnas =  new Sprite();
         maapinnas.setImage("images/maapind.png");
         maapinnas.setPosition(0, 550);
@@ -195,27 +200,35 @@ public class Game extends Application
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
 
-                //püüdmis korvi liigutamine
+                //anname kasutajatele kiirust vastavalt vajutatud klahvidele
                 kasutaja1Sprite.setVelocity(0,0);
-                if (input.contains(user1KeyLeft))
+                if (input.contains(user1KeyLeft) && kasutaja1Sprite.getPositionX()>-80 )
                     kasutaja1Sprite.addVelocity(-150,0);
-                if (input.contains(user1KeyRight))
+                if (input.contains(user1KeyRight) && kasutaja1Sprite.getPositionX()<750)
                     kasutaja1Sprite.addVelocity(150,0);
 
+                kasutaja2Sprite.setVelocity(0,0);
+                if (input.contains(user2KeyLeft) && kasutaja2Sprite.getPositionX()>-80)
+                    kasutaja2Sprite.addVelocity(-150,0);
+                if (input.contains(user2KeyRight)&& kasutaja2Sprite.getPositionX()<720)
+                    kasutaja2Sprite.addVelocity(150,0);
+
+                //liigutame kasutajaid
+                kasutaja2Sprite.update(elapsedTime);
                 kasutaja1Sprite.update(elapsedTime);
 
-                // kokkupõrgete avastamine
+                // kokkupõrgete avastamine ja nendele vastavad tegevused
                 Iterator<Food> foodIter = foodList.iterator();
                 while ( foodIter.hasNext() )
                 {
                     Food food = foodIter.next();
                     food.render(gc);
-                    if ( kasutaja1Sprite.intersects(food) )
+                    if ( kasutaja1Sprite.intersects(food)||kasutaja2Sprite.intersects(food) )
                     {
                         if (food.good)
-                            goodScore++;
+                            goodScore++; //kui toit oli tervislik suurendame skoori
                         else
-                            badScore++;
+                            healthRemaining--; //kui toit oli paha, vähendame elusid
                         foodIter.remove(); //viska toit minema
                     }
                     else if ( food.intersects(maapinnas)) {
@@ -226,15 +239,15 @@ public class Game extends Application
                 }
 
                 // render
-
                 maapinnas.render( gc );
                 kasutaja1Sprite.render( gc );
+                kasutaja2Sprite.render( gc );
 
 
                 // Näita halva skoori suurust
                 gc.setFill( Color.RED );
                 gc.setStroke( Color.DARKBLUE );
-                String pointsText = "BadScore:" + (100 * badScore);
+                String pointsText = "Healt Remaining:" + (100 * healthRemaining);
                 gc.fillText( pointsText, 360, 36 );
                 gc.strokeText( pointsText, 360, 36 );
 
@@ -245,9 +258,15 @@ public class Game extends Application
                 gc.fillText( goodPointsText, 360, 72 );
                 gc.strokeText( goodPointsText, 360, 72 );
 
+                if (healthRemaining < 1) {
+                    this.stop();
+                    // HighScores.newHighScore(goodScore);
+                }
+
             }
         };
 
+        //tekitab ajastaja, mis loobib iga 0,8s tagant toitu alla
         Timer timer = new Timer();
         TimerTask task = new TimerTask() {
             @Override
@@ -256,15 +275,9 @@ public class Game extends Application
                     foodList.add(new Food());
             }
         };
-
         timer.scheduleAtFixedRate(task, 0, 800);
 
         animationTimer.start();
-
-        if (badScore > 10) {
-            animationTimer.stop();
-            // HighScores.newHighScore(goodScore);
-        }
 
         //tekitab akna 1, sellest alustame näitamist
         stage.setTitle("Püüa ainult tervislikku toitu!");
