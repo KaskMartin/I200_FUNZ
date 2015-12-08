@@ -4,6 +4,7 @@ import javafx.scene.Group;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -21,7 +22,7 @@ import java.util.TimerTask;
 
 public class Game extends Application
 {
-    Scene theMenu, theGame, theHighscores, theSettings;
+    Scene theMenu, theGame, theHighscores, theSettings, theHelp;
     int goodScore;
     int healthRemaining = 20; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
 
@@ -215,10 +216,6 @@ public class Game extends Application
         taevas.setImage("images/taevas.png");
         taevas.setPosition(0, 0);
 
-        Sprite kasutaja1Sprite = new Sprite();
-        kasutaja1Sprite.setImage("images/basket.png");
-        kasutaja1Sprite.setPosition(50, 400);
-
         Sprite maapinnas =  new Sprite();
         maapinnas.setImage("images/maapind.png");
         maapinnas.setPosition(0, 550);
@@ -281,7 +278,7 @@ public class Game extends Application
                 }
 
                 // render
-                taevas.render( gc );
+                //taevas.render( gc );
                 maapinnas.render( gc );
                 kasutaja1Sprite.render( gc );
                 kasutaja2Sprite.render( gc );
