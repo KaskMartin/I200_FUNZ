@@ -2,8 +2,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.*;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -12,7 +12,8 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.animation.AnimationTimer;
-
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Timer;
@@ -28,6 +29,10 @@ public class Game extends Application
     {
         launch(args);
     }
+
+    public static Kasutaja kasutaja; //Kasutajaseaded - Hoiab kasutaja seadeid
+    public static HighScores edetabel; //Edetabel - väljastab tulemused
+
 
     @Override
     public void start(Stage stage)
@@ -46,57 +51,101 @@ public class Game extends Application
         startButton.setFont(theFont);
 
         Button highscoresButton = new Button("Highscores");
-            highscoresButton.setFont(theFont);
+        highscoresButton.setFont(theFont);
+
         Button settingsButton = new Button("Settings");
-            settingsButton.setFont(theFont);
+        settingsButton.setFont(theFont);
+
+        Button helpButton = new Button("Help");
+        helpButton.setFont(theFont);
+
         Button exitButton = new Button("Exit");
-            exitButton.setFont(theFont);
+        exitButton.setFont(theFont);
+
         Button backMenuAButton = new Button("Back to Menu");
-            backMenuAButton.setFont(theFontSmall);
+        backMenuAButton.setFont(theFontSmall);
+
         Button backMenuBButton = new Button("Back to Menu");
-            backMenuBButton.setFont(theFontSmall);
+        backMenuBButton.setFont(theFontSmall);
+
         Button backMenuCButton = new Button("Back to Menu");
-            backMenuCButton.setFont(theFontSmall);
+        backMenuCButton.setFont(theFontSmall);
+
+        Button backMenuDButton = new Button("Back to Menu");
+        backMenuDButton.setFont(theFontSmall);
 
         //Layout
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
+
         highscoresButton.setTranslateY(200);
         highscoresButton.setTranslateX(300);
+
         settingsButton.setTranslateY(300);
         settingsButton.setTranslateX(300);
-        exitButton.setTranslateY(400);
+
+        helpButton.setTranslateY(400);
+        helpButton.setTranslateX(300);
+
+        exitButton.setTranslateY(500);
         exitButton.setTranslateX(300);
+
         backMenuAButton.setTranslateY(0);
         backMenuAButton.setTranslateX(0);
+
         backMenuCButton.setTranslateY(120);
         backMenuCButton.setTranslateX(0);
 
+        backMenuDButton.setTranslateY(0);
+        backMenuDButton.setTranslateX(0);
+
         Group rootMenu = new Group();
-        rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, exitButton);
+        rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, helpButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
 
         Group rootHighscore = new Group();
         rootHighscore.getChildren().addAll(backMenuBButton);
-        theHighscores = new Scene (rootHighscore, 800, 600);
+        theHighscores = new Scene(rootHighscore, 800, 600);
+        Label settingsHighscore = new Label("Edetabel");
+        settingsHighscore.setTranslateX(50);
+        settingsHighscore.setTranslateY(100);
+        Text edetabel = new Text();
+        //edetabel.setText(HighScores.scoresToText());
+
 
         Group rootSettings = new Group();
-        rootSettings.getChildren().addAll(backMenuCButton);
+        Label settingsInfo = new Label("Vaheta mänguklahvide kombinatsiooni");
+        rootSettings.getChildren().addAll(settingsInfo, backMenuCButton);
         theSettings = new Scene(rootSettings, 800, 600);
-        //----------------------------------------------------------------start settingnupp
+
+        //---
+        Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja kaks saab kasutada klahve A ja D.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4. Halva toidu püüdmine annab sulle miinuspunkte.\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
+        juhend.setStyle("-fx-font-size: 12; -fx-fill: black;");
+        juhend.setTranslateX(50);
+        juhend.setTranslateY(150);
+        //---
+
+        Group rootHelp = new Group();
+        Label settingsHelp = new Label("Mängujuhis");
+        rootHelp.getChildren().addAll(settingsHelp, backMenuDButton, juhend);
+        theHelp = new Scene(rootHelp, 800, 600);
+        settingsHelp.setTranslateX(50);
+        settingsHelp.setTranslateY(100);
+
+        //--------------------------------------------------------start settingnupp
         final ToggleGroup group = new ToggleGroup();
 
         RadioButton var1 = new RadioButton("<- ->");
             var1.setToggleGroup(group);
             var1.setUserData("<- ->");
 
-        RadioButton var2 = new RadioButton("Q W");
+        RadioButton var2 = new RadioButton("A D");
             var2.setToggleGroup(group);
-            var2.setUserData("Q W");
+            var2.setUserData("A A");
 
-        RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
-            var3.setToggleGroup(group);
-            var3.setUserData("Muu");
+        //RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
+            //var3.setToggleGroup(group);
+            //var3.setUserData("Muu");
 
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
         });
@@ -106,7 +155,7 @@ public class Game extends Application
 
         vbox.getChildren().add(var1);
         vbox.getChildren().add(var2);
-        vbox.getChildren().add(var3);
+        //vbox.getChildren().add(var3);
         vbox.setSpacing(10);
 
         hbox.getChildren().add(vbox);
@@ -114,13 +163,15 @@ public class Game extends Application
         hbox.setPadding(new Insets(20, 10, 10, 20));
 
         ((Group) theSettings.getRoot()).getChildren().add(hbox);
-        //------------------------------------------------------------------end settingnupp
+        //--------------------------------------------------------end settingnupp
         startButton.setOnAction(e -> stage.setScene(theGame));
         backMenuAButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuCButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuDButton.setOnAction(e -> stage.setScene(theMenu));
         highscoresButton.setOnAction(e -> stage.setScene(theHighscores));
         settingsButton.setOnAction(e -> stage.setScene(theSettings));
+        helpButton.setOnAction(e -> stage.setScene(theHelp));
         exitButton.setOnAction(e -> System.exit(0));
 
         //------------------------------------------------------------------endmenu
@@ -134,34 +185,11 @@ public class Game extends Application
         ArrayList<String> input = new ArrayList<String>();
 
         // implementeerime nupuvajutuste ära tundmiseks EventHandleri.
-        /**
-        // theGame.setOnKeyPressed(
-                new EventHandler<KeyEvent>()
-                {
-                    public void handle(KeyEvent e)
-                    {
-                        String code = e.getCode().toString();
-                        if ( !input.contains(code) )
-                            input.add( code );
-                    }
-                });
-        */
-
         theGame.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
             if ( !input.contains(code) )
                 input.add(code);
         });
-        /**
-        theGame.setOnKeyReleased(
-                new EventHandler<KeyEvent>() {
-                    public void handle(KeyEvent e) {
-                        String code = e.getCode().toString();
-                        input.remove( code );
-                    }
-                });
-        */
-
         theGame.setOnKeyReleased(e -> {
             String code = e.getCode().toString();
             input.remove(code);
@@ -181,10 +209,24 @@ public class Game extends Application
         kasutaja2Sprite.setImage("images/userSkin2.png");
         kasutaja2Sprite.setPosition(50, 400);
 
+        // Mänguekraanil olevad kujutised ja pildid
+
+        Sprite taevas =  new Sprite();
+        taevas.setImage("images/taevas.png");
+        taevas.setPosition(0, 0);
+
+        Sprite kasutaja1Sprite = new Sprite();
+        kasutaja1Sprite.setImage("images/basket.png");
+        kasutaja1Sprite.setPosition(50, 400);
+
         Sprite maapinnas =  new Sprite();
         maapinnas.setImage("images/maapind.png");
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
+
+
+
+
 
         int maksimumFoodAllowed = 25;
         ArrayList<Food> foodList = new ArrayList<Food>();
@@ -239,9 +281,11 @@ public class Game extends Application
                 }
 
                 // render
+                taevas.render( gc );
                 maapinnas.render( gc );
                 kasutaja1Sprite.render( gc );
                 kasutaja2Sprite.render( gc );
+
 
 
                 // Näita halva skoori suurust
