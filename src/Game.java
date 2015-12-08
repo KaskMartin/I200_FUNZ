@@ -205,6 +205,10 @@ public class Game extends Application
 
         // Mänguekraanil olevad kujutised ja pildid
 
+        Sprite taevas =  new Sprite();
+        taevas.setImage("images/taevas.png");
+        taevas.setPosition(0, 0);
+
         Sprite kasutaja1Sprite = new Sprite();
         kasutaja1Sprite.setImage("images/basket.png");
         kasutaja1Sprite.setPosition(50, 400);
@@ -214,9 +218,7 @@ public class Game extends Application
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
-        //Sprite taevas =  new Sprite();
-        //taevas.setImage("images/taevas.png");
-        //taevas.setPosition(0, 0);
+
 
 
 
@@ -265,10 +267,10 @@ public class Game extends Application
                 }
 
                 // render
-
+                taevas.render( gc );
                 maapinnas.render( gc );
                 kasutaja1Sprite.render( gc );
-                //taevas.render( gc );
+
 
 
                 // Näita halva skoori suurust
