@@ -180,7 +180,7 @@ public class Game extends Application
         Canvas canvas = new Canvas(800, 600);
         GraphicsContext gc = canvas.getGraphicsContext2D();
         Group rootGame = new Group();
-        rootGame.getChildren().add( canvas );
+        rootGame.getChildren().add(canvas);
         theGame = new Scene (rootGame);
         rootGame.getChildren().addAll(backMenuAButton);
         ArrayList<String> input = new ArrayList<String>();
@@ -235,6 +235,7 @@ public class Game extends Application
                 // calculate time since last update.
 
                 gc.clearRect(0, 0, 800, 600);
+                taevas.render( gc );
 
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
@@ -278,7 +279,7 @@ public class Game extends Application
                 }
 
                 // render
-                //taevas.render( gc );
+
                 maapinnas.render( gc );
                 kasutaja1Sprite.render( gc );
                 kasutaja2Sprite.render( gc );
