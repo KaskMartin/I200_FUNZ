@@ -1,8 +1,12 @@
 import javafx.scene.control.TextInputDialog;
 
+import java.util.ArrayList;
+
 public class Results {
     private int score;
     private String name;
+
+
 
     public int getScore() {
         //get game score
@@ -13,6 +17,7 @@ public class Results {
 
     public String getName() {
         TextInputDialog dialog = new TextInputDialog();
+        dialog.setHeaderText(null);
         dialog.setContentText("Palun sisesta oma nimi");
         String name = String.valueOf(dialog.showAndWait());
         return name;

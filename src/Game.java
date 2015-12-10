@@ -2,6 +2,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
@@ -22,9 +24,9 @@ import java.util.TimerTask;
 
 public class Game extends Application
 {
-    Scene theMenu, theGame, theHighscores, theSettings, theHelp;
+    Scene theMenu, theGame, theHighscores, theSettings, theHelp, theGameOverScene;
     int goodScore;
-    int healthRemaining = 20; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
+    int healthRemaining = 2; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
 
     public static void main(String[] args)
     {
@@ -33,6 +35,7 @@ public class Game extends Application
 
     public static Kasutaja kasutaja; //Kasutajaseaded - Hoiab kasutaja seadeid
     public static HighScores edetabel; //Edetabel - väljastab tulemused
+    public Label GameOverLabel;
 
 
     @Override
@@ -75,6 +78,9 @@ public class Game extends Application
         Button backMenuDButton = new Button("Back to Menu");
         backMenuDButton.setFont(theFontSmall);
 
+        Button backMenuEButton = new Button("Back to Menu");
+        backMenuDButton.setFont(theFontSmall);
+
         //Layout
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
@@ -100,19 +106,40 @@ public class Game extends Application
         backMenuDButton.setTranslateY(0);
         backMenuDButton.setTranslateX(0);
 
+        backMenuEButton.setTranslateY(0);
+        backMenuEButton.setTranslateX(0);
+
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, helpButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
 
         Group rootHighscore = new Group();
-        rootHighscore.getChildren().addAll(backMenuBButton);
-        theHighscores = new Scene(rootHighscore, 800, 600);
         Label settingsHighscore = new Label("Edetabel");
         settingsHighscore.setTranslateX(50);
         settingsHighscore.setTranslateY(100);
-        Text edetabel = new Text();
-        //edetabel.setText(HighScores.scoresToText());
+        Text tekst = new Text();
+        tekst.setTranslateX(60);
+        tekst.setTranslateY(100);
+        HighScores tabel = new HighScores();
+        tekst.setText(tabel.scoresToText());
+        rootHighscore.getChildren().addAll(settingsHighscore, backMenuBButton,tekst);
+        theHighscores = new Scene(rootHighscore, 800, 600);
 
+        Group rootGameOver = new Group();
+        Label title = new Label("Mäng läbi");
+        title.setTranslateY(200);
+        title.setTranslateX(300);
+        title.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
+        Button newGameButton = new Button("Mängi uuesti");
+        newGameButton.setTranslateY(250);
+        newGameButton.setTranslateX(250);
+        Button newScoreButton = new Button("Lisa tulemustesse");
+        newScoreButton.setTranslateY(250);
+        newScoreButton.setTranslateX(350);
+        HighScores tulemus = new HighScores();
+        newScoreButton.setOnAction(e -> tulemus.checkScore(goodScore));
+        rootGameOver.getChildren().addAll(backMenuEButton, title, newGameButton, newScoreButton);
+        theGameOverScene = new Scene(rootGameOver, 800, 600);
 
         Group rootSettings = new Group();
         Label settingsInfo = new Label("Vaheta mänguklahvide kombinatsiooni");
@@ -170,10 +197,12 @@ public class Game extends Application
         backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuCButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuDButton.setOnAction(e -> stage.setScene(theMenu));
+        backMenuEButton.setOnAction(e -> stage.setScene(theMenu));
         highscoresButton.setOnAction(e -> stage.setScene(theHighscores));
         settingsButton.setOnAction(e -> stage.setScene(theSettings));
         helpButton.setOnAction(e -> stage.setScene(theHelp));
         exitButton.setOnAction(e -> System.exit(0));
+        newGameButton.setOnAction(e -> stage.setScene(theGame));
 
         //------------------------------------------------------------------endmenu
 
@@ -302,11 +331,12 @@ public class Game extends Application
 
                 if (healthRemaining < 1) {
                     this.stop();
-                    // HighScores.newHighScore(goodScore);
+                    stage.setScene(theGameOverScene);
+                    //resetGame();
                 }
-
             }
         };
+
 
         //tekitab ajastaja, mis loobib iga 0,8s tagant toitu alla
         Timer timer = new Timer();
@@ -327,4 +357,6 @@ public class Game extends Application
         menuPealkiri.setFont(theFont);
         stage.show();
     }
+
+
 }

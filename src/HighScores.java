@@ -1,9 +1,16 @@
-import javafx.scene.control.TextInputDialog;
+import javafx.scene.Group;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Optional;
+
 public class HighScores {
     private ArrayList<Results> scores;
     private static final String fileName = "scores.dat"; //Faili nimi
@@ -11,26 +18,29 @@ public class HighScores {
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
 
+
     //Peaks kontrollima, et m‰nguskoor on piisavalt suur, et edetabelisse p‰‰seda
-    public void checkScore(int score) {
-        if (scores != null && !scores.isEmpty()) {
+    public boolean checkScore(int score) {
+        /*if (scores != null && !scores.isEmpty()) {
             int lowestHighScore = scores.size() - 1; //vale praegu
-        }
-
-
+        }*/
+        int lowestHighScore = scores.size() - 1;
+        if (score < lowestHighScore)
+            return false;
+        return true;
     }
 
     public HighScores() {
         scores = new  ArrayList<Results>();
     }
 
-    public ArrayList<Results> getScores() {
+    public ArrayList<Results> getHighScores() {
         loadFile();
-        sortScores();
+        sort();
         return scores;
     }
 
-    private void sortScores() {
+    private void sort() {
         SortScores comparator = new SortScores();
         Collections.sort(scores, comparator);
     }
@@ -64,18 +74,24 @@ public class HighScores {
             System.out.println("Error: scores.dat file not found!");
         }
     }
-    //faili sisu tekstiks muutmine, et seda edetabelina n‰idata
+
     public String scoresToText() {
-
         String textToDisplay = "";
+        int max = 10;
         ArrayList<Results> scores;
-        scores = getScores();
-
-        for (int i = 0; i < scores.size(); i++) {
-            textToDisplay += (i + 1) + ". " + scores.get(i).getName() + " " + scores.get(i).getScore() + "\n";
+        scores = getHighScores();
+        int i = 0;
+        int x = scores.size();
+        if (x > max) {
+            x= max;
         }
-
+        while (i < x) {
+            textToDisplay += (i + 1) + ".\t" + scores.get(i).getName() + " " + scores.get(i).getScore() + "\n";
+            i++;
+        }
         return textToDisplay;
     }
+
+
 
 }
