@@ -26,7 +26,7 @@ public class Game extends Application
 {
     Scene theMenu, theGame, theHighscores, theSettings, theHelp, theGameOverScene;
     int goodScore;
-    int healthRemaining = 2; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
+    int healthRemaining = 20; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
 
     public static void main(String[] args)
     {

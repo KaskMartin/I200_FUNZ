@@ -10,6 +10,9 @@ public class Results {
 
     public int getScore() {
         //get game score
+        Game gameScore = new Game();
+        score = gameScore.goodScore;
+
         return score;
     }
 
