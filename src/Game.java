@@ -17,16 +17,19 @@ import javafx.scene.text.FontWeight;
 import javafx.animation.AnimationTimer;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Timer;
-import java.util.TimerTask;
+
+import java.util.*;
 
 public class Game extends Application
 {
-    Scene theMenu, theGame, theHighscores, theSettings, theHelp, theGameOverScene;
+    Scene theMenu, theGame, theHighscores, theSettings, theHelp;
     int goodScore;
     int healthRemaining = 20; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
+    int finalScore;
+    public String name;
+
+
+
 
     public static void main(String[] args)
     {
@@ -35,8 +38,6 @@ public class Game extends Application
 
     public static Kasutaja kasutaja; //Kasutajaseaded - Hoiab kasutaja seadeid
     public static HighScores edetabel; //Edetabel - väljastab tulemused
-    public Label GameOverLabel;
-
 
     @Override
     public void start(Stage stage)
@@ -113,33 +114,17 @@ public class Game extends Application
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, helpButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
 
+        edetabel = new HighScores();
         Group rootHighscore = new Group();
         Label settingsHighscore = new Label("Edetabel");
         settingsHighscore.setTranslateX(50);
         settingsHighscore.setTranslateY(100);
         Text tekst = new Text();
-        tekst.setTranslateX(60);
-        tekst.setTranslateY(100);
-        HighScores tabel = new HighScores();
-        tekst.setText(tabel.scoresToText());
+        tekst.setTranslateX(50);
+        tekst.setTranslateY(130);
+        tekst.setText(edetabel.getHighScores());
         rootHighscore.getChildren().addAll(settingsHighscore, backMenuBButton,tekst);
         theHighscores = new Scene(rootHighscore, 800, 600);
-
-        Group rootGameOver = new Group();
-        Label title = new Label("Mäng läbi");
-        title.setTranslateY(200);
-        title.setTranslateX(300);
-        title.setStyle("-fx-font-weight: bold; -fx-font-size: 16");
-        Button newGameButton = new Button("Mängi uuesti");
-        newGameButton.setTranslateY(250);
-        newGameButton.setTranslateX(250);
-        Button newScoreButton = new Button("Lisa tulemustesse");
-        newScoreButton.setTranslateY(250);
-        newScoreButton.setTranslateX(350);
-        HighScores tulemus = new HighScores();
-        newScoreButton.setOnAction(e -> tulemus.checkScore(goodScore));
-        rootGameOver.getChildren().addAll(backMenuEButton, title, newGameButton, newScoreButton);
-        theGameOverScene = new Scene(rootGameOver, 800, 600);
 
         Group rootSettings = new Group();
         Label settingsInfo = new Label("Vaheta mänguklahvide kombinatsiooni");
@@ -202,7 +187,7 @@ public class Game extends Application
         settingsButton.setOnAction(e -> stage.setScene(theSettings));
         helpButton.setOnAction(e -> stage.setScene(theHelp));
         exitButton.setOnAction(e -> System.exit(0));
-        newGameButton.setOnAction(e -> stage.setScene(theGame));
+
 
         //------------------------------------------------------------------endmenu
 
@@ -318,7 +303,7 @@ public class Game extends Application
                 // Näita halva skoori suurust
                 gc.setFill( Color.RED );
                 gc.setStroke( Color.DARKBLUE );
-                String pointsText = "Healt Remaining:" + (100 * healthRemaining);
+                String pointsText = "Health Remaining:" + (100 * healthRemaining);
                 gc.fillText( pointsText, 360, 36 );
                 gc.strokeText( pointsText, 360, 36 );
 
@@ -331,7 +316,24 @@ public class Game extends Application
 
                 if (healthRemaining < 1) {
                     this.stop();
-                    stage.setScene(theGameOverScene);
+                    finalScore = 100 * goodScore;
+
+                    ArrayList<HighScores.Results> scores;
+                    scores = edetabel.getScoresList();
+                    int i = 0;
+                    int x = scores.size();
+                    if (x > 10) { x = 10; }
+                    if (x == 0) {
+                        TextInputDialog dialog = new TextInputDialog();
+                        dialog.setHeaderText(null);
+                        dialog.setContentText("Palun sisesta oma nimi");
+                        dialog.show();
+
+                        //String name = String.valueOf(dialog.showAndWait());
+
+                        edetabel.addNewScore(name, finalScore);
+                    }
+                    System.out.println(edetabel.getHighScores());
                     //resetGame();
                 }
             }
@@ -357,6 +359,7 @@ public class Game extends Application
         menuPealkiri.setFont(theFont);
         stage.show();
     }
+
 
 
 }
