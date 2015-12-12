@@ -4,7 +4,7 @@ import java.util.Random;
  * Created by martin on 27.11.15.
  */
 public class Food extends Sprite {
-    String[] goodFood = {"images/apple.png","images/carrot.png","images/cherry.png","images/grape.png","images/orange.png","images/stawberry.png","images/watermelon.png" };
+    String[] goodFood = {"images/apple.png","images/carrot.png","images/cherry.png","images/grape0.png","images/orange.png","images/stawberry.png","images/watermelon.png" };
     String[] badFood = {"images/burger.png","images/frfries.png","images/hamburger.png","images/hotdog.png","images/pizza.png"};
     public Boolean good;
     Random random = new Random();

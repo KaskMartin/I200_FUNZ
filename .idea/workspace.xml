@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="938f6c95-8780-4f2d-b51e-3eef0b5c3735" name="Default" comment="">
-      <change type="DELETED" beforePath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\images\fries.jpg" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/I200_FUNZ/Food.class" afterPath="$PROJECT_DIR$/out/production/I200_FUNZ/Food.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\Game$1.class" afterPath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\Game$1.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\Game$2.class" afterPath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\Game$2.class" />
-      <change type="MODIFICATION" beforePath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\Game.class" afterPath="C:\Users\RD\Desktop\I200_FUNZ\out\production\I200_FUNZ\Game.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Game.java" afterPath="$PROJECT_DIR$/src/Game.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Food.java" afterPath="$PROJECT_DIR$/src/Food.java" />
     </list>
     <ignored path="I200_FUNZ.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -43,8 +37,8 @@
       <file leaf-file-name="Food.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Food.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25247526">
-              <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.28052804">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -140,8 +134,8 @@
         <option value="$PROJECT_DIR$/src/HighScores.java" />
         <option value="$PROJECT_DIR$/src/User.java" />
         <option value="$PROJECT_DIR$/src/Sprite.java" />
-        <option value="$PROJECT_DIR$/src/Food.java" />
         <option value="$PROJECT_DIR$/src/Game.java" />
+        <option value="$PROJECT_DIR$/src/Food.java" />
       </list>
     </option>
   </component>
@@ -970,8 +964,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Food.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25247526">
-          <caret line="9" column="33" selection-start-line="9" selection-start-column="33" selection-end-line="9" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.28052804">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
       </provider>
