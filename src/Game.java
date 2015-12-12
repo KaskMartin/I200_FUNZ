@@ -49,8 +49,8 @@ public class Game extends Application
         //-------------------------------------------------------------------------menu start
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
         Button startButton = new Button("Start");
-        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
-        Font theFontSmall = Font.font("Helvetica", FontWeight.NORMAL, 12);
+        Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
+        Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 12);
         startButton.setFont(theFont);
 
         Button highscoresButton = new Button("Highscores");
@@ -99,7 +99,7 @@ public class Game extends Application
         backMenuAButton.setTranslateY(0);
         backMenuAButton.setTranslateX(0);
 
-        backMenuCButton.setTranslateY(120);
+        backMenuCButton.setTranslateY(200);
         backMenuCButton.setTranslateX(0);
 
         backMenuDButton.setTranslateY(0);
@@ -124,11 +124,6 @@ public class Game extends Application
         rootHighscore.getChildren().addAll(settingsHighscore, backMenuBButton,tekst);
         theHighscores = new Scene(rootHighscore, 800, 600);
 
-        Group rootSettings = new Group();
-        Label settingsInfo = new Label("Vaheta mänguklahvide kombinatsiooni");
-        rootSettings.getChildren().addAll(settingsInfo, backMenuCButton);
-        theSettings = new Scene(rootSettings, 800, 600);
-
         //---
         Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja " +
                 "kaks saab kasutada klahve Q ja W.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4." +
@@ -145,6 +140,15 @@ public class Game extends Application
         rootHelp.getChildren().addAll(settingsHelp, backMenuDButton, juhend);
         theHelp = new Scene(rootHelp, 800, 600);
 
+        Group rootSettings = new Group();
+        Label settingsInfo1 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 1");
+            settingsInfo1.setTranslateX(50);
+            settingsInfo1.setTranslateY(10);
+        Label settingsInfo2 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 2");
+            settingsInfo2.setTranslateX(450);
+            settingsInfo2.setTranslateY(10);
+        rootSettings.getChildren().addAll(settingsInfo1, backMenuCButton, settingsInfo2);
+        theSettings = new Scene(rootSettings, 800, 600);
 
         //--------------------------------------------------------start settingnupp
         final ToggleGroup group = new ToggleGroup();
@@ -153,30 +157,47 @@ public class Game extends Application
         var1.setToggleGroup(group);
         var1.setUserData("<- ->");
 
-        RadioButton var2 = new RadioButton("A D");
+        RadioButton var2 = new RadioButton("Q W");
         var2.setToggleGroup(group);
-        var2.setUserData("A A");
+        var2.setUserData("Q W");
 
-        //RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
-        //var3.setToggleGroup(group);
-        //var3.setUserData("Muu");
+        RadioButton var3 = new RadioButton("<- ->");
+        var3.setToggleGroup(group);
+        var3.setUserData("<- ->");
+
+        RadioButton var4 = new RadioButton("Q W");
+        var4.setToggleGroup(group);
+        var4.setUserData("Q W");
 
         group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
         });
 
         HBox hbox = new HBox();
+        HBox hbox2 = new HBox();
         VBox vbox = new VBox();
+        VBox vbox2 = new VBox();
 
         vbox.getChildren().add(var1);
         vbox.getChildren().add(var2);
-        //vbox.getChildren().add(var3);
-        vbox.setSpacing(10);
+        vbox2.getChildren().add(var3);
+        vbox2.getChildren().add(var4);
+        vbox.setSpacing(20);
+        vbox2.setSpacing(10);
 
         hbox.getChildren().add(vbox);
-        hbox.setSpacing(50);
-        hbox.setPadding(new Insets(20, 10, 10, 20));
+        hbox.setSpacing(150);
+        hbox.setPadding(new Insets(50, 10, 10, 20));
+        hbox.setTranslateX(50);
+        hbox.setTranslateY(20);
+
+        hbox2.getChildren().add(vbox2);
+        hbox.setSpacing(150);
+        hbox.setPadding(new Insets(50, 10, 10, 20));
+        hbox2.setTranslateX(450);
+        hbox2.setTranslateY(20);
 
         ((Group) theSettings.getRoot()).getChildren().add(hbox);
+        ((Group) theSettings.getRoot()).getChildren().add(hbox2);
         //--------------------------------------------------------end settingnupp
         startButton.setOnAction(e -> {
             resetGame();
@@ -214,18 +235,18 @@ public class Game extends Application
             input.remove(code);
         });
 
-        theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
+        theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
         gc.setFill( Color.GREEN );
         gc.setStroke( Color.BLACK );
         gc.setLineWidth(1);
 
         Sprite kasutaja1Sprite = new User();
-        kasutaja1Sprite.setImage("images/kasutaja02.png");
+        kasutaja1Sprite.setImage("images/kasutaja01.png");
         kasutaja1Sprite.setPosition(200, 400);
 
         Sprite kasutaja2Sprite = new User();
-        kasutaja2Sprite.setImage("images/kasutaja04.png");
+        kasutaja2Sprite.setImage("images/kasutaja03.png");
         kasutaja2Sprite.setPosition(50, 400);
 
         // Mänguekraanil olevad kujutised ja pildid
@@ -235,7 +256,7 @@ public class Game extends Application
         taevas.setPosition(0, 0);
 
         Sprite maapinnas =  new Sprite();
-        maapinnas.setImage("images/grass1.png");
+        maapinnas.setImage("images/grass2.png");
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
