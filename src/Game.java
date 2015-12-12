@@ -145,8 +145,8 @@ public class Game extends Application
 
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
-        //IntValue badScore = new IntValue(0);
-        //IntValue goodScore = new IntValue(0);
+        IntValue badScore = new IntValue(0);
+        IntValue goodScore = new IntValue(0);
 
         new AnimationTimer()
         {
@@ -173,7 +173,7 @@ public class Game extends Application
                     if ( basket.intersects(carrot) )
                     {
                         carrotIter.remove(); //viska toit minema
-                        //goodScore.value++; //suurenda head skoori
+                        goodScore.value++; //suurenda head skoori
                     }
                 }
 
@@ -184,7 +184,7 @@ public class Game extends Application
                     if ( basket.intersects(burger) )
                     {
                         burgerIter.remove(); //viska toit minema
-                        //badScore.value++; //suurenda halba skoori
+                        badScore.value++; //suurenda halba skoori
                     }
                 }
 
@@ -204,16 +204,16 @@ public class Game extends Application
                 // Näita halva skoori suurust
                 gc.setFill( Color.RED );
                 gc.setStroke( Color.DARKBLUE );
-                //String pointsText = "BadScore:" + (100 * badScore.value);
-                //gc.fillText( pointsText, 360, 36 );
-                //gc.strokeText( pointsText, 360, 36 );
+                String pointsText = "BadScore:" + (100 * badScore.value);
+                gc.fillText( pointsText, 360, 36 );
+                gc.strokeText( pointsText, 360, 36 );
 
                 // Näita hea skoori suurust
-                //String goodPointsText = "GoodScore:" + (100 * goodScore.value);
+                String goodPointsText = "GoodScore:" + (100 * goodScore.value);
                 gc.setFill( Color.GREEN );
                 gc.setStroke( Color.BLACK );
-                //gc.fillText( goodPointsText, 360, 72 );
-                //gc.strokeText( goodPointsText, 360, 72 );
+                gc.fillText( goodPointsText, 360, 72 );
+                gc.strokeText( goodPointsText, 360, 72 );
 
             }
         }.start();
