@@ -221,11 +221,11 @@ public class Game extends Application
         gc.setLineWidth(1);
 
         Sprite kasutaja1Sprite = new User();
-        kasutaja1Sprite.setImage("images/userSkin1.png");
+        kasutaja1Sprite.setImage("images/kasutaja02.png");
         kasutaja1Sprite.setPosition(200, 400);
 
         Sprite kasutaja2Sprite = new User();
-        kasutaja2Sprite.setImage("images/userSkin2.png");
+        kasutaja2Sprite.setImage("images/kasutaja04.png");
         kasutaja2Sprite.setPosition(50, 400);
 
         // Mänguekraanil olevad kujutised ja pildid
@@ -235,7 +235,7 @@ public class Game extends Application
         taevas.setPosition(0, 0);
 
         Sprite maapinnas =  new Sprite();
-        maapinnas.setImage("images/maapind.png");
+        maapinnas.setImage("images/grass0.png");
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
