@@ -1,3 +1,9 @@
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -8,6 +14,7 @@ public class HighScores extends Game implements Serializable {
     private static final String fileName = "scores.dat"; //Faili nimi
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
+    public TextField text;
 
     public HighScores() {
         scores = new  ArrayList<Results>();
@@ -71,7 +78,7 @@ public class HighScores extends Game implements Serializable {
         ArrayList<Results> scores;
         scores = getScoresList();
 
-        int i = 0;
+        int i;
         int x = scores.size();
 
         if (x != 0) {
@@ -108,8 +115,19 @@ public class HighScores extends Game implements Serializable {
         }
 
         public String getName() {
+            Dialog<Game> dialog = new Dialog<>();
+            Label label = new Label("Siseta oma nimi: ");
+            text = new TextField();
+            GridPane grid = new GridPane();
+            grid.add(label, 1, 1);
+            grid.add(text, 2, 1);
+            dialog.getDialogPane().setContent(grid);
+            ButtonType button = new ButtonType("OK");
 
-            return name;
+            dialog.getDialogPane().getButtonTypes().add(button);
+            dialog.show();
+            return name = text.getText();
+
         }
 
         public Results(String name, int score) {
