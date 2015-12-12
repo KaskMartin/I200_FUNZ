@@ -235,7 +235,7 @@ public class Game extends Application
         taevas.setPosition(0, 0);
 
         Sprite maapinnas =  new Sprite();
-        maapinnas.setImage("images/grass.png");
+        maapinnas.setImage("images/grass1.png");
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 

@@ -28,13 +28,13 @@
       <file leaf-file-name="Game.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Game.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68508285">
-              <caret line="237" column="40" selection-start-line="237" selection-start-column="40" selection-end-line="237" selection-end-column="40" />
+            <state vertical-scroll-proportion="0.7085635">
+              <caret line="238" column="35" selection-start-line="238" selection-start-column="35" selection-end-line="238" selection-end-column="35" />
               <folding>
                 <element signature="e#975#976#0" expanded="true" />
                 <element signature="e#1003#1004#0" expanded="true" />
                 <element signature="e#7609#7617#0" expanded="true" />
-                <element signature="e#8965#8971#0" expanded="true" />
+                <element signature="e#8966#8972#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -612,7 +612,13 @@
       <option name="project" value="LOCAL" />
       <updated>1449959725387</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="pildid">
+      <created>1449960101759</created>
+      <option name="number" value="00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1449960101759</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -660,7 +666,8 @@
     <MESSAGE value="back to menu nupud" />
     <MESSAGE value="eventhandlerite muudatused - lyhemad. Kas ok?" />
     <MESSAGE value="settingute nupp" />
-    <option name="LAST_COMMIT_MESSAGE" value="settingute nupp" />
+    <MESSAGE value="pildid" />
+    <option name="LAST_COMMIT_MESSAGE" value="pildid" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -708,7 +715,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -774,7 +781,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -840,7 +847,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -891,7 +898,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -942,7 +949,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -974,7 +981,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1006,7 +1013,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1046,7 +1053,7 @@
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1135,13 +1142,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Game.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68508285">
-          <caret line="237" column="40" selection-start-line="237" selection-start-column="40" selection-end-line="237" selection-end-column="40" />
+        <state vertical-scroll-proportion="0.7085635">
+          <caret line="238" column="35" selection-start-line="238" selection-start-column="35" selection-end-line="238" selection-end-column="35" />
           <folding>
             <element signature="e#975#976#0" expanded="true" />
             <element signature="e#1003#1004#0" expanded="true" />
             <element signature="e#7609#7617#0" expanded="true" />
-            <element signature="e#8965#8971#0" expanded="true" />
+            <element signature="e#8966#8972#0" expanded="true" />
           </folding>
         </state>
       </provider>
