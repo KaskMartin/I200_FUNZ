@@ -24,7 +24,7 @@ public class Game extends Application
 {
     Scene theMenu, theGame, theHighscores, theSettings, theHelp;
     int goodScore;
-    int healthRemaining = 20; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
+    int healthRemaining = 10; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
     int finalScore;
     public String name;
 
@@ -132,7 +132,9 @@ public class Game extends Application
         theSettings = new Scene(rootSettings, 800, 600);
 
         //---
-        Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja kaks saab kasutada klahve A ja D.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4. Halva toidu püüdmine annab sulle miinuspunkte.\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
+        Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja " +
+                "kaks saab kasutada klahve Q ja W.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4." +
+                " Halva toidu püüdmine vähendab elusid. Mäng lõppeb, kui elud otsa saavad.\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
         juhend.setStyle("-fx-font-size: 12; -fx-fill: black;");
         juhend.setTranslateX(50);
         juhend.setTranslateY(150);
@@ -177,7 +179,10 @@ public class Game extends Application
 
         ((Group) theSettings.getRoot()).getChildren().add(hbox);
         //--------------------------------------------------------end settingnupp
-        startButton.setOnAction(e -> stage.setScene(theGame));
+        startButton.setOnAction(e -> {
+            resetGame();
+            stage.setScene(theGame);
+        });
         backMenuAButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuBButton.setOnAction(e -> stage.setScene(theMenu));
         backMenuCButton.setOnAction(e -> stage.setScene(theMenu));
@@ -353,6 +358,11 @@ public class Game extends Application
 
         animationTimer.start();
 
+        stage.setOnCloseRequest(e -> {
+            animationTimer.stop();
+            timer.cancel();
+        });
+
         //tekitab akna 1, sellest alustame näitamist
         stage.setTitle("Püüa ainult tervislikku toitu!");
         stage.setScene(theMenu);
@@ -360,6 +370,10 @@ public class Game extends Application
         stage.show();
     }
 
+    public void resetGame() {
+        goodScore = 0;
+        healthRemaining = 10;
+    }
 
 
 }
