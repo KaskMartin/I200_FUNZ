@@ -1,26 +1,19 @@
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.Dialog;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class HighScores extends Game implements Serializable {
-    private ArrayList<Results> scores;
+public class HighScores {
+    private ArrayList<Result> scores;
     private static final String fileName = "scores.dat"; //Faili nimi
     ObjectOutputStream outputStream = null;
     ObjectInputStream inputStream = null;
-    public TextField text;
 
     public HighScores() {
-        scores = new  ArrayList<Results>();
+        scores = new  ArrayList<Result>();
     }
 
-    public ArrayList<Results> getScoresList() {
+    public ArrayList<Result> getScoresList() {
         loadFile();
         sort();
         return scores;
@@ -33,14 +26,14 @@ public class HighScores extends Game implements Serializable {
 
     public void addNewScore(String name, int score) {
         loadFile();
-        scores.add(new Results(name, score));
+        scores.add(new Result(name, score));
         updateFile();
     }
 
     public void loadFile() {
         try {
             inputStream = new ObjectInputStream(new FileInputStream(fileName));
-            scores = (ArrayList<Results>) inputStream.readObject();
+            scores = (ArrayList<Result>) inputStream.readObject();
         } catch (FileNotFoundException e) {
         } catch (IOException e) {
         } catch (ClassNotFoundException e) {
@@ -68,30 +61,28 @@ public class HighScores extends Game implements Serializable {
         } catch(IOException e) {
             e.printStackTrace();
         }
-
     }
 
     public String getHighScores() {
         String textToDisplay = "";
-        int max = 10;
 
-        ArrayList<Results> scores;
+        ArrayList<Result> scores;
         scores = getScoresList();
+        int scoresToDisplay = scores.size();
+        if (scoresToDisplay > 10)
+            scoresToDisplay = 10;
 
-        int i;
-        int x = scores.size();
-
-        if (x != 0) {
-            for (i = 0; i < x; i++ ) {
-                textToDisplay += (i + 1) + ". " + scores.get(i).getName() + " " + scores.get(i).getScore() + "\n";
+        if (scoresToDisplay != 0) {
+            for (int i = 0; i < scoresToDisplay; i++) {
+                textToDisplay += (i + 1) + ". " + scores.get(i).getNameString() + " " + scores.get(i).getScore() + "\n";
             }
         } else textToDisplay = "Tulemusi ei ole";
         return textToDisplay;
 
     }
 
-    public class SortScores implements Comparator<Results> {
-        public int compare(Results score1, Results score2) {
+    public class SortScores implements Comparator<Result> {
+        public int compare(Result score1, Result score2) {
             int sc1 = score1.getScore();
             int sc2 = score2.getScore();
 
@@ -102,37 +93,6 @@ public class HighScores extends Game implements Serializable {
             }else{
                 return 0;
             }
-        }
-    }
-
-    public class Results {
-        private int score;
-        private String name;
-
-        public int getScore() {
-
-            return score;
-        }
-
-        public String getName() {
-            Dialog<Game> dialog = new Dialog<>();
-            Label label = new Label("Siseta oma nimi: ");
-            text = new TextField();
-            GridPane grid = new GridPane();
-            grid.add(label, 1, 1);
-            grid.add(text, 2, 1);
-            dialog.getDialogPane().setContent(grid);
-            ButtonType button = new ButtonType("OK");
-
-            dialog.getDialogPane().getButtonTypes().add(button);
-            dialog.show();
-            return name = text.getText();
-
-        }
-
-        public Results(String name, int score) {
-            this.score = score;
-            this.name = name;
         }
     }
 

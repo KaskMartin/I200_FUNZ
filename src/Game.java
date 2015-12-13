@@ -28,6 +28,7 @@ public class Game extends Application
     int healthRemaining = 10; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
     int finalScore;
     public String name;
+    public TextField nimeSisestamiseV2li;
 
 
     public static void main(String[] args)
@@ -362,25 +363,17 @@ public class Game extends Application
                 gc.fillText( goodPointsText, 360, 72 );
                 gc.strokeText( goodPointsText, 360, 72 );
 
+
                 if (healthRemaining < 1) {
                     this.stop();
                     finalScore = 100 * goodScore;
 
-                    ArrayList<HighScores.Results> scores;
-                    scores = edetabel.getScoresList();
-                    int i = 0;
-                    int x = scores.size();
-                    if (x > 10) { x = 10; }
-                    if (x == 0) {
+                    String kasutajaPooltSisestatudNimi = getName();
+                    edetabel.addNewScore(kasutajaPooltSisestatudNimi, finalScore);
 
-                        HighScores.Results.class.getName();
-
-                        edetabel.addNewScore(name, finalScore);
-                    }
                     System.out.println(edetabel.getHighScores());
                     resetGame();
                     stage.setScene(theGame);
-
                 }
             }
         };
@@ -414,6 +407,22 @@ public class Game extends Application
     public void resetGame() {
         goodScore = 0;
         healthRemaining = 10;
+
+    }
+
+    public String getName() {
+        Dialog<Game> dialog = new Dialog<>();
+        Label label = new Label("Siseta oma nimi: ");
+        nimeSisestamiseV2li = new TextField();
+        GridPane grid = new GridPane();
+        grid.add(label, 1, 1);
+        grid.add(nimeSisestamiseV2li, 2, 1);
+        dialog.getDialogPane().setContent(grid);
+        ButtonType nimeSisestamisNupp = new ButtonType("OK");
+
+        dialog.getDialogPane().getButtonTypes().add(nimeSisestamisNupp);
+        dialog.show();
+        return nimeSisestamiseV2li.getText();
     }
 
 
