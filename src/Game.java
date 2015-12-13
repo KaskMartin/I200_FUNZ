@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.geometry.Dimension2D;
 import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.control.*;
@@ -29,8 +30,6 @@ public class Game extends Application
     public String name;
 
 
-
-
     public static void main(String[] args)
     {
         launch(args);
@@ -49,12 +48,14 @@ public class Game extends Application
         String user2KeyRight = "W";
 
         //-------------------------------------------------------------------------menu start
+
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
         Button startButton = new Button("Start");
-        Font theFont = Font.font("Helvetica", FontWeight.BOLD, 24);
-        Font theFontSmall = Font.font("Helvetica", FontWeight.NORMAL, 12);
+        Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
+        Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
         startButton.setFont(theFont);
 
+        //Nupud menüüs
         Button highscoresButton = new Button("Highscores");
         highscoresButton.setFont(theFont);
 
@@ -82,26 +83,31 @@ public class Game extends Application
         Button backMenuEButton = new Button("Back to Menu");
         backMenuDButton.setFont(theFontSmall);
 
-        //Layout
+        //Nuppude paigutus
         startButton.setTranslateY(100);
         startButton.setTranslateX(300);
+        startButton.setPrefSize(200,20);
 
-        highscoresButton.setTranslateY(200);
+        highscoresButton.setTranslateY(175);
         highscoresButton.setTranslateX(300);
+        highscoresButton.setPrefSize(200, 20);
 
-        settingsButton.setTranslateY(300);
+        settingsButton.setTranslateY(250);
         settingsButton.setTranslateX(300);
+        settingsButton.setPrefSize(200, 20);
 
-        helpButton.setTranslateY(400);
+        helpButton.setTranslateY(325);
         helpButton.setTranslateX(300);
+        helpButton.setPrefSize(200, 20);
 
-        exitButton.setTranslateY(500);
+        exitButton.setTranslateY(400);
         exitButton.setTranslateX(300);
+        exitButton.setPrefSize(200,20);
 
         backMenuAButton.setTranslateY(0);
         backMenuAButton.setTranslateX(0);
 
-        backMenuCButton.setTranslateY(120);
+        backMenuCButton.setTranslateY(0);
         backMenuCButton.setTranslateX(0);
 
         backMenuDButton.setTranslateY(0);
@@ -110,6 +116,8 @@ public class Game extends Application
         backMenuEButton.setTranslateY(0);
         backMenuEButton.setTranslateX(0);
 
+
+
         Group rootMenu = new Group();
         rootMenu.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, helpButton, exitButton);
         theMenu = new Scene(rootMenu, 800, 600);
@@ -117,6 +125,7 @@ public class Game extends Application
         edetabel = new HighScores();
         Group rootHighscore = new Group();
         Label settingsHighscore = new Label("Edetabel");
+        settingsHighscore.setFont(theFontSmall);
         settingsHighscore.setTranslateX(50);
         settingsHighscore.setTranslateY(100);
         Text tekst = new Text();
@@ -126,59 +135,93 @@ public class Game extends Application
         rootHighscore.getChildren().addAll(settingsHighscore, backMenuBButton,tekst);
         theHighscores = new Scene(rootHighscore, 800, 600);
 
-        Group rootSettings = new Group();
-        Label settingsInfo = new Label("Vaheta mänguklahvide kombinatsiooni");
-        rootSettings.getChildren().addAll(settingsInfo, backMenuCButton);
-        theSettings = new Scene(rootSettings, 800, 600);
-
-        //---
+        //Help
         Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja " +
                 "kaks saab kasutada klahve Q ja W.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4." +
                 " Halva toidu püüdmine vähendab elusid. Mäng lõppeb, kui elud otsa saavad.\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
-        juhend.setStyle("-fx-font-size: 12; -fx-fill: black;");
         juhend.setTranslateX(50);
         juhend.setTranslateY(150);
-        //---
+        juhend.setFont(theFontSmall);
 
         Group rootHelp = new Group();
         Label settingsHelp = new Label("Mängujuhis");
-        rootHelp.getChildren().addAll(settingsHelp, backMenuDButton, juhend);
-        theHelp = new Scene(rootHelp, 800, 600);
+        settingsHelp.setFont(theFontSmall);
         settingsHelp.setTranslateX(50);
         settingsHelp.setTranslateY(100);
+        rootHelp.getChildren().addAll(settingsHelp, backMenuDButton, juhend);
+        theHelp = new Scene(rootHelp, 800, 600);
 
-        //--------------------------------------------------------start settingnupp
-        final ToggleGroup group = new ToggleGroup();
+        //Settings
+        Group rootSettings = new Group();
+        Label settingsInfo1 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 1");
+            settingsInfo1.setTranslateX(100);
+            settingsInfo1.setTranslateY(60);
+            settingsInfo1.setFont(theFontSmall);
+        Label settingsInfo2 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 2");
+            settingsInfo2.setTranslateX(475);
+            settingsInfo2.setTranslateY(60);
+            settingsInfo2.setFont(theFontSmall);
+        rootSettings.getChildren().addAll(settingsInfo1, backMenuCButton, settingsInfo2);
+        theSettings = new Scene(rootSettings, 800, 600);
+
+        final ToggleGroup valikunupp = new ToggleGroup();
 
         RadioButton var1 = new RadioButton("<- ->");
-            var1.setToggleGroup(group);
-            var1.setUserData("<- ->");
+        var1.setToggleGroup(valikunupp);
+        var1.setUserData("<- ->");
+        var1.setFont(theFontSmall);
 
-        RadioButton var2 = new RadioButton("A D");
-            var2.setToggleGroup(group);
-            var2.setUserData("A A");
+        RadioButton var2 = new RadioButton("Q W");
+        var2.setToggleGroup(valikunupp);
+        var2.setUserData("Q W");
+        var2.setFont(theFontSmall);
 
-        //RadioButton var3 = new RadioButton("Muu kombinatsioon, blabla");
-            //var3.setToggleGroup(group);
-            //var3.setUserData("Muu");
+        RadioButton var3 = new RadioButton("<- ->");
+        var3.setToggleGroup(valikunupp);
+        var3.setUserData("<- ->");
+        var3.setFont(theFontSmall);
 
-        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        RadioButton var4 = new RadioButton("Q W");
+        var4.setToggleGroup(valikunupp);
+        var4.setUserData("Q W");
+        var4.setFont(theFontSmall);
+
+        valikunupp.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
         });
 
         HBox hbox = new HBox();
+        HBox hbox2 = new HBox();
         VBox vbox = new VBox();
+        VBox vbox2 = new VBox();
 
         vbox.getChildren().add(var1);
         vbox.getChildren().add(var2);
-        //vbox.getChildren().add(var3);
-        vbox.setSpacing(10);
+        vbox.setSpacing(20);
+        vbox.setTranslateX(70);
+        vbox.setTranslateY(0);
+
+        vbox2.getChildren().add(var3);
+        vbox2.getChildren().add(var4);
+        vbox2.setSpacing(20);
+        vbox2.setTranslateX(70);
+        vbox2.setTranslateY(50);
 
         hbox.getChildren().add(vbox);
-        hbox.setSpacing(50);
-        hbox.setPadding(new Insets(20, 10, 10, 20));
+        hbox.setSpacing(150);
+        hbox.setPadding(new Insets(50, 10, 10, 20));
+        hbox.setTranslateX(50);
+        hbox.setTranslateY(100);
+
+        hbox2.getChildren().add(vbox2);
+        hbox.setSpacing(150);
+        hbox.setPadding(new Insets(50, 10, 10, 20));
+        hbox2.setTranslateX(450);
+        hbox2.setTranslateY(100);
 
         ((Group) theSettings.getRoot()).getChildren().add(hbox);
-        //--------------------------------------------------------end settingnupp
+        ((Group) theSettings.getRoot()).getChildren().add(hbox2);
+
+
         startButton.setOnAction(e -> {
             resetGame();
             stage.setScene(theGame);
@@ -215,18 +258,18 @@ public class Game extends Application
             input.remove(code);
         });
 
-        theFont = Font.font( "Helvetica", FontWeight.BOLD, 24 );
+        theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
         gc.setFill( Color.GREEN );
         gc.setStroke( Color.BLACK );
         gc.setLineWidth(1);
 
         Sprite kasutaja1Sprite = new User();
-        kasutaja1Sprite.setImage("images/userSkin1.png");
+        kasutaja1Sprite.setImage("images/kasutaja01.png");
         kasutaja1Sprite.setPosition(200, 400);
 
         Sprite kasutaja2Sprite = new User();
-        kasutaja2Sprite.setImage("images/userSkin2.png");
+        kasutaja2Sprite.setImage("images/kasutaja03.png");
         kasutaja2Sprite.setPosition(50, 400);
 
         // Mänguekraanil olevad kujutised ja pildid
@@ -236,7 +279,7 @@ public class Game extends Application
         taevas.setPosition(0, 0);
 
         Sprite maapinnas =  new Sprite();
-        maapinnas.setImage("images/maapind.png");
+        maapinnas.setImage("images/grass2.png");
         maapinnas.setPosition(0, 550);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
@@ -329,17 +372,15 @@ public class Game extends Application
                     int x = scores.size();
                     if (x > 10) { x = 10; }
                     if (x == 0) {
-                        TextInputDialog dialog = new TextInputDialog();
-                        dialog.setHeaderText(null);
-                        dialog.setContentText("Palun sisesta oma nimi");
-                        dialog.show();
 
-                        //String name = String.valueOf(dialog.showAndWait());
+                        HighScores.Results.class.getName();
 
                         edetabel.addNewScore(name, finalScore);
                     }
                     System.out.println(edetabel.getHighScores());
-                    //resetGame();
+                    resetGame();
+                    stage.setScene(theGame);
+
                 }
             }
         };
