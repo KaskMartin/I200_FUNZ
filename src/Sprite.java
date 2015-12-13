@@ -13,8 +13,8 @@ public class Sprite
     private Image image;
     protected double positionX;
     protected double positionY;
-    private double velocityX;
-    private double velocityY;
+    protected double velocityX;
+    protected double velocityY;
     protected double width;
     protected double height;
 

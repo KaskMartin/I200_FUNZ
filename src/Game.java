@@ -265,11 +265,11 @@ public class Game extends Application
         gc.setStroke( Color.BLACK );
         gc.setLineWidth(1);
 
-        Sprite kasutaja1Sprite = new User();
+        Sprite kasutaja1Sprite = new User(3, 21, 75, 21);
         kasutaja1Sprite.setImage("images/kasutaja01.png");
         kasutaja1Sprite.setPosition(200, 400);
 
-        Sprite kasutaja2Sprite = new User();
+        Sprite kasutaja2Sprite = new User(79, 18, 81, 26);
         kasutaja2Sprite.setImage("images/kasutaja03.png");
         kasutaja2Sprite.setPosition(50, 400);
 
