@@ -52,7 +52,7 @@ public class Game extends Application
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
         Button startButton = new Button("Start");
         Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
-        Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 12);
+        Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
         startButton.setFont(theFont);
 
         //Nupud menüüs
@@ -90,15 +90,15 @@ public class Game extends Application
 
         highscoresButton.setTranslateY(175);
         highscoresButton.setTranslateX(300);
-        highscoresButton.setPrefSize(200,20);
+        highscoresButton.setPrefSize(200, 20);
 
         settingsButton.setTranslateY(250);
         settingsButton.setTranslateX(300);
-        settingsButton.setPrefSize(200,20);
+        settingsButton.setPrefSize(200, 20);
 
         helpButton.setTranslateY(325);
         helpButton.setTranslateX(300);
-        helpButton.setPrefSize(200,20);
+        helpButton.setPrefSize(200, 20);
 
         exitButton.setTranslateY(400);
         exitButton.setTranslateX(300);
@@ -125,6 +125,7 @@ public class Game extends Application
         edetabel = new HighScores();
         Group rootHighscore = new Group();
         Label settingsHighscore = new Label("Edetabel");
+        settingsHighscore.setFont(theFontSmall);
         settingsHighscore.setTranslateX(50);
         settingsHighscore.setTranslateY(100);
         Text tekst = new Text();
@@ -138,12 +139,13 @@ public class Game extends Application
         Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja " +
                 "kaks saab kasutada klahve Q ja W.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4." +
                 " Halva toidu püüdmine vähendab elusid. Mäng lõppeb, kui elud otsa saavad.\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
-        juhend.setStyle("-fx-font-size: 12; -fx-fill: black;");
         juhend.setTranslateX(50);
         juhend.setTranslateY(150);
+        juhend.setFont(theFontSmall);
 
         Group rootHelp = new Group();
         Label settingsHelp = new Label("Mängujuhis");
+        settingsHelp.setFont(theFontSmall);
         settingsHelp.setTranslateX(50);
         settingsHelp.setTranslateY(100);
         rootHelp.getChildren().addAll(settingsHelp, backMenuDButton, juhend);
@@ -152,33 +154,39 @@ public class Game extends Application
         //Settings
         Group rootSettings = new Group();
         Label settingsInfo1 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 1");
-            settingsInfo1.setTranslateX(50);
+            settingsInfo1.setTranslateX(100);
             settingsInfo1.setTranslateY(60);
+            settingsInfo1.setFont(theFontSmall);
         Label settingsInfo2 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 2");
-            settingsInfo2.setTranslateX(450);
+            settingsInfo2.setTranslateX(475);
             settingsInfo2.setTranslateY(60);
+            settingsInfo2.setFont(theFontSmall);
         rootSettings.getChildren().addAll(settingsInfo1, backMenuCButton, settingsInfo2);
         theSettings = new Scene(rootSettings, 800, 600);
 
-        final ToggleGroup group = new ToggleGroup();
+        final ToggleGroup valikunupp = new ToggleGroup();
 
         RadioButton var1 = new RadioButton("<- ->");
-        var1.setToggleGroup(group);
+        var1.setToggleGroup(valikunupp);
         var1.setUserData("<- ->");
+        var1.setFont(theFontSmall);
 
         RadioButton var2 = new RadioButton("Q W");
-        var2.setToggleGroup(group);
+        var2.setToggleGroup(valikunupp);
         var2.setUserData("Q W");
+        var2.setFont(theFontSmall);
 
         RadioButton var3 = new RadioButton("<- ->");
-        var3.setToggleGroup(group);
+        var3.setToggleGroup(valikunupp);
         var3.setUserData("<- ->");
+        var3.setFont(theFontSmall);
 
         RadioButton var4 = new RadioButton("Q W");
-        var4.setToggleGroup(group);
+        var4.setToggleGroup(valikunupp);
         var4.setUserData("Q W");
+        var4.setFont(theFontSmall);
 
-        group.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+        valikunupp.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
         });
 
         HBox hbox = new HBox();
