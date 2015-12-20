@@ -1,3 +1,5 @@
+package views.gms;
+
 import java.util.Random;
 
 /**

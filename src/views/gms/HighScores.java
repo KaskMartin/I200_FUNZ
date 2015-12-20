@@ -1,3 +1,7 @@
+package views.gms;
+
+import views.gms.Result;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -10,16 +14,16 @@ public class HighScores {
     ObjectInputStream inputStream = null;
 
     public HighScores() {
-        scores = new  ArrayList<Result>();
+        scores = getScoresList();
     }
 
     public ArrayList<Result> getScoresList() {
         loadFile();
-        sort();
+        // sort(scores);
         return scores;
     }
 
-    private void sort() {
+    private void sort(ArrayList<Result> scores) {
         SortScores comparator = new SortScores();
         Collections.sort(scores, comparator);
     }
@@ -63,14 +67,11 @@ public class HighScores {
         }
     }
 
-    public String getHighScores() {
+    public String printOutHighScores() {
         String textToDisplay = "";
-
-        ArrayList<Result> scores;
-        scores = getScoresList();
         int scoresToDisplay = scores.size();
         if (scoresToDisplay > 10)
-            scoresToDisplay = 10;
+            scoresToDisplay = 9;
 
         if (scoresToDisplay != 0) {
             for (int i = 0; i < scoresToDisplay; i++) {
