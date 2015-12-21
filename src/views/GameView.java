@@ -1,13 +1,9 @@
 package views;
 
 import javafx.animation.AnimationTimer;
-import javafx.beans.InvalidationListener;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableBooleanValue;
-import javafx.scene.Group;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -16,7 +12,6 @@ import views.gms.Food;
 import views.gms.LongValue;
 import views.gms.Sprite;
 import views.gms.User;
-
 import java.util.*;
 
 /**
@@ -24,65 +19,34 @@ import java.util.*;
  */
 public class GameView extends Pane {
     private int goodScore;
-    private int healthRemaining = 10; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
+    private int healthRemaining = 4; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
     private int maksimumFoodAllowed = 25;
-    User kasutaja1 = new User(3, 21, 75, 21);
-    User kasutaja2 = new User(79, 18, 81, 26);
     private Timer timer = new Timer();
-    public AnimationTimer animationTimer = new AnimationTimer() {
-        @Override
-        public void handle(long now) {
+    public AnimationTimer animationTimer;
+    User kasutaja1, kasutaja2;
 
-        }
-    };
-
-    public Button mingiSuvalinNupp = new Button();
-
-    public ObservableBooleanValue m2ngL2bi = new ObservableBooleanValue() {
-        @Override
-        public boolean get() {
-            return false;
-        }
-
-        @Override
-        public void addListener(ChangeListener<? super Boolean> listener) {
-
-        }
-
-        @Override
-        public void removeListener(ChangeListener<? super Boolean> listener) {
-
-        }
-
-        @Override
-        public Boolean getValue() {
-            return null;
-        }
-
-        @Override
-        public void addListener(InvalidationListener listener) {
-
-        }
-
-        @Override
-        public void removeListener(InvalidationListener listener) {
-
-        }
-    };
-
+    public SimpleBooleanProperty m2ngL2bi = new SimpleBooleanProperty();
+    ArrayList<Food> foodList = new ArrayList<Food>();
 
     public int getGoodScore () {
         return goodScore;
     }
 
     public GameView() {
+        this.setHeight(600);
+        this.setWidth(800);
+
+        kasutaja1 = new User(3, 21, 75, 21);
+        kasutaja2 = new User(79, 18, 81, 26);
+
         ArrayList<String> input = new ArrayList<String>();
 
         this.setOnKeyPressed(e -> {
-                String code = e.getCode().toString();
-                if ( !input.contains(code) )
-                        input.add(code);
-            });
+            String code = e.getCode().toString();
+            if (!input.contains(code))
+                input.add(code);
+        });
+
         this.setOnKeyReleased(e -> {
             String code = e.getCode().toString();
             input.remove(code);
@@ -99,30 +63,37 @@ public class GameView extends Pane {
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
 
         kasutaja1.setImage("images/kasutaja01.png");
-        kasutaja1.setPosition(200, 400);
+        kasutaja1.setPosition(200, 365);
 
         kasutaja1.setMoveLeft("LEFT");
         kasutaja1.setMoveRight("RIGHT");
 
 
         kasutaja2.setImage("images/kasutaja03.png");
-        kasutaja2.setPosition(50, 400);
+        kasutaja2.setPosition(600, 365);
 
         kasutaja2.setMoveLeft("Q");
         kasutaja2.setMoveRight("W");
 
         // Mänguekraanil olevad kujutised ja pildid
-
         Sprite taevas =  new Sprite();
         taevas.setImage("images/taevas.png");
         taevas.setPosition(0, 0);
 
         Sprite maapindSprite =  new Sprite();
         maapindSprite.setImage("images/grass2.png");
-        maapindSprite.setPosition(0, 550);
+        maapindSprite.setPosition(0, 540);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
-        ArrayList<Food> foodList = new ArrayList<Food>();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (foodList.size() < maksimumFoodAllowed)
+                    foodList.add(new Food());
+            }
+        }, 0, 800);
+
+
 
         animationTimer = new AnimationTimer()
         {
@@ -195,43 +166,31 @@ public class GameView extends Pane {
                 gc.fillText( goodPointsText, 360, 72 );
                 gc.strokeText( goodPointsText, 360, 72 );
 
+                /** MEGA TÄHTIS!!! Lõpetab mängu kui elud otsa saavad. Muudab m2ngLbi SimpleBooleanProperty variably, millele
+                 * on ehitatud kuulaja Main meetodi jaoks. Sealt käivitub HighScoreide kuvamine
+                 */
 
                 if (healthRemaining < 1) {
                     stopGame();
-                    m2ngL2bi.equals(true);
+                    m2ngL2bi.set(true);
                 }
             }
         };
 
         //tekitab ajastaja, mis loobib iga 0,8s tagant toitu alla
-
-        TimerTask task = new TimerTask() {
-            @Override
-            public void run() {
-                if (foodList.size() < maksimumFoodAllowed)
-                    foodList.add(new Food());
-            }
-        };
-        startFoodThrowing(task);
-        animationTimer.start();
     }
 
     public void stopGame() {
-        animationTimer.stop();
-        timer.cancel();
-    }
-
-    public void startFoodThrowing(TimerTask task) {
-        timer.scheduleAtFixedRate(task, 0, 800);
+            animationTimer.stop();
     }
 
     public void resetGame() {
+        foodList = new ArrayList<Food>();
         goodScore = 0;
-        healthRemaining = 10;
-        kasutaja1.setPosition(200, 400);
-        kasutaja2.setPosition(50, 400);
+        healthRemaining = 4;
+        kasutaja1.setPosition(200, 365);
+        kasutaja2.setPosition(600, 365);
         animationTimer.start();
-        m2ngL2bi.equals(false);
+        m2ngL2bi.set(false);
     }
-
 }

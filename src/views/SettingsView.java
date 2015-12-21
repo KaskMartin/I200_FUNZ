@@ -16,6 +16,8 @@ import javafx.scene.text.FontWeight;
 public class SettingsView extends Pane {
 
     public SettingsView() {
+        this.setHeight(600);
+        this.setWidth(800);
         Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
         Label settingsInfo1 = new Label("Vaheta mänguklahvide kombinatsiooni \n\nKasutaja 1");

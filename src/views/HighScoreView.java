@@ -22,6 +22,8 @@ public class HighScoreView extends Pane {
     public HighScores edetabel = new HighScores(); //Edetabel - väljastab tulemused
 
     public HighScoreView() {
+        this.setHeight(600);
+        this.setWidth(800);
 
         Label highScooriTabeliP2is = new Label("Edetabel");
 

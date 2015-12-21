@@ -13,6 +13,8 @@ import javafx.scene.text.Text;
 public class HelpView extends Pane {
 
     public HelpView() {
+        this.setHeight(600);
+        this.setWidth(800);
         Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
         Text juhend = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja " +

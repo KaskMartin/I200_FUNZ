@@ -17,6 +17,8 @@ public class MenuView extends Pane {
     public Button exitButton = new Button("Exit");
 
     public MenuView(){
+        this.setHeight(600);
+        this.setWidth(800);
         Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
         Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
 
