@@ -1,14 +1,24 @@
 import com.sun.javafx.property.adapter.PropertyDescriptor;
 import javafx.application.Application;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
+
+import java.io.File;
 
 public class Main extends Application
 {
     public static void main(String[] args)
     {
         launch(args);
+    }
+
+    public void PlayPauseSound () {
+        Media sound = new Media(new File("src/sounds/167127__crisstanza__pause.mp3").toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     @Override
@@ -28,6 +38,7 @@ public class Main extends Application
         Layout layout = new Layout(menu);
         layout.hideBackButton();
         layout.backMenuButton.setOnAction(e -> {
+            PlayPauseSound ();
             game.stopGame();
             layout.setContent(menu);
             layout.hideBackButton();
@@ -45,19 +56,26 @@ public class Main extends Application
         });
 
         menu.startButton.setOnAction(e -> {
+            PlayPauseSound ();
             game.resetGame();
             layout.setContent(game);
         });
         menu.highscoresButton.setOnAction(e -> {
+            PlayPauseSound ();
             layout.setContent(currentHighScores);
         });
         menu.settingsButton.setOnAction(e -> {
+            PlayPauseSound ();
             layout.setContent(settings);
         });
         menu.helpButton.setOnAction(e -> {
+            PlayPauseSound ();
             layout.setContent(help);
         });
-        menu.exitButton.setOnAction(e -> System.exit(0));
+        menu.exitButton.setOnAction(e -> {
+            PlayPauseSound ();
+            System.exit(0);
+        });
 
         game.m2ngL2bi.addListener(e-> {
             if (game.m2ngL2bi.getValue()) {
