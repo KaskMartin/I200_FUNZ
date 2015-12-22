@@ -5,6 +5,8 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -12,6 +14,7 @@ import views.gms.Food;
 import views.gms.LongValue;
 import views.gms.Sprite;
 import views.gms.User;
+import java.io.File;
 import java.util.*;
 
 /**
@@ -30,6 +33,12 @@ public class GameView extends Pane {
 
     public int getGoodScore () {
         return goodScore;
+    }
+
+    public void PlaySound (String soundFileName) {
+        Media sound = new Media(new File(soundFileName).toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.play();
     }
 
     public GameView() {
@@ -129,14 +138,19 @@ public class GameView extends Pane {
                     foodSprite.render(gc);
                     if ( kasutaja1.intersects(foodSprite)||kasutaja2.intersects(foodSprite) )
                     {
-                        if (foodSprite.good)
+                        if (foodSprite.good) {
                             goodScore++; //kui toit oli tervislik suurendame skoori
-                        else
+                            PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
+                        }
+                        else {
                             healthRemaining--; //kui toit oli paha, vähendame elusid
+                            PlaySound("src/sounds/249615__vincentm400__confirm.mp3");
+                        }
                         foodIter.remove(); //viska toit minema
                     }
                     else if ( foodSprite.intersects(maapindSprite)) {
                         foodIter.remove();
+                        if (foodSprite.good) {PlaySound("src/sounds/149899__animationisaac__box-crash.mp3");}
                     }
                     foodSprite.update(elapsedTime);
                 }
