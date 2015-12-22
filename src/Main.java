@@ -1,3 +1,4 @@
+import com.sun.javafx.property.adapter.PropertyDescriptor;
 import javafx.application.Application;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
@@ -15,6 +16,10 @@ public class Main extends Application
     {
         stage.setWidth(800);
         stage.setHeight(600);
+        stage.setMaxWidth(800);
+        stage.setMaxHeight(600);
+        stage.setResizable(false);
+
         MenuView menu = new MenuView();
         GameView game = new GameView();
         HelpView currentHighScores = new HelpView(); //NB!  pandud help siia praegu peaks olema: HighScoreView currentHighScores = new HighScoreView();
@@ -26,6 +31,17 @@ public class Main extends Application
             game.stopGame();
             layout.setContent(menu);
             layout.hideBackButton();
+        });
+
+        layout.setOnKeyPressed(e -> {
+            String code = e.getCode().toString();
+            if (!game.input.contains(code))
+                game.input.add(code);
+        });
+
+        layout.setOnKeyReleased(e -> {
+            String code = e.getCode().toString();
+            game.input.remove(code);
         });
 
         menu.startButton.setOnAction(e -> {

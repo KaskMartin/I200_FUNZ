@@ -21,12 +21,12 @@ public class GameView extends Pane {
     private int goodScore;
     private int healthRemaining = 4; //elude hulk mis alguses kaasa antakse, kui see =0, siis mäng läbi!!
     private int maksimumFoodAllowed = 25;
-    private Timer timer = new Timer();
     public AnimationTimer animationTimer;
     User kasutaja1, kasutaja2;
 
     public SimpleBooleanProperty m2ngL2bi = new SimpleBooleanProperty();
     ArrayList<Food> foodList = new ArrayList<Food>();
+    public ArrayList<String> input = new ArrayList<String>();
 
     public int getGoodScore () {
         return goodScore;
@@ -36,10 +36,21 @@ public class GameView extends Pane {
         this.setHeight(600);
         this.setWidth(800);
 
+        //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
         kasutaja1 = new User(3, 21, 75, 21);
         kasutaja2 = new User(79, 18, 81, 26);
+        kasutaja1.setImage("images/kasutaja01.png");
+        kasutaja1.setPosition(200, 365);
 
-        ArrayList<String> input = new ArrayList<String>();
+        kasutaja1.setMoveLeft("LEFT");
+        kasutaja1.setMoveRight("RIGHT");
+
+        kasutaja2.setImage("images/kasutaja03.png");
+        kasutaja2.setPosition(600, 365);
+
+        kasutaja2.setMoveLeft("Q");
+        kasutaja2.setMoveRight("W");
+        this.requestFocus();
 
         this.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
@@ -60,20 +71,6 @@ public class GameView extends Pane {
         gc.setFont( theFont );
         gc.setLineWidth(1);
 
-        //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
-
-        kasutaja1.setImage("images/kasutaja01.png");
-        kasutaja1.setPosition(200, 365);
-
-        kasutaja1.setMoveLeft("LEFT");
-        kasutaja1.setMoveRight("RIGHT");
-
-
-        kasutaja2.setImage("images/kasutaja03.png");
-        kasutaja2.setPosition(600, 365);
-
-        kasutaja2.setMoveLeft("Q");
-        kasutaja2.setMoveRight("W");
 
         // Mänguekraanil olevad kujutised ja pildid
         Sprite taevas =  new Sprite();
@@ -85,6 +82,8 @@ public class GameView extends Pane {
         maapindSprite.setPosition(0, 540);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
+        //See on toiduloopija, mis lisav toitu meie foodList-i
+        Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -92,8 +91,6 @@ public class GameView extends Pane {
                     foodList.add(new Food());
             }
         }, 0, 800);
-
-
 
         animationTimer = new AnimationTimer()
         {
