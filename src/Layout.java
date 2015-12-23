@@ -9,14 +9,13 @@ import javafx.scene.text.FontWeight;
  */
 public class Layout extends Group{
     Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
-    public Button backMenuButton = new Button("Back to Menu");
+    public Button backMenuButton = new Button("TAGASI");
 
     //Layouti default constructor, koos back nupuga
     public Layout (Pane pane) {
         setContent(pane);
         showBackButton();
     }
-
 
     public void showBackButton() {
         this.backMenuButton.setVisible(true);

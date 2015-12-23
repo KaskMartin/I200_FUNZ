@@ -10,17 +10,17 @@ import javafx.scene.text.FontWeight;
  * Created by martin on 13.12.15.
  */
 public class MenuView extends Pane {
-    public Button startButton = new Button("Start");
-    public Button highscoresButton = new Button("Highscores");
-    public Button settingsButton = new Button("Settings");
-    public Button helpButton = new Button("Help");
-    public Button exitButton = new Button("Exit");
+    public Button startButton = new Button("ALUSTA MÄNGU");
+    public Button highscoresButton = new Button("EDETABEL");
+    public Button settingsButton = new Button("SEADED");
+    public Button helpButton = new Button("ABI");
+    public Button exitButton = new Button("VÄLJU");
 
     public MenuView(){
         this.setHeight(600);
         this.setWidth(800);
         Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
-        Label menuPealkiri = new Label("Püüa ainult tervislikku toitu!");
+        Label menuPealkiri = new Label("PÜÜA AINULT TERVISLIKKU TOITU!");
 
 
         startButton.setFont(theFont);
