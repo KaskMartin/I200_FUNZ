@@ -38,38 +38,54 @@ public class SettingsView extends Pane {
 
     Text scenetitle = new Text("VALI MÄNGIJA \n\nMÄNGIJA 1");
     scenetitle.setFont(Font.font("Tahoma", FontWeight.NORMAL, 20));
-    grid.add(scenetitle, 0, 0, 2, 1);
+    grid.add(scenetitle, 0, 0);
+        Label valimangija1 = new Label("Vali mängija 1");
+            //grid.add(valimangija1, 1, 1);
+        Label valimangija2 = new Label("Vali mängija 2");
+            //grid.add(valimangija1, 3, 1);
 
-        final ToggleGroup valikunupp = new ToggleGroup();
+        final ToggleGroup valikunupp1 = new ToggleGroup();
 
-        RadioButton var1 = new RadioButton("");
-        var1.setToggleGroup(valikunupp);
-        var1.setUserData("");
+        RadioButton var1 = new RadioButton("1");
+        var1.setToggleGroup(valikunupp1);
+        var1.setUserData("1");
         var1.setFont(theFontSmall);
 
-        RadioButton var2 = new RadioButton("");
-        var2.setToggleGroup(valikunupp);
-        var2.setUserData("");
+        RadioButton var2 = new RadioButton("2");
+        var2.setToggleGroup(valikunupp1);
+        var2.setUserData("2");
         var2.setFont(theFontSmall);
 
-        RadioButton var3 = new RadioButton("");
-        var3.setToggleGroup(valikunupp);
-        var3.setUserData("");
+        final ToggleGroup valikunupp2 = new ToggleGroup();
+        RadioButton var3 = new RadioButton("3");
+        var3.setToggleGroup(valikunupp2);
+        var3.setUserData("3");
         var3.setFont(theFontSmall);
 
-        RadioButton var4 = new RadioButton("");
-        var4.setToggleGroup(valikunupp);
-        var4.setUserData("");
+        RadioButton var4 = new RadioButton("4");
+        var4.setToggleGroup(valikunupp2);
+        var4.setUserData("4");
         var4.setFont(theFontSmall);
 
-        valikunupp.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
+        Image kasutaja03 = new Image("kasutaja03.png");
+                new Image(SettingsView.class.getResourceAsStream("kasutaja03.png")));
+        grid.add(kasutaja03, 2, 1);
 
-        grid.add(var1, 1, 1));
-        grid.add(var2, 2, 2);
-        //grid.add(var3, 2, 2, 3, 2);
-        //grid.add(var4, 5, 2, 2, 5);
+        //valikunupp.selectedToggleProperty().addListener((observable, oldValue, newValue) ->
 
-    //Label userName = new Label("User Name:");
+                grid.add(var1, 1, 2);
+                grid.add(var2, 3, 2);
+                grid.add(var3, 1, 3);
+                grid.add(var4, 3, 3);
+
+
+        //var1.setToggleGroup(valikunupp);
+        //var2.setToggleGroup(valikunupp);
+
+        //valikunupp.getToggles().addAll(var1, var2);
+
+
+        //Label userName = new Label("User Name:");
     //grid.add(userName, 0, 1);
 
     //TextField userTextField = new TextField();
