@@ -9,22 +9,19 @@ import views.gms.HighScores;
 
 import java.io.File;
 
-public class Main extends Application
-{
-    public static void main(String[] args)
-    {
+public class Main extends Application {
+    public static void main(String[] args) {
         launch(args);
     }
 
-    public void PlayPauseSound () {
+    public void PlayPauseSound() {
         Media sound = new Media(new File("src/sounds/167127__crisstanza__pause.mp3").toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(sound);
         mediaPlayer.play();
     }
 
     @Override
-    public void start(Stage stage)
-    {
+    public void start(Stage stage) {
         stage.setWidth(800);
         stage.setHeight(600);
         stage.setMaxWidth(800);
@@ -41,7 +38,7 @@ public class Main extends Application
         Layout layout = new Layout(menu);
         layout.hideBackButton();
         layout.backMenuButton.setOnAction(e -> {
-            PlayPauseSound ();
+            PlayPauseSound();
             game.stopGame();
             layout.setContent(menu);
             layout.hideBackButton();
@@ -59,70 +56,72 @@ public class Main extends Application
         });
 
         menu.startButton.setOnAction(e -> {
-            PlayPauseSound ();
+            PlayPauseSound();
             game.resetGame();
             layout.setContent(game);
         });
         menu.highscoresButton.setOnAction(e -> {
-            PlayPauseSound ();
+            PlayPauseSound();
             layout.setContent(currentHighScores);
         });
         menu.settingsButton.setOnAction(e -> {
-            PlayPauseSound ();
+            PlayPauseSound();
             layout.setContent(settings);
         });
         menu.helpButton.setOnAction(e -> {
-            PlayPauseSound ();
+            PlayPauseSound();
             layout.setContent(help);
         });
         menu.exitButton.setOnAction(e -> {
-            PlayPauseSound ();
+            PlayPauseSound();
             System.exit(0);
         });
 
-<<<<<<< HEAD
+//<<<<<<< HEAD
         settings.mangijaPilt1.setOnAction(e -> {
             game.setUserData("image/kasutaja04.png");
-=======
-        game.m2ngL2bi.addListener(e-> {
-            if (game.m2ngL2bi.getValue()) {
-                int finalScore = 100 * game.getGoodScore();
-                // currentHighScores.edetabel.addNewScore(currentHighScores.getName(), finalScore); ***Kui edetabel korda saab saab selle siit sise tagasi kommida
 
-                System.out.println("Mäng sai läbi!"); //TESTING!
-                edetabel.addScore(finalScore);
-                layout.setContent(currentHighScores);
-            }
->>>>>>> fb4b99bb2f1648963b46d547039fd5fec1668238
         });
+//=======
+            game.m2ngL2bi.addListener(e -> {
+                if (game.m2ngL2bi.getValue()) {
+                    int finalScore = 100 * game.getGoodScore();
+                    // currentHighScores.edetabel.addNewScore(currentHighScores.getName(), finalScore); ***Kui edetabel korda saab saab selle siit sise tagasi kommida
 
-        settings.mangijaPilt2.setOnAction(e -> {
-            game.setUserData("image/kasutaja01sv.png");
-        });
+                    System.out.println("Mäng sai läbi!"); //TESTING!
+                    edetabel.addScore(finalScore);
+                    layout.setContent(currentHighScores);
+                }
+//>>>>>>> fb4b99bb2f1648963b46d547039fd5fec1668238
+            });
 
-        settings.mangijaPilt3.setOnAction(e -> {
-            game.setUserData("image/kasutaja04.png");
-        });
+            settings.mangijaPilt2.setOnAction(e -> {
+                game.setUserData("image/kasutaja01sv.png");
+            });
 
-        settings.mangijaPilt4.setOnAction(e -> {
-            game.setUserData("image/kasutaja01sv.png");
-        });
+            settings.mangijaPilt3.setOnAction(e -> {
+                game.setUserData("image/kasutaja04.png");
+            });
 
-        settings.mangijaPilt5.setOnAction(e -> {
-            game.setUserData("image/kasutaja04.png");
-        });
+            settings.mangijaPilt4.setOnAction(e -> {
+                game.setUserData("image/kasutaja01sv.png");
+            });
 
-        settings.mangijaPilt6.setOnAction(e -> {
-            game.setUserData("image/kasutaja01sv.png");
-        });
+            settings.mangijaPilt5.setOnAction(e -> {
+                game.setUserData("image/kasutaja04.png");
+            });
 
-        settings.mangijaPilt7.setOnAction(e -> {
-            game.setUserData("image/kasutaja04.png");
-        });
+            settings.mangijaPilt6.setOnAction(e -> {
+                game.setUserData("image/kasutaja01sv.png");
+            });
 
-        settings.mangijaPilt8.setOnAction(e -> {
-            game.setUserData("image/kasutaja01sv.png");
-        });
+            settings.mangijaPilt7.setOnAction(e -> {
+                game.setUserData("image/kasutaja04.png");
+            });
+
+            settings.mangijaPilt8.setOnAction(e -> {
+                game.setUserData("image/kasutaja01sv.png");
+            });
 
             game.m2ngL2bi.addListener(e -> {
                 if (game.m2ngL2bi.getValue()) {

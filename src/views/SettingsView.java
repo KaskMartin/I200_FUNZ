@@ -24,10 +24,13 @@ public class SettingsView extends Pane {
     public RadioButton mangijaPilt7 = new RadioButton("");
     public RadioButton mangijaPilt8 = new RadioButton("");
 
-    public SettingsView() {
+    public boolean SettingsView() {
         this.setHeight(600);
         this.setWidth(800);
         Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
+
+        boolean answerKasutajaYks = false;
+        boolean answerKasutajaKaks = false;
 
         //GridPane nuppude jaoks
         GridPane pane = new GridPane();
@@ -94,7 +97,6 @@ public class SettingsView extends Pane {
 
         ToggleGroup mangija2Valikud = new ToggleGroup();
 
-
         VBox paneForRadioButtons2 = new VBox(20);
         paneForRadioButtons2.setPadding(new Insets(5, 5, 5, 5));
         pane.add(mangijaPilt5, 3, 2);
@@ -110,7 +112,7 @@ public class SettingsView extends Pane {
         mangijaPilt7.setToggleGroup(mangija2Valikud);
         mangijaPilt8.setToggleGroup(mangija2Valikud);
 
-        mangija2Valikud.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+        /**mangija2Valikud.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
             public void changed(ObservableValue<? extends Toggle> ov,
                                 Toggle old_toggle, Toggle new_toggle) {
                 if (mangija2Valikud.getSelectedToggle() != null) {
@@ -122,7 +124,15 @@ public class SettingsView extends Pane {
                     );
                 }
             }
+
         });
+         */
+
+        //mangijaPilt2.setOnAction( event ->  {
+            //answerKasutajaYks = true;
+        //});
+        return answerKasutajaYks;
+
     }
 }
 
