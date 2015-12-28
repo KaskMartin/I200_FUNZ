@@ -10,11 +10,11 @@ import javafx.scene.text.FontWeight;
  * Created by martin on 13.12.15.
  */
 public class MenuView extends Pane {
-    public Button startButton = new Button("ALUSTA MÄNGU");
-    public Button highscoresButton = new Button("EDETABEL");
-    public Button settingsButton = new Button("SEADED");
-    public Button helpButton = new Button("ABI");
-    public Button exitButton = new Button("VÄLJU");
+    public Button startButton = new Button("_MÄNGU ALGUS");
+    public Button highscoresButton = new Button("_EDETABEL");
+    public Button settingsButton = new Button("_SEADED");
+    public Button helpButton = new Button("_ABI");
+    public Button exitButton = new Button("_VÄLJU");
 
     public MenuView(){
         this.setHeight(600);

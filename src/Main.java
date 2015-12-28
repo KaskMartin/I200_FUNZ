@@ -77,23 +77,55 @@ public class Main extends Application
             System.exit(0);
         });
 
-        game.m2ngL2bi.addListener(e-> {
-            if (game.m2ngL2bi.getValue()) {
-                int finalScore = 100 * game.getGoodScore();
-                // currentHighScores.edetabel.addNewScore(currentHighScores.getName(), finalScore); ***Kui edetabel korda saab saab selle siit sise tagasi kommida
-                layout.setContent(currentHighScores);
-                System.out.println("Mäng sai läbi!"); //TESTING!
-            }
+        settings.mangijaPilt1.setOnAction(e -> {
+            game.setUserData("image/kasutaja04.png");
         });
 
-        stage.setTitle("Püüa ainult tervislikku toitu!");
-        Scene scene = new Scene(layout);
-        stage.setScene(scene);
-        stage.show();
-
-        stage.setOnCloseRequest(e -> {
-            System.exit(0);
+        settings.mangijaPilt2.setOnAction(e -> {
+            game.setUserData("image/kasutaja01sv.png");
         });
+
+        settings.mangijaPilt3.setOnAction(e -> {
+            game.setUserData("image/kasutaja04.png");
+        });
+
+        settings.mangijaPilt4.setOnAction(e -> {
+            game.setUserData("image/kasutaja01sv.png");
+        });
+
+        settings.mangijaPilt5.setOnAction(e -> {
+            game.setUserData("image/kasutaja04.png");
+        });
+
+        settings.mangijaPilt6.setOnAction(e -> {
+            game.setUserData("image/kasutaja01sv.png");
+        });
+
+        settings.mangijaPilt7.setOnAction(e -> {
+            game.setUserData("image/kasutaja04.png");
+        });
+
+        settings.mangijaPilt8.setOnAction(e -> {
+            game.setUserData("image/kasutaja01sv.png");
+        });
+
+            game.m2ngL2bi.addListener(e -> {
+                if (game.m2ngL2bi.getValue()) {
+                    int finalScore = 100 * game.getGoodScore();
+                    // currentHighScores.edetabel.addNewScore(currentHighScores.getName(), finalScore); ***Kui edetabel korda saab saab selle siit sise tagasi kommida
+                    layout.setContent(currentHighScores);
+                    System.out.println("Mäng sai läbi!"); //TESTING!
+                }
+            });
+
+            stage.setTitle("Püüa ainult tervislikku toitu!");
+            Scene scene = new Scene(layout);
+            stage.setScene(scene);
+            stage.show();
+
+            stage.setOnCloseRequest(e -> {
+                System.exit(0);
+            });
+        }
+
     }
-
-}
