@@ -5,6 +5,7 @@ import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
+import views.gms.HighScores;
 
 import java.io.File;
 
@@ -32,7 +33,9 @@ public class Main extends Application
 
         MenuView menu = new MenuView();
         GameView game = new GameView();
-        HelpView currentHighScores = new HelpView(); //NB!  pandud help siia praegu peaks olema: HighScoreView currentHighScores = new HighScoreView();
+        //HelpView currentHighScores = new HelpView(); //NB!  pandud help siia praegu peaks olema: HighScoreView currentHighScores = new HighScoreView();
+        HighScoreView currentHighScores = new HighScoreView();
+        HighScores edetabel = new HighScores();
         HelpView help = new HelpView();
         SettingsView settings = new SettingsView();
         Layout layout = new Layout(menu);
@@ -77,8 +80,20 @@ public class Main extends Application
             System.exit(0);
         });
 
+<<<<<<< HEAD
         settings.mangijaPilt1.setOnAction(e -> {
             game.setUserData("image/kasutaja04.png");
+=======
+        game.m2ngL2bi.addListener(e-> {
+            if (game.m2ngL2bi.getValue()) {
+                int finalScore = 100 * game.getGoodScore();
+                // currentHighScores.edetabel.addNewScore(currentHighScores.getName(), finalScore); ***Kui edetabel korda saab saab selle siit sise tagasi kommida
+
+                System.out.println("Mäng sai läbi!"); //TESTING!
+                edetabel.addScore(finalScore);
+                layout.setContent(currentHighScores);
+            }
+>>>>>>> fb4b99bb2f1648963b46d547039fd5fec1668238
         });
 
         settings.mangijaPilt2.setOnAction(e -> {
