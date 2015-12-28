@@ -37,18 +37,5 @@ public class HighScoreView extends Pane {
         this.getChildren().addAll(highScooriTabeliP2is, tekst);
     }
 
-    public String getName() {
-        Dialog<Main> dialog = new Dialog<>();
-        Label label = new Label("Siseta oma nimi: ");
-        TextField nimeSisestamiseV2li = new TextField();
-        GridPane grid = new GridPane();
-        grid.add(label, 1, 1);
-        grid.add(nimeSisestamiseV2li, 2, 1);
-        dialog.getDialogPane().setContent(grid);
-        ButtonType nimeSisestamisNupp = new ButtonType("OK");
 
-        dialog.getDialogPane().getButtonTypes().add(nimeSisestamisNupp);
-        dialog.show();
-
-        return nimeSisestamiseV2li.getText();}
 }
