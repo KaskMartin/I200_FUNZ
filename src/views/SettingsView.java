@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -24,15 +25,88 @@ public class SettingsView extends Pane {
     public RadioButton mangijaPilt7 = new RadioButton("");
     public RadioButton mangijaPilt8 = new RadioButton("");
 
-    public boolean SettingsView() {
+    public SettingsView() {
         this.setHeight(600);
         this.setWidth(800);
         Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
-        boolean answerKasutajaYks = false;
-        boolean answerKasutajaKaks = false;
+        GridPane pane = new GridPane();
+        pane.setAlignment(Pos.CENTER);
+        pane.setPadding(new Insets(20, 20, 20, 20));
+        pane.setGridLinesVisible(true);
 
+        Label mangija1Label = new Label("MÄNGIJA 1");
+        mangija1Label.setContentDisplay(ContentDisplay.TOP);
+        mangija1Label.setPadding(new Insets(5, 5, 5, 50));
+
+        Label mangija2Label = new Label("MÄNGIJA 2");
+        mangija2Label.setContentDisplay(ContentDisplay.TOP);
+        mangija2Label.setPadding(new Insets(5, 5, 5, 50));
+
+        //Button vali1Tegelane = new Button("KINNITAN TEGELASE");
+
+        //-----Mängija 1
+        ChoiceBox<String> mangija1Tegelane = new ChoiceBox<>();
+
+        mangija1Tegelane.getItems().add("VALI TEGELANE 1");
+        mangija1Tegelane.getItems().addAll("1", "2", "3", "4");
+        mangija1Tegelane.setValue("VALI TEGELANE 1");
+
+        //vali1Tegelane.setOnAction(e -> getChoice(mangija1Tegelane));
+
+        VBox layout1 = new VBox(10);
+        layout1.setPadding(new Insets(20, 20, 20, 20));
+        layout1.getChildren().addAll(mangija1Label, mangija1Tegelane);
+
+
+        //------Mängija 2
+        ChoiceBox<String> mangija2Tegelane = new ChoiceBox<>();
+
+        //getItems returns the ObservableList object which you can add items to
+        mangija2Tegelane.getItems().add("VALI TEGELANE 2");
+        mangija2Tegelane.getItems().addAll("1", "2", "3", "4");
+        mangija2Tegelane.setValue("VALI TEGELANE 2");
+
+        VBox layout2 = new VBox(10);
+        layout2.setPadding(new Insets(20, 20, 20, 20));
+        layout2.getChildren().addAll(mangija2Label, mangija2Tegelane);
+
+        ImageView mangija1Pilt = new ImageView("images/kasutaja01sv.png");
+        ImageView mangija2Pilt = new ImageView("images/kasutaja01v.png");
+        ImageView mangija3Pilt = new ImageView("images/kasutaja01v.png");
+        ImageView mangija4Pilt = new ImageView("images/kasutaja01v.png");
+
+        Label mangija1Text = new Label("1");
+        Label mangija2Text = new Label("2");
+        Label mangija3Text = new Label("3");
+        Label mangija4Text = new Label("4");
+
+        pane.add(layout1, 2, 2);
+        pane.add(layout2, 5, 2);
+        pane.add(mangija1Label, 2, 1);
+        pane.add(mangija2Label, 5, 1);
+        pane.add(mangija1Pilt, 4, 3);
+        pane.add(mangija2Pilt, 4, 4);
+        pane.add(mangija3Pilt, 4, 5);
+        pane.add(mangija4Pilt, 4, 6);
+        pane.add(mangija1Text, 3, 3);
+        pane.add(mangija2Text, 3, 4);
+        pane.add(mangija3Text, 3, 5);
+        pane.add(mangija4Text, 3, 6);
+
+        this.getChildren().addAll(pane);
+    }
+
+    //To get the value of the selected item
+    private void getChoice(ChoiceBox<String> choiceBox) {
+        String food = choiceBox.getValue();
+        System.out.println(food);
+    }
+}
+
+        /**
         //GridPane nuppude jaoks
+
         GridPane pane = new GridPane();
         pane.setAlignment(Pos.CENTER);
         pane.setPadding(new Insets(20, 20, 20, 20));
@@ -112,27 +186,12 @@ public class SettingsView extends Pane {
         mangijaPilt7.setToggleGroup(mangija2Valikud);
         mangijaPilt8.setToggleGroup(mangija2Valikud);
 
-        /**mangija2Valikud.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            public void changed(ObservableValue<? extends Toggle> ov,
-                                Toggle old_toggle, Toggle new_toggle) {
-                if (mangija2Valikud.getSelectedToggle() != null) {
-                    final Image image = new Image(
-                            getClass().getResourceAsStream(
-                                    mangija2Valikud.getSelectedToggle().getUserData().toString()
-                                            //+ "kasutaja03sv.png"
-                            )
-                    );
-                }
-            }
-
-        });
          */
 
-        //mangijaPilt2.setOnAction( event ->  {
-            //answerKasutajaYks = true;
-        //});
-        return answerKasutajaYks;
 
-    }
-}
+
+
+
+
+
 
