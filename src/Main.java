@@ -1,10 +1,15 @@
 import com.sun.javafx.property.adapter.PropertyDescriptor;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Toggle;
+import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
+import views.gms.AlertBox;
 import views.gms.HighScores;
 
 import java.io.File;
@@ -94,6 +99,9 @@ public class Main extends Application {
                 }
 //>>>>>>> fb4b99bb2f1648963b46d547039fd5fec1668238
             });
+
+        settings.mangija1Valikud.getSelectedToggle();
+        settings.mangija2Valikud.getSelectedToggle();
 
             settings.mangijaPilt2.setOnAction(e -> {
                 game.setUserData("image/kasutaja01sv.png");

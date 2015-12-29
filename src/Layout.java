@@ -10,16 +10,26 @@ import javafx.scene.text.FontWeight;
 public class Layout extends Group{
     Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
     public Button backMenuButton = new Button("_TAGASI");
+    public Button soundOffOnButton = new Button("_HELI");
 
     //Layouti default constructor, koos back nupuga
     public Layout (Pane pane) {
         setContent(pane);
         showBackButton();
+        showSoundButton();
     }
 
     public void showBackButton() {
         this.backMenuButton.setVisible(true);
+        backMenuButton.setFont(theFontSmall);
     }
+//
+    public void showSoundButton() {
+        this.soundOffOnButton.setVisible(true);
+        soundOffOnButton.setFont(theFontSmall);
+
+    }
+    //
 
     public void hideBackButton() {
         this.backMenuButton.setVisible(false);
@@ -31,7 +41,9 @@ public class Layout extends Group{
         this.backMenuButton.setFont(theFontSmall);
         this.backMenuButton.setTranslateY(0);
         this.backMenuButton.setTranslateX(0);
-        this.getChildren().addAll(pane, backMenuButton);
+        this.soundOffOnButton.setTranslateX(735);
+        this.soundOffOnButton.setTranslateY(0);
+        this.getChildren().addAll(pane, backMenuButton, soundOffOnButton);
         this.showBackButton();
     }
 }

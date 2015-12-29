@@ -22,7 +22,6 @@ public class MenuView extends Pane {
         Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
         Label menuPealkiri = new Label("PÜÜA AINULT TERVISLIKKU TOITU!");
 
-
         startButton.setFont(theFont);
         highscoresButton.setFont(theFont);
         settingsButton.setFont(theFont);
