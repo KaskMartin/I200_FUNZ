@@ -11,12 +11,15 @@ import views.gms.HighScores;
  * Created by martin on 13.12.15.
  */
 public class HighScoreView extends Pane {
-    private String highScoresToDisplay = "";
+    private Text text = new Text();
 
     Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
     public void ResetHighScoresToDisplay () {
-        highScoresToDisplay = HighScores.printOutHighScores();
+        String highScoresToDisplay = HighScores.printOutHighScores();
+        text.setText(highScoresToDisplay);
+        text.setTranslateX(50);
+        text.setTranslateY(130);
     }
 
     public HighScoreView() {
@@ -27,10 +30,6 @@ public class HighScoreView extends Pane {
         highScoreLabel.setFont(theFontSmall);
         highScoreLabel.setTranslateX(50);
         highScoreLabel.setTranslateY(100);
-        Text text = new Text();
-        text.setTranslateX(50);
-        text.setTranslateY(130);
-        text.setText(highScoresToDisplay);
         this.getChildren().addAll(highScoreLabel, text);
     }
 

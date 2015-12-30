@@ -66,6 +66,11 @@ public class Main extends Application {
                 layout.soundOffOnButton.setTextFill(Color.RED);
         });
 
+        //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
+        HighScores.nameEntryButton.setOnAction(event -> {
+            currentHighScores.ResetHighScoresToDisplay();
+        });
+
         //Klaviatuuri nupuvajutuste haldamine
         layout.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
@@ -164,6 +169,6 @@ public class Main extends Application {
         stage.setOnCloseRequest(e -> {
             System.exit(0);
         });
-        }
-
     }
+
+}

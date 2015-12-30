@@ -1,5 +1,8 @@
 package views.gms;
 
+import com.sun.javafx.event.EventRedirector;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.event.EventTarget;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -11,6 +14,7 @@ public class HighScores {
     private static final String fileName = "scores.txt"; //Faili nimi
     private static int score, index;
     private static String[][] highScoresList;
+    public static Button nameEntryButton = new Button("OK");
 
     //Tulemuste kuvamine, vajalik HighScoreViews
     public static String printOutHighScores() {
@@ -90,7 +94,6 @@ public class HighScores {
         BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
         TextField nameEntryField = new TextField();
-        Button nameEntryButton = new Button("OK");
         nameEntryButton.setOnAction(event -> {
             nameEntryField.getText();
             writeToScoresFile(nameEntryField.getText());
@@ -100,8 +103,8 @@ public class HighScores {
         borderPane.setTop(label);
         borderPane.setCenter(nameEntryField);
         borderPane.setBottom(nameEntryButton);
-        Scene getName = new Scene(borderPane, 200, 100);
-        nameEntryWindow.setScene(getName);
+        Scene getNameWindowScene = new Scene(borderPane, 200, 100);
+        nameEntryWindow.setScene(getNameWindowScene);
         nameEntryWindow.show();
     }
 
