@@ -1,4 +1,5 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
@@ -7,6 +8,7 @@ import javafx.scene.Scene;
 import views.*;
 import views.gms.HighScores;
 import java.io.File;
+import static views.gms.HighScores.nameEntryButton;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -66,11 +68,6 @@ public class Main extends Application {
                 layout.soundOffOnButton.setTextFill(Color.RED);
         });
 
-        //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
-        HighScores.nameEntryButton.setOnAction(event -> {
-            currentHighScores.ResetHighScoresToDisplay();
-        });
-
         //Klaviatuuri nupuvajutuste haldamine
         layout.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
@@ -113,8 +110,6 @@ public class Main extends Application {
                 int finalScore = 100 * game.getGoodScore();
                 System.out.println("Mäng sai läbi!"); //TESTING!
                 HighScores.addScore(finalScore);
-                currentHighScores.ResetHighScoresToDisplay();
-                layout.setContent(currentHighScores);
             }
         });
 
@@ -157,6 +152,13 @@ public class Main extends Application {
         settings.user2Image4Button.setOnAction(e -> {
             game.user2.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
             game.user2.setImage("images/kasutaja04.png");
+        });
+
+        //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
+        nameEntryButton.addEventHandler(ActionEvent.ACTION, event -> {
+            System.out.println("name has been entered");
+            currentHighScores.ResetHighScoresToDisplay();
+            layout.setContent(currentHighScores);
         });
 
         //Lavale tseeni sättimine ja lava näitamine
