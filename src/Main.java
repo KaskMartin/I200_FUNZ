@@ -1,6 +1,7 @@
 import javafx.application.Application;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
@@ -59,6 +60,10 @@ public class Main extends Application {
         layout.soundOffOnButton.setOnAction(e -> {
             game.toggleSound();
             toggleSound();
+            if (soundIsOn)
+                layout.soundOffOnButton.setTextFill(Color.GREEN);
+            else
+                layout.soundOffOnButton.setTextFill(Color.RED);
         });
 
         //Klaviatuuri nupuvajutuste haldamine
