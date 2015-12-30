@@ -16,20 +16,13 @@ public class Layout extends Group{
     public Layout (Pane pane) {
         setContent(pane);
         showBackButton();
-        showSoundButton();
+
     }
 
     public void showBackButton() {
         this.backMenuButton.setVisible(true);
         backMenuButton.setFont(theFontSmall);
     }
-//
-    public void showSoundButton() {
-        this.soundOffOnButton.setVisible(true);
-        soundOffOnButton.setFont(theFontSmall);
-
-    }
-    //
 
     public void hideBackButton() {
         this.backMenuButton.setVisible(false);

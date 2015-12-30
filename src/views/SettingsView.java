@@ -1,12 +1,8 @@
 package views;
 
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -17,17 +13,17 @@ import views.gms.AlertBox;
  * Created by martin on 13.12.15.
  */
 public class SettingsView extends Pane {
-    public RadioButton mangijaPilt1 = new RadioButton("");
-    public RadioButton mangijaPilt2 = new RadioButton("");
-    public RadioButton mangijaPilt3 = new RadioButton("");
-    public RadioButton mangijaPilt4 = new RadioButton("");
-    public RadioButton mangijaPilt5 = new RadioButton("");
-    public RadioButton mangijaPilt6 = new RadioButton("");
-    public RadioButton mangijaPilt7 = new RadioButton("");
-    public RadioButton mangijaPilt8 = new RadioButton("");
-    public ToggleGroup mangija1Valikud = new ToggleGroup();
-    public final ToggleGroup mangija2Valikud = new ToggleGroup();
-    public Button kinnitaTegelased = new Button("KINNITA TEGELASED");
+    public RadioButton user1Image1Button = new RadioButton("");
+    public RadioButton user1Image2Button = new RadioButton("");
+    public RadioButton user1Image3Button = new RadioButton("");
+    public RadioButton user1Image4Button = new RadioButton("");
+    public RadioButton user2Image1Button = new RadioButton("");
+    public RadioButton user2Image2Button = new RadioButton("");
+    public RadioButton user2Image3Button = new RadioButton("");
+    public RadioButton user2Image4Button = new RadioButton("");
+    public ToggleGroup user1SelectionChoicesToggleGroup = new ToggleGroup();
+    public ToggleGroup user2SelectionChoicesToggleGroup = new ToggleGroup();
+    public Button confirmSelectedUsersButton = new Button("KINNITA TEGELASED");
 
     public SettingsView() {
         this.setHeight(600);
@@ -35,127 +31,100 @@ public class SettingsView extends Pane {
         Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
         //GridPane nuppude jaoks
-        GridPane pane = new GridPane();
-        pane.setAlignment(Pos.CENTER);
-        pane.setPadding(new Insets(20, 20, 20, 20));
+        GridPane gridPane = new GridPane();
+        gridPane.setAlignment(Pos.CENTER);
+        gridPane.setPadding(new Insets(20, 20, 20, 20));
 
-        Label mangija1Label = new Label("MÄNGIJA 1");
-        mangija1Label.setContentDisplay(ContentDisplay.TOP);
-        mangija1Label.setPadding(new Insets(5, 5, 5, 250));
-        mangija1Label.setFont(theFontSmall);
+
 
         //---mängija1 tegelased
-        RadioButton mangija1Tegelane1 = new RadioButton("");
-        mangija1Tegelane1.setUserData(new ImageView("images/kasutaja01v.png"));
-        mangija1Tegelane1.setGraphic(new ImageView("images/kasutaja01v.png"));
-        mangija1Tegelane1.setSelected(true);
-        mangija1Tegelane1.setPadding(new Insets(5, 5, 5, 200));
+        Label user1Label = new Label("MÄNGIJA 1");
+        user1Label.setContentDisplay(ContentDisplay.TOP);
+        user1Label.setPadding(new Insets(5, 5, 5, 250));
+        user1Label.setFont(theFontSmall);
 
-        RadioButton mangija1Tegelane2 = new RadioButton("");
-        mangija1Tegelane2.setUserData(new ImageView("images/kasutaja03v.png"));
-        mangija1Tegelane2.setGraphic(new ImageView("images/kasutaja03v.png"));
-        mangija1Tegelane2.setPadding(new Insets(5, 5, 5, 200));
+        user1Image1Button.setGraphic(new ImageView("images/kasutaja01.png"));
+        user1Image1Button.setSelected(true);
+        user1Image1Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image1Button.setId("1");
 
-        RadioButton mangija1Tegelane3 = new RadioButton("");
-        mangija1Tegelane3.setGraphic(new ImageView("images/kasutaja03v.png"));
-        mangija1Tegelane3.setPadding(new Insets(5, 5, 5, 200));
+        //user1Image2Button.setGraphic(new ImageView("images/kasutaja02.png"));
+        user1Image2Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image2Button.setId("2");
 
-        RadioButton mangija1Tegelane4 = new RadioButton("");
-        mangija1Tegelane4.setGraphic(new ImageView("images/kasutaja04v.png"));
-        mangija1Tegelane4.setPadding(new Insets(5, 5, 5, 200));
+        //user1Image3Button.setGraphic(new ImageView("images/kasutaja03.png"));
+        user1Image3Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image3Button.setId("3");
 
-        ToggleGroup mangija1Valikud = new ToggleGroup();
-        mangija1Tegelane1.setToggleGroup(mangija1Valikud);
-        mangija1Tegelane2.setToggleGroup(mangija1Valikud);
-        mangija1Tegelane3.setToggleGroup(mangija1Valikud);
-        mangija1Tegelane4.setToggleGroup(mangija1Valikud);
+        //user1Image4Button.setGraphic(new ImageView("images/kasutaja04.png"));
+        user1Image4Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image4Button.setId("4");
+
+        user1Image1Button.setToggleGroup(user1SelectionChoicesToggleGroup);
+        user1Image2Button.setToggleGroup(user1SelectionChoicesToggleGroup);
+        user1Image3Button.setToggleGroup(user1SelectionChoicesToggleGroup);
+        user1Image4Button.setToggleGroup(user1SelectionChoicesToggleGroup);
 
         VBox paneForRadioButtons1 = new VBox(20);
         paneForRadioButtons1.setPadding(new Insets(5, 5, 5, 5));
-        pane.add(mangija1Label, 2, 1);
-        pane.add(mangija1Tegelane1, 2, 2);
-        pane.add(mangija1Tegelane2, 2, 3);
-        pane.add(mangija1Tegelane3, 2, 4);
-        pane.add(mangija1Tegelane4, 2, 5);
+        gridPane.add(user1Label, 2, 1);
+        gridPane.add(user1Image1Button, 2, 2);
+        gridPane.add(user1Image2Button, 2, 3);
+        gridPane.add(user1Image3Button, 2, 4);
+        gridPane.add(user1Image4Button, 2, 5);
 
-        Label mangija2Label = new Label("MÄNGIJA 2");
-        mangija2Label.setContentDisplay(ContentDisplay.TOP);
-        mangija2Label.setPadding(new Insets(5, 5, 5, 100));
-        mangija2Label.setFont(theFontSmall);
-
-        /**
         //---mängija2 tegelased
-        RadioButton mangijaPilt5 = new RadioButton("");
-        mangijaPilt5.setGraphic(new ImageView("images/kasutaja01sv.png"));
-        mangijaPilt5.setSelected(true);
-        mangijaPilt5.setPadding(new Insets(5, 5, 5, 70));
+        Label user2Label = new Label("MÄNGIJA 2");
+        user2Label.setContentDisplay(ContentDisplay.TOP);
+        user2Label.setPadding(new Insets(5, 5, 5, 100));
+        user2Label.setFont(theFontSmall);
 
-        RadioButton mangijaPilt6 = new RadioButton("");
-        mangijaPilt6.setGraphic(new ImageView("images/kasutaja01sv.png"));
-        mangijaPilt6.setPadding(new Insets(5, 5, 5, 70));
+        user2Image1Button.setGraphic(new ImageView("images/kasutaja01.png"));
+        user2Image1Button.setSelected(true);
+        user2Image1Button.setId("1");
+        user2Image1Button.setPadding(new Insets(5, 5, 5, 70));
 
-        RadioButton mangijaPilt7 = new RadioButton("");
-        mangijaPilt7.setGraphic(new ImageView("images/kasutaja01sv.png"));
-        mangijaPilt7.setPadding(new Insets(5, 5, 5, 70));
+        //user2Image2Button.setGraphic(new ImageView("images/kasutaja02.png"));
+        user2Image2Button.setPadding(new Insets(5, 5, 5, 70));
+        user2Image2Button.setId("2");
 
-        RadioButton mangijaPilt8 = new RadioButton("");
-        mangijaPilt8.setGraphic(new ImageView("images/kasutaja01sv.png"));
-        mangijaPilt8.setPadding(new Insets(5, 5, 5, 70));
+        //user2Image3Button.setGraphic(new ImageView("images/kasutaja03.png"));
+        user2Image3Button.setPadding(new Insets(5, 5, 5, 70));
+        user2Image3Button.setId("3");
 
-        ToggleGroup mangija2Valikud = new ToggleGroup();
+        //user2Image4Button.setGraphic(new ImageView("images/kasutaja04.png"));
+        user2Image4Button.setPadding(new Insets(5, 5, 5, 70));
+        user2Image4Button.setId("4");
+
 
         VBox paneForRadioButtons2 = new VBox(20);
         paneForRadioButtons2.setPadding(new Insets(5, 5, 5, 5));
-        pane.add(mangijaPilt5, 3, 2);
-        pane.add(mangijaPilt6, 3, 3);
-        pane.add(mangijaPilt7, 3, 4);
-        pane.add(mangijaPilt8, 3, 5);
-        pane.add(mangija2Label, 3, 1);
-         */
+        gridPane.add(user2Image1Button, 3, 2);
+        gridPane.add(user2Image2Button, 3, 3);
+        gridPane.add(user2Image3Button, 3, 4);
+        gridPane.add(user2Image4Button, 3, 5);
+        gridPane.add(user2Label, 3, 1);
 
-        //---mängija2 tegelased
-        RadioButton mangijaPilt5 = new RadioButton("");
-        mangijaPilt5.setUserData(new ImageView("images/kasutaja01v.png"));
-        mangijaPilt5.setSelected(true);
-        mangijaPilt5.setPadding(new Insets(5, 5, 5, 70));
+        user2Image1Button.setToggleGroup(user2SelectionChoicesToggleGroup);
+        user2Image2Button.setToggleGroup(user2SelectionChoicesToggleGroup);
+        user2Image3Button.setToggleGroup(user2SelectionChoicesToggleGroup);
+        user2Image4Button.setToggleGroup(user2SelectionChoicesToggleGroup);
 
-        RadioButton mangijaPilt6 = new RadioButton("");
-        mangijaPilt6.setUserData(new ImageView("images/kasutaja01v.png"));
-        mangijaPilt6.setPadding(new Insets(5, 5, 5, 70));
 
-        RadioButton mangijaPilt7 = new RadioButton("");
-        mangijaPilt7.setUserData(new ImageView("images/kasutaja03v.png"));
-        mangijaPilt7.setPadding(new Insets(5, 5, 5, 70));
-
-        RadioButton mangijaPilt8 = new RadioButton("");
-        mangijaPilt8.setUserData(new ImageView("images/kasutaja03v.png"));
-        mangijaPilt8.setPadding(new Insets(5, 5, 5, 70));
-
-        ToggleGroup mangija2Valikud = new ToggleGroup();
-
-        VBox paneForRadioButtons2 = new VBox(20);
-        paneForRadioButtons2.setPadding(new Insets(5, 5, 5, 5));
-        pane.add(mangijaPilt5, 3, 2);
-        pane.add(mangijaPilt6, 3, 3);
-        pane.add(mangijaPilt7, 3, 4);
-        pane.add(mangijaPilt8, 3, 5);
-        pane.add(mangija2Label, 3, 1);
 
         //Tekita valikute kontroll. Kui on samad pildid valitud, siis viskab vea. Kui ei ole, siis ei viska.
         //AlertBox selleks, kui kasutajad valivad samad tegelased. EI TÖÖTA!
-        kinnitaTegelased.setFont(theFontSmall);
-        pane.add(kinnitaTegelased, 3, 7);
-            if (mangija1Valikud.getSelectedToggle().equals(mangija2Valikud.getSelectedToggle()));
-            kinnitaTegelased.setOnAction(e -> AlertBox.display("VIGA", "PALUN VALIGE ERINEVAD TEGELASED!"));
+        confirmSelectedUsersButton.setFont(theFontSmall);
+        gridPane.add(confirmSelectedUsersButton, 3, 7);
+            confirmSelectedUsersButton.setOnAction(e -> {
+                if ((user1SelectionChoicesToggleGroup.getSelectedToggle().toString()).equals(user2SelectionChoicesToggleGroup.getSelectedToggle().toString())) {
+                    System.out.println(user1SelectionChoicesToggleGroup.getSelectedToggle());
+                    System.out.println(user2SelectionChoicesToggleGroup.getSelectedToggle());
+                    AlertBox.display("VIGA", "PALUN VALIGE ERINEVAD TEGELASED!");
+                }
+            });
 
-        this.getChildren().addAll(pane);
-
-        mangijaPilt5.setToggleGroup(mangija2Valikud);
-        mangijaPilt6.setToggleGroup(mangija2Valikud);
-        mangijaPilt7.setToggleGroup(mangija2Valikud);
-        mangijaPilt8.setToggleGroup(mangija2Valikud);
-
-
+        this.getChildren().addAll(gridPane);
     }
 }
 

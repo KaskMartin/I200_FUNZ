@@ -10,6 +10,7 @@ import javafx.scene.text.FontWeight;
  * Created by martin on 13.12.15.
  */
 public class MenuView extends Pane {
+    //Loome nupud, valikute jaoks
     public Button startButton = new Button("_MÄNGU ALGUS");
     public Button highscoresButton = new Button("_EDETABEL");
     public Button settingsButton = new Button("_SEADED");
@@ -28,26 +29,27 @@ public class MenuView extends Pane {
         helpButton.setFont(theFont);
         exitButton.setFont(theFont);
         menuPealkiri.setFont(theFont);
+        menuPealkiri.setTranslateX(185);
 
         startButton.setTranslateY(100);
-        startButton.setTranslateX(300);
-        startButton.setPrefSize(200,20);
+        startButton.setTranslateX(275);
+        startButton.setPrefSize(250,20);
 
         highscoresButton.setTranslateY(175);
-        highscoresButton.setTranslateX(300);
-        highscoresButton.setPrefSize(200, 20);
+        highscoresButton.setTranslateX(275);
+        highscoresButton.setPrefSize(250, 20);
 
         settingsButton.setTranslateY(250);
-        settingsButton.setTranslateX(300);
-        settingsButton.setPrefSize(200, 20);
+        settingsButton.setTranslateX(275);
+        settingsButton.setPrefSize(250, 20);
 
         helpButton.setTranslateY(325);
-        helpButton.setTranslateX(300);
-        helpButton.setPrefSize(200, 20);
+        helpButton.setTranslateX(275);
+        helpButton.setPrefSize(250, 20);
 
         exitButton.setTranslateY(400);
-        exitButton.setTranslateX(300);
-        exitButton.setPrefSize(200,20);
+        exitButton.setTranslateX(275);
+        exitButton.setPrefSize(250,20);
 
     this.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, helpButton, exitButton);
     }

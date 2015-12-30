@@ -23,14 +23,14 @@ import java.util.*;
 public class GameView extends Pane {
 
     private int goodScore;
-    private final int healthAtStart = 4; //elude hulk mis alguses kaasa antakse,
+    private final int healthAtStart = 4; //elude hulk mis alguses kaasa antakse,MUUDA KUI VAJA!
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
     private int maksimumFoodAllowed = 25;
     public AnimationTimer animationTimer;
     public User user1 = new User(3, 21, 75, 21);
     public User user2 = new User(79, 18, 81, 26);
 
-    public SimpleBooleanProperty m2ngL2bi = new SimpleBooleanProperty();
+    public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
     public ArrayList<String> input = new ArrayList<String>(); //klahvivajutuste konteiner
 
@@ -38,7 +38,7 @@ public class GameView extends Pane {
         return goodScore;
     }
 
-    //Sound controller
+    //Helide haldamine
     private boolean soundIsOn = true;
 
     public void toggleSound () {
@@ -53,23 +53,21 @@ public class GameView extends Pane {
             }
     }
 
+    //Konstruktor mängu objekti loomiseks
     public GameView() {
         this.setHeight(600);
         this.setWidth(800);
 
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
-
+        user1.setImage("images/kasutaja01.png");
         user1.setPosition(200, 365);
-
         user1.setMoveLeft("LEFT");
         user1.setMoveRight("RIGHT");
 
         user2.setImage("images/kasutaja03.png");
         user2.setPosition(600, 365);
-
         user2.setMoveLeft("Q");
         user2.setMoveRight("W");
-        this.requestFocus();
 
         this.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
@@ -92,13 +90,13 @@ public class GameView extends Pane {
 
 
         // Mänguekraanil olevad kujutised ja pildid
-        Sprite taevas =  new Sprite();
-        taevas.setImage("images/taevas.png");
-        taevas.setPosition(0, 0);
+        Sprite skyBackgroundSprite =  new Sprite();
+        skyBackgroundSprite.setImage("images/taevas.png");
+        skyBackgroundSprite.setPosition(0, 0);
 
-        Sprite maapindSprite =  new Sprite();
-        maapindSprite.setImage("images/grass2.png");
-        maapindSprite.setPosition(0, 540);
+        Sprite grassSprite =  new Sprite();
+        grassSprite.setImage("images/grass2.png");
+        grassSprite.setPosition(0, 540);
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
         //See on toiduloopija, mis lisav toitu meie foodList-i
@@ -117,7 +115,7 @@ public class GameView extends Pane {
             {
                 // calculate time since last update.
                 gc.clearRect(0, 0, 800, 600);
-                taevas.render( gc );
+                skyBackgroundSprite.render(gc);
 
                 double elapsedTime = (currentNanoTime - lastNanoTime.value) / 1000000000.0;
                 lastNanoTime.value = currentNanoTime;
@@ -157,7 +155,7 @@ public class GameView extends Pane {
                         }
                         foodIter.remove(); //viska toit minema
                     }
-                    else if ( foodSprite.intersects(maapindSprite)) {
+                    else if ( foodSprite.intersects(grassSprite)) {
                         foodIter.remove();
                         if (foodSprite.good) {PlaySound("src/sounds/149899__animationisaac__box-crash.mp3");}
                     }
@@ -166,7 +164,7 @@ public class GameView extends Pane {
 
                 // render
 
-                maapindSprite.render(gc);
+                grassSprite.render(gc);
                 user1.render(gc);
                 user2.render(gc);
 
@@ -190,7 +188,7 @@ public class GameView extends Pane {
 
                 if (healthRemaining < 1) {
                     stopGame();
-                    m2ngL2bi.set(true);
+                    gameOver.set(true);
                 }
             }
         };
@@ -209,6 +207,6 @@ public class GameView extends Pane {
         user1.setPosition(200, 365);
         user2.setPosition(600, 365);
         animationTimer.start();
-        m2ngL2bi.set(false);
+        gameOver.set(false);
     }
 }

@@ -13,7 +13,7 @@ public class HighScores {
     private static String[][] highScoresList;
 
     //Tulemuste kuvamine, vajalik HighScoreViews
-    public String printOutHighScores() {
+    public static String printOutHighScores() {
         String textToDisplay = "";
         getResults();
         if (highScoresList != null) {
@@ -29,14 +29,15 @@ public class HighScores {
 
     }
 
-    //Mänguskoori lisamine, seda meetodit kasutame main classis
+    //Mï¿½nguskoori lisamine, seda meetodit kasutame main classis
     public static void addScore(int gameScore) {
         score = gameScore;
         getName();
+        getResults();
     }
 
     //Tulemuste laadimine failist
-    public void getResults() {
+    public static void getResults() {
         ArrayList<ArrayList<String>> scores = new ArrayList<>();
         try {
             Scanner readFromFile = new Scanner(new FileReader(fileName));
@@ -52,14 +53,14 @@ public class HighScores {
                 i++;
             }
             //Ajutine array tulemuste listi jaoks
-            String ajutineArray[][] = new String[i][2];
+            String temporaryArray[][] = new String[i][2];
             i = 0;
             for (ArrayList a:scores) {
-                ajutineArray[i][0] = a.get(0).toString();
-                ajutineArray[i][1] = a.get(1).toString();
+                temporaryArray[i][0] = a.get(0).toString();
+                temporaryArray[i][1] = a.get(1).toString();
                 i++;
             }
-            highScoresList = ajutineArray;
+            highScoresList = temporaryArray;
         }
         catch (FileNotFoundException e) {
             highScoresList = null;
@@ -67,7 +68,7 @@ public class HighScores {
 
     }
 
-    //Sorteerimine, et oleks õiges järjekorras
+    //Sorteerimine, et oleks ï¿½iges jï¿½rjekorras
     /*public class SortScores implements Comparator<Result> {
         public int compare(Result score1, Result score2) {
             int sc1 = score1.getScore();
@@ -83,25 +84,25 @@ public class HighScores {
         }
     }*/
 
-    //Nime küsimise dialoog, vormindust vaja muuta veel
+    //Nime kï¿½simise dialoog, vormindust vaja muuta veel
     private static void getName() {
-        Stage NimeSisestamisAken = new Stage();
-        BorderPane paigutus = new BorderPane();
+        Stage nameEntryWindow = new Stage();
+        BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
-        TextField nimeSisestamiseV2li = new TextField();
-        Button nimeSisestamisNupp = new Button("OK");
-        nimeSisestamisNupp.setOnAction(event -> {
-            nimeSisestamiseV2li.getText();
-            writeToScoresFile(nimeSisestamiseV2li.getText());
-            NimeSisestamisAken.close();
+        TextField nameEntryField = new TextField();
+        Button nameEntryButton = new Button("OK");
+        nameEntryButton.setOnAction(event -> {
+            nameEntryField.getText();
+            writeToScoresFile(nameEntryField.getText());
+            nameEntryWindow.close();
         });
 
-        paigutus.setTop(label);
-        paigutus.setCenter(nimeSisestamiseV2li);
-        paigutus.setBottom(nimeSisestamisNupp);
-        Scene getName = new Scene(paigutus, 200, 100);
-        NimeSisestamisAken.setScene(getName);
-        NimeSisestamisAken.show();
+        borderPane.setTop(label);
+        borderPane.setCenter(nameEntryField);
+        borderPane.setBottom(nameEntryButton);
+        Scene getName = new Scene(borderPane, 200, 100);
+        nameEntryWindow.setScene(getName);
+        nameEntryWindow.show();
     }
 
     //Tulemuste faili kirjutamine
@@ -111,14 +112,14 @@ public class HighScores {
             FileWriter fileWriter = new FileWriter(fileName);
             int i = 0;
             if (highScoresList != null) {
-                for (String tulemus[]: highScoresList) {
+                for (String result[]: highScoresList) {
                     if (i < 9) {
                         if (i == index) {
                             //uue tulemuse faili kirjutamine
                             fileWriter.write(name + "," + score + "\n");
                         }
-                        //eelmise tulemuse allesjäämiseks
-                        fileWriter.write(tulemus[0] + "," + tulemus[1]);
+                        //eelmise tulemuse allesjï¿½ï¿½miseks
+                        fileWriter.write(result[0] + "," + result[1]);
 
                         if (i == highScoresList.length - 1 && index > i) {
                             fileWriter.write("\n" + name + "," + score);

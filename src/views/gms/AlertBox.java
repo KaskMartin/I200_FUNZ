@@ -13,7 +13,6 @@ public class AlertBox {
 
         public static void display(String title, String message) {
             Stage window = new Stage();
-            message = "PALUN VALI TEINE TEGELANE";
 
             //Block events to other windows
             window.initModality(Modality.APPLICATION_MODAL);

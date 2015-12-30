@@ -32,6 +32,14 @@ public class User extends Sprite {
         collisonhight = collisonHight;
     }
 
+    //collision boxi setter, settingute jaoks
+    public void setCollision (int colX, int colY, int colwidth, int colhight) {
+        collisonStartX = colX;
+        collisonStartY = colY;
+        collisonwidth = colwidth;
+        collisonhight = colhight;
+    }
+
     public void setMoveLeft(String moveLeft) {
         this.moveLeft = moveLeft;
     }
