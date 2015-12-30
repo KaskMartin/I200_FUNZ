@@ -1,4 +1,4 @@
-package views.gms;
+package lib;
 
 import javafx.geometry.Rectangle2D;
 

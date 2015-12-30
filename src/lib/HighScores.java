@@ -1,8 +1,6 @@
-package views.gms;
+package lib;
 
-import com.sun.javafx.event.EventRedirector;
-import javafx.beans.property.SimpleBooleanProperty;
-import javafx.event.EventTarget;
+import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
@@ -18,12 +16,12 @@ public class HighScores {
     public static Button nameEntryButton = new Button("OK");
 
 
-
     //Tulemuste kuvamine, vajalik HighScoreViews
     public static String printOutHighScores() {
         String textToDisplay = "";
         getResults();
         if (highScoresList != null) {
+            //print NIMI vahe mingi siia ja SKOOR
             for (int i = 0; i < highScoresList.length; i++) {
                 textToDisplay += (i + 1) + ". " + highScoresList[i][0] + " " + highScoresList[i][1] + "\n";
             }
@@ -31,6 +29,7 @@ public class HighScores {
         } else {
             textToDisplay = "Tulemusi ei leitud";
         }
+        //set textToDisplay font !!!
 
         return textToDisplay;
     }
@@ -82,10 +81,17 @@ public class HighScores {
         BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
         TextField nameEntryField = new TextField();
-        nameEntryButton.setOnAction(event -> {
+      //SIIA Meetod kuidas koma välistada
+        // nameEntryField.setOnKeyPressed(event1 -> {
+      //    if (nameEntryField.getUserData().toString().charAt(((nameEntryField.getUserData()).toString()).length() - 1) == ','){
+      //        nameEntryField.setText(((nameEntryField.getUserData()).toString()).substring(0, (((nameEntryField.getUserData()).toString()).length()-2)));
+      //    }
+      //});
+        nameEntryButton.addEventHandler(ActionEvent.ACTION, event -> {
             nameEntryField.getText();
             writeToScoresFile(nameEntryField.getText());
             nameEntryWindow.close();
+            System.out.println("nameEntryButton pressed action in GetName method");
         });
 
         borderPane.setTop(label);

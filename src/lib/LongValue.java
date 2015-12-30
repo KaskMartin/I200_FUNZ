@@ -1,4 +1,4 @@
-package views.gms;
+package lib;
 
 /**
  * Created by martin on 18.10.15.

@@ -1,4 +1,4 @@
-package views.gms;
+package lib;
 
 import java.util.Random;
 

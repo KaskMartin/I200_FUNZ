@@ -1,4 +1,4 @@
-package views.gms; /**
+package lib; /**
  * Created by martin on 18.10.15.
  * Algkood on laenatud siit: https://github.com/tutsplus/Introduction-to-JavaFX-for-Game-Development/blob/master/Sprite.java
  * Kuid kogu klassi on veidike modifitseeritud
