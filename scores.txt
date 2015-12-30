@@ -1,6 +1,0 @@
-mmm,500
-test9,400
-testv,300
-,200
-qwwq,100
-test66,100
