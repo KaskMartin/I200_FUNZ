@@ -3,6 +3,7 @@ package views;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
@@ -35,6 +36,17 @@ public class SettingsView extends Pane {
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setPadding(new Insets(20, 20, 20, 20));
 
+        class MyImageView extends ImageView {
+            public MyImageView (String fileName) {
+                Image image = new Image(fileName);
+                this.setImage(image);
+                this.setScaleY(0.3);
+                this.setScaleX(0.3);
+                this.autosize();
+                this.setFitHeight(100);
+            }
+        }
+
 
 
         //---mängija1 tegelased
@@ -43,20 +55,20 @@ public class SettingsView extends Pane {
         user1Label.setPadding(new Insets(5, 5, 5, 250));
         user1Label.setFont(theFontSmall);
 
-        user1Image1Button.setGraphic(new ImageView("images/kasutaja01.png"));
+        user1Image1Button.setGraphic(new MyImageView("images/kasutaja01.png"));
         user1Image1Button.setSelected(true);
         user1Image1Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image1Button.setId("1");
 
-        //user1Image2Button.setGraphic(new ImageView("images/kasutaja02.png"));
+        user1Image2Button.setGraphic(new MyImageView("images/kasutaja02.png"));
         user1Image2Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image2Button.setId("2");
 
-        //user1Image3Button.setGraphic(new ImageView("images/kasutaja03.png"));
+        user1Image3Button.setGraphic(new MyImageView("images/kasutaja03.png"));
         user1Image3Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image3Button.setId("3");
 
-        //user1Image4Button.setGraphic(new ImageView("images/kasutaja04.png"));
+        user1Image4Button.setGraphic(new MyImageView("images/kasutaja04.png"));
         user1Image4Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image4Button.setId("4");
 
@@ -79,38 +91,36 @@ public class SettingsView extends Pane {
         user2Label.setPadding(new Insets(5, 5, 5, 100));
         user2Label.setFont(theFontSmall);
 
-        user2Image1Button.setGraphic(new ImageView("images/kasutaja01.png"));
+        user2Image1Button.setGraphic(new MyImageView("images/kasutaja01.png"));
         user2Image1Button.setSelected(true);
         user2Image1Button.setId("1");
         user2Image1Button.setPadding(new Insets(5, 5, 5, 70));
 
-        //user2Image2Button.setGraphic(new ImageView("images/kasutaja02.png"));
+        user2Image2Button.setGraphic(new MyImageView("images/kasutaja02.png"));
         user2Image2Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image2Button.setId("2");
 
-        //user2Image3Button.setGraphic(new ImageView("images/kasutaja03.png"));
+        user2Image3Button.setGraphic(new MyImageView("images/kasutaja03.png"));
         user2Image3Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image3Button.setId("3");
 
-        //user2Image4Button.setGraphic(new ImageView("images/kasutaja04.png"));
+        user2Image4Button.setGraphic(new MyImageView("images/kasutaja04.png"));
         user2Image4Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image4Button.setId("4");
 
 
         VBox paneForRadioButtons2 = new VBox(20);
         paneForRadioButtons2.setPadding(new Insets(5, 5, 5, 5));
+        gridPane.add(user2Label, 3, 1);
         gridPane.add(user2Image1Button, 3, 2);
         gridPane.add(user2Image2Button, 3, 3);
         gridPane.add(user2Image3Button, 3, 4);
         gridPane.add(user2Image4Button, 3, 5);
-        gridPane.add(user2Label, 3, 1);
 
         user2Image1Button.setToggleGroup(user2SelectionChoicesToggleGroup);
         user2Image2Button.setToggleGroup(user2SelectionChoicesToggleGroup);
         user2Image3Button.setToggleGroup(user2SelectionChoicesToggleGroup);
         user2Image4Button.setToggleGroup(user2SelectionChoicesToggleGroup);
-
-
 
         //Tekita valikute kontroll. Kui on samad pildid valitud, siis viskab vea. Kui ei ole, siis ei viska.
         //AlertBox selleks, kui kasutajad valivad samad tegelased. EI TÖÖTA!
@@ -123,7 +133,6 @@ public class SettingsView extends Pane {
                     AlertBox.display("VIGA", "PALUN VALIGE ERINEVAD TEGELASED!");
                 }
             });
-
         this.getChildren().addAll(gridPane);
     }
 }
