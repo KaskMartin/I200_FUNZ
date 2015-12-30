@@ -1,14 +1,17 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
-import views.gms.HighScores;
+import lib.HighScores;
 import java.io.File;
-import static views.gms.HighScores.nameEntryButton;
+import static lib.HighScores.nameEntryButton;
+import static lib.HighScores.nameEntryField;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -159,6 +162,14 @@ public class Main extends Application {
             System.out.println("name has been entered");
             currentHighScores.ResetHighScoresToDisplay();
             layout.setContent(currentHighScores);
+        });
+
+
+        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                currentHighScores.ResetHighScoresToDisplay();
+                layout.setContent(currentHighScores);
+            }
         });
 
         //Lavale tseeni sättimine ja lava näitamine

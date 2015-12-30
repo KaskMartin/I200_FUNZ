@@ -3,8 +3,12 @@ package lib;
 import javafx.event.ActionEvent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
+import java.beans.EventHandler;
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +18,7 @@ public class HighScores {
     private static String[][] highScoresList;
     private static int MAX_SCORES = 10;
     public static Button nameEntryButton = new Button("OK");
+    public static TextField nameEntryField = new TextField();
 
 
     //Tulemuste kuvamine, vajalik HighScoreViews
@@ -80,7 +85,7 @@ public class HighScores {
         Stage nameEntryWindow = new Stage();
         BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
-        TextField nameEntryField = new TextField();
+        //TextField nameEntryField = new TextField();
       //SIIA Meetod kuidas koma välistada
         // nameEntryField.setOnKeyPressed(event1 -> {
       //    if (nameEntryField.getUserData().toString().charAt(((nameEntryField.getUserData()).toString()).length() - 1) == ','){
@@ -93,6 +98,17 @@ public class HighScores {
             nameEntryWindow.close();
             System.out.println("nameEntryButton pressed action in GetName method");
         });
+
+        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                nameEntryField.getText();
+                writeToScoresFile(nameEntryField.getText());
+                nameEntryWindow.close();
+                System.out.println("Enter pressed");
+            }
+
+        });
+
 
         borderPane.setTop(label);
         borderPane.setCenter(nameEntryField);

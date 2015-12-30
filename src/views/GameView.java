@@ -10,10 +10,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import views.gms.Food;
-import views.gms.LongValue;
-import views.gms.Sprite;
-import views.gms.User;
+import lib.Food;
+import lib.LongValue;
+import lib.Sprite;
+import lib.User;
 import java.io.File;
 import java.util.*;
 

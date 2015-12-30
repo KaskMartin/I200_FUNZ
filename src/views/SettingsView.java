@@ -8,7 +8,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import views.gms.AlertBox;
+import lib.AlertBox;
 
 /**
  * Created by martin on 13.12.15.
