@@ -11,6 +11,9 @@ public class HighScores {
     private static final String fileName = "scores.txt"; //Faili nimi
     private static int score, index;
     private static String[][] highScoresList;
+    private static int MAX_SCORES = 10;
+
+
 
     //Tulemuste kuvamine, vajalik HighScoreViews
     public static String printOutHighScores() {
@@ -26,10 +29,10 @@ public class HighScores {
         }
 
         return textToDisplay;
-
     }
 
-    //Mï¿½nguskoori lisamine, seda meetodit kasutame main classis
+
+    //M?nguskoori lisamine, seda meetodit kasutame main classis
     public static void addScore(int gameScore) {
         score = gameScore;
         getName();
@@ -60,6 +63,7 @@ public class HighScores {
                 temporaryArray[i][1] = a.get(1).toString();
                 i++;
             }
+
             highScoresList = temporaryArray;
         }
         catch (FileNotFoundException e) {
@@ -68,23 +72,7 @@ public class HighScores {
 
     }
 
-    //Sorteerimine, et oleks ï¿½iges jï¿½rjekorras
-    /*public class SortScores implements Comparator<Result> {
-        public int compare(Result score1, Result score2) {
-            int sc1 = score1.getScore();
-            int sc2 = score2.getScore();
-
-            if (sc1 > sc2){
-                return -1;
-            }else if (sc1 < sc2){
-                return +1;
-            }else{
-                return 0;
-            }
-        }
-    }*/
-
-    //Nime kï¿½simise dialoog, vormindust vaja muuta veel
+    //Nime k?simise dialoog, vormindust vaja muuta veel
     private static void getName() {
         Stage nameEntryWindow = new Stage();
         BorderPane borderPane = new BorderPane();
@@ -105,36 +93,46 @@ public class HighScores {
         nameEntryWindow.show();
     }
 
+    //vajalik, et faili kirjutades uus tulemus õigesse kohta läheks
+    private static int lowestScoreRowNumber() {
+        getResults();
+        if (highScoresList!= null) {
+            int i = highScoresList.length;
+            for (String b[]:highScoresList) {
+                if (score > Integer.parseInt(b[1])) {
+                    i--;
+                }
+            }
+            return i;
+        }
+        return 0;
+    }
+
     //Tulemuste faili kirjutamine
     private static void writeToScoresFile(String name) {
-
+        index = lowestScoreRowNumber();
         try {
-            FileWriter fileWriter = new FileWriter(fileName);
-            int i = 0;
+            PrintWriter printWriter = new PrintWriter(new FileWriter(fileName));
             if (highScoresList != null) {
+                int i = 0;
                 for (String result[]: highScoresList) {
-                    if (i < 9) {
+                    if (i < MAX_SCORES - 1) {
                         if (i == index) {
                             //uue tulemuse faili kirjutamine
-                            fileWriter.write(name + "," + score + "\n");
+                            printWriter.println(name + "," + score);
                         }
-                        //eelmise tulemuse allesjï¿½ï¿½miseks
-                        fileWriter.write(result[0] + "," + result[1]);
-
+                        //eelmised tulemused
+                        printWriter.println(result[0] + "," + result[1]);
                         if (i == highScoresList.length - 1 && index > i) {
-                            fileWriter.write("\n" + name + "," + score);
+                            printWriter.println(name + "," + score);
                         }
                         i++;
-
-                        if (i < highScoresList.length && i != 9) {
-                            fileWriter.write("\n"); //reavahetus
-                        }
                     }
                 }
             } else {
-                fileWriter.write(name + "," + score);
+                printWriter.println(name + "," + score);
             }
-            fileWriter.close();
+            printWriter.close();
         } catch (IOException e) {
         }
     }
