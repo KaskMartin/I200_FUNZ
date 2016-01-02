@@ -46,7 +46,7 @@ public class SettingsView extends Pane {
                 this.setFitHeight(100);
             }
         }
-        
+
         //---mängija1 tegelased
         Label user1Label = new Label("MÄNGIJA 1");
         user1Label.setContentDisplay(ContentDisplay.TOP);

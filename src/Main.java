@@ -118,42 +118,42 @@ public class Main extends Application {
 
         //Seadetes tehtud muutuste haldamine
         settings.user1Image1Button.setOnAction(e -> {
-            game.user1.setCollision(3, 21, 75, 21);
-            game.user1.setImage("images/kasutaja01.png");
+            game.user1.setCollision(0, 37, 75, 17);
+            game.user1.setImage("images/kasutaja1sinine.png");
         });
 
         settings.user1Image2Button.setOnAction(e -> {
-            game.user1.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user1.setImage("images/kasutaja02.png");
+            game.user1.setCollision(63, 35, 101, 17); //Muuda collision box ära!!!
+            game.user1.setImage("images/kasutaja2sinine.png");
         });
 
         settings.user1Image3Button.setOnAction(e -> {
-            game.user1.setCollision(79, 18, 81, 26);
-            game.user1.setImage("images/kasutaja03.png");
+            game.user1.setCollision(57, 18, 85, 15);
+            game.user1.setImage("images/kasutaja3sinine.png");
         });
 
         settings.user1Image4Button.setOnAction(e -> {
-            game.user1.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user1.setImage("images/kasutaja04.png");
+            game.user1.setCollision(0, 130, 73, 16); //Muuda collision box ära!!!
+            game.user1.setImage("images/kasutaja4sinine.png");
         });
 
         settings.user2Image1Button.setOnAction(e -> {
-            game.user2.setCollision(3, 21, 75, 21);
-            game.user2.setImage("images/kasutaja01.png");
+            game.user2.setCollision(0, 37, 75, 17);
+            game.user2.setImage("images/kasutaja1punane.png");
         });
 
         settings.user2Image2Button.setOnAction(e -> {
-            game.user2.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user2.setImage("images/kasutaja02.png");
+            game.user2.setCollision(63, 35, 101, 17); //Muuda collision box ära!!!
+            game.user2.setImage("images/kasutaja2punane.png");
         });
 
         settings.user2Image3Button.setOnAction(e -> {
-            game.user2.setCollision(79, 18, 81, 26);
-            game.user2.setImage("images/kasutaja03.png");
+            game.user2.setCollision(57, 18, 85, 15);
+            game.user2.setImage("images/kasutaja3punane.png");
         });
 
         settings.user2Image4Button.setOnAction(e -> {
-            game.user2.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
+            game.user2.setCollision(0, 130, 73, 16); //Muuda collision box ära!!!
             game.user2.setImage("images/kasutaja04.png");
         });
 
