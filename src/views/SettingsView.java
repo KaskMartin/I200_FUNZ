@@ -24,7 +24,7 @@ public class SettingsView extends Pane {
     public RadioButton user2Image4Button = new RadioButton("");
     public ToggleGroup user1SelectionChoicesToggleGroup = new ToggleGroup();
     public ToggleGroup user2SelectionChoicesToggleGroup = new ToggleGroup();
-    public Button confirmSelectedUsersButton = new Button("KINNITA TEGELASED");
+    //public Button confirmSelectedUsersButton = new Button("KINNITA TEGELASED");
 
     public SettingsView() {
         this.setHeight(600);
@@ -46,7 +46,6 @@ public class SettingsView extends Pane {
                 this.setFitHeight(100);
             }
         }
-
 
 
         //---mängija1 tegelased
@@ -124,7 +123,7 @@ public class SettingsView extends Pane {
 
         //Tekita valikute kontroll. Kui on samad pildid valitud, siis viskab vea. Kui ei ole, siis ei viska.
         //AlertBox selleks, kui kasutajad valivad samad tegelased. EI TÖÖTA!
-        confirmSelectedUsersButton.setFont(theFontSmall);
+        /**confirmSelectedUsersButton.setFont(theFontSmall);
         gridPane.add(confirmSelectedUsersButton, 3, 7);
             confirmSelectedUsersButton.setOnAction(e -> {
                 if ((user1SelectionChoicesToggleGroup.getSelectedToggle().toString()).equals(user2SelectionChoicesToggleGroup.getSelectedToggle().toString())) {
@@ -134,6 +133,7 @@ public class SettingsView extends Pane {
                 }
             });
         this.getChildren().addAll(gridPane);
+         */
     }
 }
 
