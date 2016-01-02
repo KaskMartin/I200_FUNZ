@@ -70,6 +70,7 @@ public class SettingsView extends Pane {
         user1Image4Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image4Button.setId("4");
 
+        //registreerime valiku, kasutame seda main classis tegelase pildi kuvamiseks
         user1Image1Button.setToggleGroup(user1SelectionChoicesToggleGroup);
         user1Image2Button.setToggleGroup(user1SelectionChoicesToggleGroup);
         user1Image3Button.setToggleGroup(user1SelectionChoicesToggleGroup);
@@ -105,8 +106,7 @@ public class SettingsView extends Pane {
         user2Image4Button.setGraphic(new MyImageView("images/kasutaja4punane.png"));
         user2Image4Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image4Button.setId("4");
-
-
+        
         VBox paneForRadioButtons2 = new VBox(20);
         paneForRadioButtons2.setPadding(new Insets(5, 5, 5, 5));
         gridPane.add(user2Label, 3, 1);
@@ -115,6 +115,7 @@ public class SettingsView extends Pane {
         gridPane.add(user2Image3Button, 3, 4);
         gridPane.add(user2Image4Button, 3, 5);
 
+        //registreerime valiku, kasutame seda main classis tegelase pildi kuvamiseks
         user2Image1Button.setToggleGroup(user2SelectionChoicesToggleGroup);
         user2Image2Button.setToggleGroup(user2SelectionChoicesToggleGroup);
         user2Image3Button.setToggleGroup(user2SelectionChoicesToggleGroup);

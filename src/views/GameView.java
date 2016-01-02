@@ -28,7 +28,7 @@ public class GameView extends Pane {
     private int maksimumFoodAllowed = 25;
     public AnimationTimer animationTimer;
     public User user1 = new User(0, 38, 75, 16);
-    public User user2 = new User(62, 36, 100, 16);
+    public User user2 = new User(63, 35, 101, 17);
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner

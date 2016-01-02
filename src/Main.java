@@ -154,7 +154,7 @@ public class Main extends Application {
 
         settings.user2Image4Button.setOnAction(e -> {
             game.user2.setCollision(0, 130, 73, 16); //Muuda collision box ära!!!
-            game.user2.setImage("images/kasutaja04.png");
+            game.user2.setImage("images/kasutaja4punane.png");
         });
 
         //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
