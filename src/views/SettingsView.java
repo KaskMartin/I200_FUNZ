@@ -40,34 +40,33 @@ public class SettingsView extends Pane {
             public MyImageView (String fileName) {
                 Image image = new Image(fileName);
                 this.setImage(image);
-                this.setScaleY(0.3);
-                this.setScaleX(0.3);
+                this.setScaleY(0.9);
+                this.setScaleX(0.5);
                 this.autosize();
                 this.setFitHeight(100);
             }
         }
-
-
+        
         //---mängija1 tegelased
         Label user1Label = new Label("MÄNGIJA 1");
         user1Label.setContentDisplay(ContentDisplay.TOP);
         user1Label.setPadding(new Insets(5, 5, 5, 250));
         user1Label.setFont(theFontSmall);
 
-        user1Image1Button.setGraphic(new MyImageView("images/kasutaja01.png"));
+        user1Image1Button.setGraphic(new MyImageView("images/kasutaja1sinine.png"));
         user1Image1Button.setSelected(true);
         user1Image1Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image1Button.setId("1");
 
-        user1Image2Button.setGraphic(new MyImageView("images/kasutaja02.png"));
+        user1Image2Button.setGraphic(new MyImageView("images/kasutaja2sinine.png"));
         user1Image2Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image2Button.setId("2");
 
-        user1Image3Button.setGraphic(new MyImageView("images/kasutaja03.png"));
+        user1Image3Button.setGraphic(new MyImageView("images/kasutaja3sinine.png"));
         user1Image3Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image3Button.setId("3");
 
-        user1Image4Button.setGraphic(new MyImageView("images/kasutaja04.png"));
+        user1Image4Button.setGraphic(new MyImageView("images/kasutaja4sinine.png"));
         user1Image4Button.setPadding(new Insets(5, 5, 5, 200));
         user1Image4Button.setId("4");
 
@@ -90,20 +89,20 @@ public class SettingsView extends Pane {
         user2Label.setPadding(new Insets(5, 5, 5, 100));
         user2Label.setFont(theFontSmall);
 
-        user2Image1Button.setGraphic(new MyImageView("images/kasutaja01.png"));
+        user2Image1Button.setGraphic(new MyImageView("images/kasutaja1punane.png"));
         user2Image1Button.setSelected(true);
         user2Image1Button.setId("1");
         user2Image1Button.setPadding(new Insets(5, 5, 5, 70));
 
-        user2Image2Button.setGraphic(new MyImageView("images/kasutaja02.png"));
+        user2Image2Button.setGraphic(new MyImageView("images/kasutaja2punane.png"));
         user2Image2Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image2Button.setId("2");
 
-        user2Image3Button.setGraphic(new MyImageView("images/kasutaja03.png"));
+        user2Image3Button.setGraphic(new MyImageView("images/kasutaja3punane.png"));
         user2Image3Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image3Button.setId("3");
 
-        user2Image4Button.setGraphic(new MyImageView("images/kasutaja04.png"));
+        user2Image4Button.setGraphic(new MyImageView("images/kasutaja4punane.png"));
         user2Image4Button.setPadding(new Insets(5, 5, 5, 70));
         user2Image4Button.setId("4");
 
@@ -132,8 +131,9 @@ public class SettingsView extends Pane {
                     AlertBox.display("VIGA", "PALUN VALIGE ERINEVAD TEGELASED!");
                 }
             });
-        this.getChildren().addAll(gridPane);
          */
+        this.getChildren().addAll(gridPane);
+
     }
 }
 

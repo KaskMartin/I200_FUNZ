@@ -27,8 +27,8 @@ public class GameView extends Pane {
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
     private int maksimumFoodAllowed = 25;
     public AnimationTimer animationTimer;
-    public User user1 = new User(3, 21, 75, 21);
-    public User user2 = new User(79, 18, 81, 26);
+    public User user1 = new User(0, 38, 75, 16);
+    public User user2 = new User(62, 36, 100, 16);
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
@@ -59,15 +59,15 @@ public class GameView extends Pane {
         this.setWidth(800);
 
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
-        user1.setImage("images/kasutaja01.png");
-        user1.setPosition(200, 365);
-        user1.setMoveLeft("LEFT");
-        user1.setMoveRight("RIGHT");
+        user1.setImage("images/kasutaja1punane.png");
+        user1.setPosition(200, 355);
+        user1.setMoveLeft("Q");
+        user1.setMoveRight("W");
 
-        user2.setImage("images/kasutaja03.png");
+        user2.setImage("images/kasutaja2sinine.png");
         user2.setPosition(600, 365);
-        user2.setMoveLeft("Q");
-        user2.setMoveRight("W");
+        user2.setMoveLeft("LEFT");
+        user2.setMoveRight("RIGHT");
 
         this.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
