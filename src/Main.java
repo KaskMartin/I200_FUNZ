@@ -1,19 +1,24 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
 import lib.HighScores;
 import java.io.File;
 import static lib.HighScores.nameEntryButton;
+import static lib.HighScores.nameEntryField;
 
 public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public ImageView soundOnImage = new ImageView("images/soundON.png");
+    public ImageView soundOffImage = new ImageView("images/soundOFF.png");
 
     //Menyy heli mängimise haldamine
     private boolean soundIsOn = true;
@@ -63,9 +68,9 @@ public class Main extends Application {
             game.toggleSound();
             toggleSound();
             if (soundIsOn)
-                layout.soundOffOnButton.setTextFill(Color.GREEN);
+                layout.soundOffOnButton.setGraphic(soundOnImage);
             else
-                layout.soundOffOnButton.setTextFill(Color.RED);
+                layout.soundOffOnButton.setGraphic(soundOffImage);
         });
 
         //Klaviatuuri nupuvajutuste haldamine
@@ -115,43 +120,43 @@ public class Main extends Application {
 
         //Seadetes tehtud muutuste haldamine
         settings.user1Image1Button.setOnAction(e -> {
-            game.user1.setCollision(3, 21, 75, 21);
-            game.user1.setImage("images/kasutaja01.png");
+            game.user1.setCollision(0, 37, 75, 17);
+            game.user1.setImage("images/kasutaja1sinine.png");
         });
 
         settings.user1Image2Button.setOnAction(e -> {
-            game.user1.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user1.setImage("images/kasutaja02.png");
+            game.user1.setCollision(63, 35, 101, 17); //Muuda collision box ära!!!
+            game.user1.setImage("images/kasutaja2sinine.png");
         });
 
         settings.user1Image3Button.setOnAction(e -> {
-            game.user1.setCollision(79, 18, 81, 26);
-            game.user1.setImage("images/kasutaja03.png");
+            game.user1.setCollision(57, 18, 85, 15);
+            game.user1.setImage("images/kasutaja3sinine.png");
         });
 
         settings.user1Image4Button.setOnAction(e -> {
-            game.user1.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user1.setImage("images/kasutaja04.png");
+            game.user1.setCollision(0, 130, 73, 16); //Muuda collision box ära!!!
+            game.user1.setImage("images/kasutaja4sinine.png");
         });
 
         settings.user2Image1Button.setOnAction(e -> {
-            game.user2.setCollision(3, 21, 75, 21);
-            game.user2.setImage("images/kasutaja01.png");
+            game.user2.setCollision(0, 37, 75, 17);
+            game.user2.setImage("images/kasutaja1punane.png");
         });
 
         settings.user2Image2Button.setOnAction(e -> {
-            game.user2.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user2.setImage("images/kasutaja02.png");
+            game.user2.setCollision(63, 35, 101, 17); //Muuda collision box ära!!!
+            game.user2.setImage("images/kasutaja2punane.png");
         });
 
         settings.user2Image3Button.setOnAction(e -> {
-            game.user2.setCollision(79, 18, 81, 26);
-            game.user2.setImage("images/kasutaja03.png");
+            game.user2.setCollision(57, 18, 85, 15);
+            game.user2.setImage("images/kasutaja3punane.png");
         });
 
         settings.user2Image4Button.setOnAction(e -> {
-            game.user2.setCollision(79, 18, 81, 26); //Muuda collision box ära!!!
-            game.user2.setImage("images/kasutaja04.png");
+            game.user2.setCollision(0, 130, 73, 16); //Muuda collision box ära!!!
+            game.user2.setImage("images/kasutaja4punane.png");
         });
 
         //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
@@ -160,6 +165,14 @@ public class Main extends Application {
             System.out.println("name has been entered");
             currentHighScores.ResetHighScoresToDisplay();
             layout.setContent(currentHighScores);
+        });
+
+
+        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                currentHighScores.ResetHighScoresToDisplay();
+                layout.setContent(currentHighScores);
+            }
         });
 
         //Lavale tseeni sättimine ja lava näitamine

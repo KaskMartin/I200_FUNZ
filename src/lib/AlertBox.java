@@ -11,7 +11,7 @@ import javafx.geometry.*;
  */
 public class AlertBox {
 
-        public static void display(String title, String message) {
+        /**public static void display(String title, String message) {
             Stage window = new Stage();
 
             //Block events to other windows
@@ -33,5 +33,6 @@ public class AlertBox {
             window.setScene(scene);
             window.showAndWait();
         }
+         */
 
     }

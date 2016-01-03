@@ -3,5 +3,3 @@ Martin,1800
 www,1800
 test111,1000
 MinuNimi,400
-Nimi,300
-test999,200

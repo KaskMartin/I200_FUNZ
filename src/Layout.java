@@ -1,5 +1,6 @@
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -11,11 +12,13 @@ import javafx.scene.text.FontWeight;
 public class Layout extends Group{
     Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
     public Button backMenuButton = new Button("_TAGASI");
-    public Button soundOffOnButton = new Button("_HELI");
+    public Button soundOffOnButton = new Button("");
+    public ImageView soundOnImage = new ImageView("images/soundON.png");
+    public ImageView soundOffImage = new ImageView("images/soundOFF.png");
 
     //Layouti default constructor, koos back nupuga
     public Layout (Pane pane) {
-        soundOffOnButton.setTextFill(Color.GREEN);
+        soundOffOnButton.setGraphic(soundOnImage);
         setContent(pane);
         showBackButton();
     }

@@ -16,13 +16,15 @@ public class MenuView extends Pane {
     public Button settingsButton = new Button("_SEADED");
     public Button helpButton = new Button("_ABI");
     public Button exitButton = new Button("_VÄLJU");
+    public Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
+    public Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
     public MenuView(){
         this.setHeight(600);
         this.setWidth(800);
-        Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
-        Label menuPealkiri = new Label("PÜÜA AINULT TERVISLIKKU TOITU!");
 
+        Label menuPealkiri = new Label("PÜÜA AINULT TERVISLIKKU TOITU!");
+        menuPealkiri.setFont(theFontSmall);
         startButton.setFont(theFont);
         highscoresButton.setFont(theFont);
         settingsButton.setFont(theFont);
@@ -51,6 +53,8 @@ public class MenuView extends Pane {
         exitButton.setTranslateX(275);
         exitButton.setPrefSize(250,20);
 
+
     this.getChildren().addAll(menuPealkiri, startButton, highscoresButton, settingsButton, helpButton, exitButton);
+
     }
 }
