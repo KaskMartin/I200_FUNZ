@@ -7,8 +7,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
-import java.beans.EventHandler;
 import java.io.*;
 import java.util.*;
 
@@ -19,6 +17,7 @@ public class HighScores {
     private static int MAX_SCORES = 10;
     public static Button nameEntryButton = new Button("OK");
     public static TextField nameEntryField = new TextField();
+    private static String nameEntryText;
 
 
     //Tulemuste kuvamine, vajalik HighScoreViews
@@ -85,32 +84,26 @@ public class HighScores {
         Stage nameEntryWindow = new Stage();
         BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
-        //TextField nameEntryField = new TextField();
-      //SIIA Meetod kuidas koma välistada
-        // nameEntryField.setOnKeyPressed(event1 -> {
-      //    if (nameEntryField.getUserData().toString().charAt(((nameEntryField.getUserData()).toString()).length() - 1) == ','){
-      //        nameEntryField.setText(((nameEntryField.getUserData()).toString()).substring(0, (((nameEntryField.getUserData()).toString()).length()-2)));
-      //    }
-      //});
+
+        //SIIA Meetod kuidas koma välistada
+
         nameEntryButton.addEventHandler(ActionEvent.ACTION, event1 -> {
-            nameEntryField.getText();
-            writeToScoresFile(nameEntryField.getText());
+            nameEntryText = nameEntryField.getText();
             nameEntryWindow.close();
+            writeToScoresFile(nameEntryText);
             System.out.println("nameEntryButton pressed action in GetName method");
-            nameEntryButton.setDisable(true);
         });
 
         nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
             if (event1.getCode() == KeyCode.ENTER) {
-                nameEntryField.getText();
-                writeToScoresFile(nameEntryField.getText());
+                nameEntryText = nameEntryField.getText();
                 nameEntryWindow.close();
+                writeToScoresFile(nameEntryText);
                 System.out.println("Enter pressed");
-                nameEntryButton.setDisable(true);
+                event1.consume();
             }
 
         });
-
 
         borderPane.setTop(label);
         borderPane.setCenter(nameEntryField);
