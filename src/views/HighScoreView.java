@@ -13,7 +13,7 @@ import lib.HighScores;
 public class HighScoreView extends Pane {
     private Text text = new Text();
 
-    Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
+    Font theFontSmall = Font.font("Tahoma", FontWeight.LIGHT, 14);
 
     public void ResetHighScoresToDisplay () {
         String highScoresToDisplay = HighScores.printOutHighScores();

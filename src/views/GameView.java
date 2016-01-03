@@ -85,7 +85,7 @@ public class GameView extends Pane {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.getChildren().add(canvas);
 
-        //FontsUsed theFont = FontsUsed.font( "Tahoma", FontWeight.BOLD, 24 );
+
         gc.setFont( theFont );
         gc.setLineWidth(1);
 

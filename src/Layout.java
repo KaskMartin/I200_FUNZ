@@ -14,9 +14,9 @@ import lib.Sprite;
  * Created by martin on 13.12.15.
  */
 public class Layout extends Group{
-    Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
+    public Font theFontSmall = Font.font("Tahoma", FontWeight.LIGHT, 14);
     public Button backMenuButton = new Button("_TAGASI");
-    public Button soundOffOnButton = new Button("");
+    public Button soundOffOnButton = new Button("_HELI");
     public ImageView soundOnImage = new ImageView("images/soundON.png");
     public ImageView soundOffImage = new ImageView("images/soundOFF.png");
 
@@ -37,19 +37,21 @@ public class Layout extends Group{
     }
     //lisab Layout Groupile Panei
     public void setContent(Pane pane) {
+        //Taustapildi lisamine
+        Canvas backgroundImageCanvas = new Canvas(800, 600);
+        GraphicsContext gc = backgroundImageCanvas.getGraphicsContext2D();
+
         Sprite BackgroundImageSprite =  new Sprite();
         BackgroundImageSprite.setImage("images/backgroundLight.png");
         BackgroundImageSprite.setPosition(0, 0);
-
-        Canvas backgroundImageCanvas = new Canvas(800, 600);
-        GraphicsContext gc = backgroundImageCanvas.getGraphicsContext2D();
 
         this.getChildren().clear();
         BackgroundImageSprite.render(gc);
         this.backMenuButton.setFont(theFontSmall);
         this.backMenuButton.setTranslateY(0);
         this.backMenuButton.setTranslateX(0);
-        this.soundOffOnButton.setTranslateX(735);
+        this.soundOffOnButton.setTranslateX(720); //tekstiga nupu asukoht
+        //this.soundOffOnButton.setTranslateX(753); //kui nupul pole teksti
         this.soundOffOnButton.setTranslateY(0);
         this.getChildren().addAll(backgroundImageCanvas, pane, backMenuButton, soundOffOnButton);
         this.showBackButton();

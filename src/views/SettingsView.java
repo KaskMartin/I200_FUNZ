@@ -24,8 +24,8 @@ public class SettingsView extends Pane {
     public RadioButton user2Image4Button = new RadioButton("");
     public ToggleGroup user1SelectionChoicesToggleGroup = new ToggleGroup();
     public ToggleGroup user2SelectionChoicesToggleGroup = new ToggleGroup();
-    public Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
-    public Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
+    public Font theFont = Font.font("Tahoma", FontWeight.LIGHT, 24);
+    public Font theFontSmall = Font.font("Tahoma", FontWeight.LIGHT, 14);
 
     public SettingsView() {
         this.setHeight(600);
@@ -50,24 +50,24 @@ public class SettingsView extends Pane {
         //---mängija1 tegelased
         Label user1Label = new Label("MÄNGIJA 1");
         user1Label.setContentDisplay(ContentDisplay.TOP);
-        user1Label.setPadding(new Insets(5, 5, 5, 250));
+        user1Label.setPadding(new Insets(5, 5, 5, 150));
         user1Label.setFont(theFontSmall);
 
         user1Image1Button.setGraphic(new MyImageView("images/kasutaja1sinine.png"));
         user1Image1Button.setSelected(true);
-        user1Image1Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image1Button.setPadding(new Insets(5, 5, 5, 150));
         user1Image1Button.setId("1");
 
         user1Image2Button.setGraphic(new MyImageView("images/kasutaja2sinine.png"));
-        user1Image2Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image2Button.setPadding(new Insets(5, 5, 5, 150));
         user1Image2Button.setId("2");
 
         user1Image3Button.setGraphic(new MyImageView("images/kasutaja3sinine.png"));
-        user1Image3Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image3Button.setPadding(new Insets(5, 5, 5, 150));
         user1Image3Button.setId("3");
 
         user1Image4Button.setGraphic(new MyImageView("images/kasutaja4sinine.png"));
-        user1Image4Button.setPadding(new Insets(5, 5, 5, 200));
+        user1Image4Button.setPadding(new Insets(5, 5, 5, 150));
         user1Image4Button.setId("4");
 
         //registreerime valiku, kasutame seda main classis tegelase pildi kuvamiseks
@@ -87,7 +87,7 @@ public class SettingsView extends Pane {
         //---mängija2 tegelased
         Label user2Label = new Label("MÄNGIJA 2");
         user2Label.setContentDisplay(ContentDisplay.TOP);
-        user2Label.setPadding(new Insets(5, 5, 5, 100));
+        user2Label.setPadding(new Insets(5, 5, 5, 70));
         user2Label.setFont(theFontSmall);
 
         user2Image1Button.setGraphic(new MyImageView("images/kasutaja1punane.png"));
