@@ -1,10 +1,14 @@
 import javafx.scene.Group;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import lib.Sprite;
 
 /**
  * Created by martin on 13.12.15.
@@ -31,10 +35,17 @@ public class Layout extends Group{
     public void hideBackButton() {
         this.backMenuButton.setVisible(false);
     }
-
     //lisab Layout Groupile Panei
     public void setContent(Pane pane) {
+        Sprite BackgroundSprite =  new Sprite();
+        BackgroundSprite.setImage("images/backgroundLight.png");
+        BackgroundSprite.setPosition(0, 0);
+        
+        Canvas canvas = new Canvas(800, 600);
+        GraphicsContext gc = canvas.getGraphicsContext2D();
+
         this.getChildren().clear();
+        BackgroundSprite.render(gc);
         this.backMenuButton.setFont(theFontSmall);
         this.backMenuButton.setTranslateY(0);
         this.backMenuButton.setTranslateX(0);
