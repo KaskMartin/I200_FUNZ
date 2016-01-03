@@ -5,6 +5,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
@@ -75,10 +76,14 @@ public class Main extends Application {
         layout.soundOffOnButton.setOnAction(e -> {
             game.toggleSound();
             toggleSound();
-            if (soundIsOn)
+            if (soundIsOn) {
                 layout.soundOffOnButton.setGraphic(soundOnImage);
-            else
+                layout.soundOffOnButton.setTextFill(Color.GREEN); //Kui nupul on tekst juures, saab kasutada lühikäsklusi
+            }else {
                 layout.soundOffOnButton.setGraphic(soundOffImage);
+                layout.soundOffOnButton.setTextFill(Color.RED); //Kui nupul on tekst juures, saab kasutada lühikäsklusi
+            }
+
         });
 
         //Klaviatuuri nupuvajutuste haldamine

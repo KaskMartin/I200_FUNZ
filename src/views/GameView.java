@@ -27,8 +27,9 @@ public class GameView extends Pane {
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
     private int maximumFoodAllowed = 25;
     public AnimationTimer animationTimer;
-    public User user1 = new User(3, 21, 75, 21);
-    public User user2 = new User(79, 18, 81, 26);
+    public User user1 = new User(0, 38, 75, 16);
+    public User user2 = new User(63, 35, 101, 17);
+    public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
@@ -59,7 +60,6 @@ public class GameView extends Pane {
         this.setWidth(800);
 
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
-
         user1.setImage("images/kasutaja1sinine.png");
         user1.setPosition(200, 355);
         user1.setMoveLeft("LEFT");
@@ -85,7 +85,7 @@ public class GameView extends Pane {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.getChildren().add(canvas);
 
-        Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
+
         gc.setFont( theFont );
         gc.setLineWidth(1);
 

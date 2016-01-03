@@ -16,8 +16,8 @@ public class MenuView extends Pane {
     public Button settingsButton = new Button("_SEADED");
     public Button helpButton = new Button("_ABI");
     public Button exitButton = new Button("_VÄLJU");
-    public Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
-    public Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
+    public Font theFont = Font.font("Tahoma", FontWeight.LIGHT, 24);
+    public Font theFontSmall = Font.font("Tahoma", FontWeight.LIGHT, 14);
 
     public MenuView(){
         this.setHeight(600);
@@ -31,7 +31,7 @@ public class MenuView extends Pane {
         helpButton.setFont(theFont);
         exitButton.setFont(theFont);
         menuPealkiri.setFont(theFont);
-        menuPealkiri.setTranslateX(185);
+        menuPealkiri.setTranslateX(225);
 
         startButton.setTranslateY(100);
         startButton.setTranslateX(275);
