@@ -24,12 +24,14 @@ public class SettingsView extends Pane {
     public RadioButton user2Image4Button = new RadioButton("");
     public ToggleGroup user1SelectionChoicesToggleGroup = new ToggleGroup();
     public ToggleGroup user2SelectionChoicesToggleGroup = new ToggleGroup();
+    public Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
+    public Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
     //public Button confirmSelectedUsersButton = new Button("KINNITA TEGELASED");
 
     public SettingsView() {
         this.setHeight(600);
         this.setWidth(800);
-        Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
+        //Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
         //GridPane nuppude jaoks
         GridPane gridPane = new GridPane();
@@ -121,18 +123,7 @@ public class SettingsView extends Pane {
         user2Image3Button.setToggleGroup(user2SelectionChoicesToggleGroup);
         user2Image4Button.setToggleGroup(user2SelectionChoicesToggleGroup);
 
-        //Tekita valikute kontroll. Kui on samad pildid valitud, siis viskab vea. Kui ei ole, siis ei viska.
-        //AlertBox selleks, kui kasutajad valivad samad tegelased. EI TÖÖTA!
-        /**confirmSelectedUsersButton.setFont(theFontSmall);
-        gridPane.add(confirmSelectedUsersButton, 3, 7);
-            confirmSelectedUsersButton.setOnAction(e -> {
-                if ((user1SelectionChoicesToggleGroup.getSelectedToggle().toString()).equals(user2SelectionChoicesToggleGroup.getSelectedToggle().toString())) {
-                    System.out.println(user1SelectionChoicesToggleGroup.getSelectedToggle());
-                    System.out.println(user2SelectionChoicesToggleGroup.getSelectedToggle());
-                    AlertBox.display("VIGA", "PALUN VALIGE ERINEVAD TEGELASED!");
-                }
-            });
-         */
+       
         this.getChildren().addAll(gridPane);
 
     }

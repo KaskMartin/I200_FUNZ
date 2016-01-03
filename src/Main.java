@@ -1,10 +1,10 @@
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
@@ -17,6 +17,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
+    public ImageView soundONImage = new ImageView("images/soundON.png");
+    public ImageView soundOFFImage = new ImageView("images/soundOFF.png");
 
     //Menyy heli mängimise haldamine
     private boolean soundIsOn = true;
@@ -66,9 +68,9 @@ public class Main extends Application {
             game.toggleSound();
             toggleSound();
             if (soundIsOn)
-                layout.soundOffOnButton.setTextFill(Color.GREEN);
+                layout.soundOffOnButton.setGraphic(soundONImage);
             else
-                layout.soundOffOnButton.setTextFill(Color.RED);
+                layout.soundOffOnButton.setGraphic(soundOFFImage);
         });
 
         //Klaviatuuri nupuvajutuste haldamine

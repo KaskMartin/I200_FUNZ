@@ -29,6 +29,7 @@ public class GameView extends Pane {
     public AnimationTimer animationTimer;
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
+    public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
@@ -84,7 +85,7 @@ public class GameView extends Pane {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         this.getChildren().add(canvas);
 
-        Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
+        //Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
         gc.setFont( theFont );
         gc.setLineWidth(1);
 
