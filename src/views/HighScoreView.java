@@ -5,7 +5,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import views.gms.HighScores;
+import lib.HighScores;
 
 /**
  * Created by martin on 13.12.15.

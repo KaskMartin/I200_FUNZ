@@ -1,6 +1,7 @@
+Martin,2500
+Martin,1800
+www,1800
 test111,1000
+MinuNimi,400
+Nimi,300
 test999,200
-test 3,200
-Test2,100
-Test1,300
-KM,200

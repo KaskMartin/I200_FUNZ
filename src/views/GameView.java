@@ -10,10 +10,10 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import views.gms.Food;
-import views.gms.LongValue;
-import views.gms.Sprite;
-import views.gms.User;
+import lib.Food;
+import lib.LongValue;
+import lib.Sprite;
+import lib.User;
 import java.io.File;
 import java.util.*;
 
@@ -22,10 +22,10 @@ import java.util.*;
  */
 public class GameView extends Pane {
 
-    private int goodScore;
+    private int usersCombinedScore;
     private final int healthAtStart = 4; //elude hulk mis alguses kaasa antakse,MUUDA KUI VAJA!
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
-    private int maksimumFoodAllowed = 25;
+    private int maximumFoodAllowed = 25;
     public AnimationTimer animationTimer;
     public User user1 = new User(3, 21, 75, 21);
     public User user2 = new User(79, 18, 81, 26);
@@ -34,8 +34,8 @@ public class GameView extends Pane {
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
     public ArrayList<String> input = new ArrayList<String>(); //klahvivajutuste konteiner
 
-    public int getGoodScore () {
-        return goodScore;
+    public int getUsersCombinedScore() {
+        return usersCombinedScore;
     }
 
     //Helide haldamine
@@ -61,13 +61,13 @@ public class GameView extends Pane {
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
         user1.setImage("images/kasutaja01.png");
         user1.setPosition(200, 365);
-        user1.setMoveLeft("LEFT");
-        user1.setMoveRight("RIGHT");
+        user1.setMoveLeft("Q");
+        user1.setMoveRight("W");
 
         user2.setImage("images/kasutaja03.png");
         user2.setPosition(600, 365);
-        user2.setMoveLeft("Q");
-        user2.setMoveRight("W");
+        user2.setMoveLeft("LEFT");
+        user2.setMoveRight("RIGHT");
 
         this.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
@@ -104,7 +104,7 @@ public class GameView extends Pane {
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (foodList.size() < maksimumFoodAllowed)
+                if (foodList.size() < maximumFoodAllowed)
                     foodList.add(new Food());
             }
         }, 0, 800);
@@ -146,7 +146,7 @@ public class GameView extends Pane {
                     if ( user1.intersects(foodSprite)|| user2.intersects(foodSprite) )
                     {
                         if (foodSprite.good) {
-                            goodScore++; //kui toit oli tervislik suurendame skoori
+                            usersCombinedScore++; //kui toit oli tervislik suurendame skoori
                             PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
                         }
                         else {
@@ -176,7 +176,7 @@ public class GameView extends Pane {
                 gc.strokeText( pointsText, 360, 36 );
 
                 // Näita hea skoori suurust
-                String goodPointsText = "GoodScore:" + (100 * goodScore);
+                String goodPointsText = "GoodScore:" + (100 * usersCombinedScore);
                 gc.setFill( Color.GREEN );
                 gc.setStroke( Color.BLACK );
                 gc.fillText( goodPointsText, 360, 72 );
@@ -202,7 +202,7 @@ public class GameView extends Pane {
 
     public void resetGame() {
         foodList = new ArrayList<Food>();
-        goodScore = 0;
+        usersCombinedScore = 0;
         healthRemaining = healthAtStart;
         user1.setPosition(200, 365);
         user2.setPosition(600, 365);

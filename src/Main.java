@@ -6,9 +6,9 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import views.*;
-import views.gms.HighScores;
+import lib.HighScores;
 import java.io.File;
-import static views.gms.HighScores.nameEntryButton;
+import static lib.HighScores.nameEntryButton;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -107,7 +107,7 @@ public class Main extends Application {
         //mängu lõppemise haldamine. (GameView game-is asetseb SimpleBooleanProperty, mis muutub "true"-ks, kui mäng lõppeb)
         game.gameOver.addListener(e -> {
             if (game.gameOver.getValue()) {
-                int finalScore = 100 * game.getGoodScore();
+                int finalScore = 100 * game.getUsersCombinedScore();
                 System.out.println("Mäng sai läbi!"); //TESTING!
                 HighScores.addScore(finalScore);
             }
@@ -156,6 +156,7 @@ public class Main extends Application {
 
         //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
         nameEntryButton.addEventHandler(ActionEvent.ACTION, event -> {
+
             System.out.println("name has been entered");
             currentHighScores.ResetHighScoresToDisplay();
             layout.setContent(currentHighScores);
