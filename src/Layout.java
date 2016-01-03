@@ -37,21 +37,21 @@ public class Layout extends Group{
     }
     //lisab Layout Groupile Panei
     public void setContent(Pane pane) {
-        Sprite BackgroundSprite =  new Sprite();
-        BackgroundSprite.setImage("images/backgroundLight.png");
-        BackgroundSprite.setPosition(0, 0);
-        
-        Canvas canvas = new Canvas(800, 600);
-        GraphicsContext gc = canvas.getGraphicsContext2D();
+        Sprite BackgroundImageSprite =  new Sprite();
+        BackgroundImageSprite.setImage("images/backgroundLight.png");
+        BackgroundImageSprite.setPosition(0, 0);
+
+        Canvas backgroundImageCanvas = new Canvas(800, 600);
+        GraphicsContext gc = backgroundImageCanvas.getGraphicsContext2D();
 
         this.getChildren().clear();
-        BackgroundSprite.render(gc);
+        BackgroundImageSprite.render(gc);
         this.backMenuButton.setFont(theFontSmall);
         this.backMenuButton.setTranslateY(0);
         this.backMenuButton.setTranslateX(0);
         this.soundOffOnButton.setTranslateX(735);
         this.soundOffOnButton.setTranslateY(0);
-        this.getChildren().addAll(pane, backMenuButton, soundOffOnButton);
+        this.getChildren().addAll(backgroundImageCanvas, pane, backMenuButton, soundOffOnButton);
         this.showBackButton();
     }
 }
