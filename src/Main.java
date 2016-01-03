@@ -17,8 +17,8 @@ public class Main extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    public ImageView soundONImage = new ImageView("images/soundON.png");
-    public ImageView soundOFFImage = new ImageView("images/soundOFF.png");
+    public ImageView soundOnImage = new ImageView("images/soundON.png");
+    public ImageView soundOffImage = new ImageView("images/soundOFF.png");
 
     //Menyy heli mängimise haldamine
     private boolean soundIsOn = true;
@@ -68,9 +68,9 @@ public class Main extends Application {
             game.toggleSound();
             toggleSound();
             if (soundIsOn)
-                layout.soundOffOnButton.setGraphic(soundONImage);
+                layout.soundOffOnButton.setGraphic(soundOnImage);
             else
-                layout.soundOffOnButton.setGraphic(soundOFFImage);
+                layout.soundOffOnButton.setGraphic(soundOffImage);
         });
 
         //Klaviatuuri nupuvajutuste haldamine

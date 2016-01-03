@@ -26,12 +26,10 @@ public class SettingsView extends Pane {
     public ToggleGroup user2SelectionChoicesToggleGroup = new ToggleGroup();
     public Font theFont = Font.font("Consolas", FontWeight.LIGHT, 24);
     public Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
-    //public Button confirmSelectedUsersButton = new Button("KINNITA TEGELASED");
 
     public SettingsView() {
         this.setHeight(600);
         this.setWidth(800);
-        //Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
         //GridPane nuppude jaoks
         GridPane gridPane = new GridPane();

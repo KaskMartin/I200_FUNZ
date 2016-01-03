@@ -11,11 +11,11 @@ import javafx.scene.text.Text;
  * Created by martin on 13.12.15.
  */
 public class HelpView extends Pane {
+    public Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
     public HelpView() {
         this.setHeight(600);
         this.setWidth(800);
-        Font theFontSmall = Font.font("Consolas", FontWeight.LIGHT, 14);
 
         Text instructions = new Text("1. Püüa toitu kasutades nooleklahve liikumiseks paremale või vasakule.\n2. Kasutaja " +
                 "kaks saab kasutada klahve Q ja W.\n3. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n4." +
