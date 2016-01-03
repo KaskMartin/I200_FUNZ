@@ -35,6 +35,14 @@ public class Main extends Application {
             }
     }
 
+    public void PlayGameOverSound() {
+        if (soundIsOn) {
+            Media sound = new Media(new File("src/sounds/325413__squarepug__cute-pixie-says-game-over.mp3").toURI().toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(sound);
+            mediaPlayer.play();
+        }
+    }
+
     @Override
     public void start(Stage stage) {
         //Lava suuruse määratlemine
@@ -112,6 +120,7 @@ public class Main extends Application {
         //mängu lõppemise haldamine. (GameView game-is asetseb SimpleBooleanProperty, mis muutub "true"-ks, kui mäng lõppeb)
         game.gameOver.addListener(e -> {
             if (game.gameOver.getValue()) {
+                PlayGameOverSound();
                 int finalScore = 100 * game.getUsersCombinedScore();
                 System.out.println("Mäng sai läbi!"); //TESTING!
                 HighScores.addScore(finalScore);

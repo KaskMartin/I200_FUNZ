@@ -93,12 +93,12 @@ public class SettingsView extends Pane {
         user2Label.setFont(theFontSmall);
 
         user2Image1Button.setGraphic(new MyImageView("images/kasutaja1punane.png"));
-        user2Image1Button.setSelected(true);
         user2Image1Button.setId("1");
         user2Image1Button.setPadding(new Insets(0, 0, 0, 70));
 
         user2Image2Button.setGraphic(new MyImageView("images/kasutaja2punane.png"));
         user2Image2Button.setPadding(new Insets(5, 5, 5, 70));
+        user2Image2Button.setSelected(true);
         user2Image2Button.setId("2");
 
         user2Image3Button.setGraphic(new MyImageView("images/kasutaja3punane.png"));

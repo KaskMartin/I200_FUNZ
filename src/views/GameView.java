@@ -59,8 +59,7 @@ public class GameView extends Pane {
         this.setWidth(800);
 
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
-        user1.setImage("images/kasutaja01.png");
-        user1.setPosition(200, 365);
+
         user1.setImage("images/kasutaja1sinine.png");
         user1.setPosition(200, 355);
         user1.setMoveLeft("LEFT");
@@ -148,7 +147,7 @@ public class GameView extends Pane {
                     if ( user1.intersects(foodSprite)|| user2.intersects(foodSprite) )
                     {
                         if (foodSprite.good) {
-                            usersCombinedScore++; //kui toit oli tervislik suurendame skoori
+                            usersCombinedScore =+ 10; //kui toit oli tervislik suurendame skoori
                             PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
                         }
                         else {
@@ -159,7 +158,10 @@ public class GameView extends Pane {
                     }
                     else if ( foodSprite.intersects(grassSprite)) {
                         foodIter.remove();
-                        if (foodSprite.good) {PlaySound("src/sounds/149899__animationisaac__box-crash.mp3");}
+                        if (foodSprite.good) {
+                            usersCombinedScore--;
+                            PlaySound("src/sounds/149899__animationisaac__box-crash.mp3");
+                        }
                     }
                     foodSprite.update(elapsedTime);
                 }
@@ -178,7 +180,7 @@ public class GameView extends Pane {
                 gc.strokeText( pointsText, 360, 36 );
 
                 // Näita hea skoori suurust
-                String goodPointsText = "GoodScore:" + (100 * usersCombinedScore);
+                String goodPointsText = "Score:" + (usersCombinedScore);
                 gc.setFill( Color.GREEN );
                 gc.setStroke( Color.BLACK );
                 gc.fillText( goodPointsText, 360, 72 );
