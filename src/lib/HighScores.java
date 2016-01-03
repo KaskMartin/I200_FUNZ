@@ -92,19 +92,21 @@ public class HighScores {
       //        nameEntryField.setText(((nameEntryField.getUserData()).toString()).substring(0, (((nameEntryField.getUserData()).toString()).length()-2)));
       //    }
       //});
-        nameEntryButton.addEventHandler(ActionEvent.ACTION, event -> {
+        nameEntryButton.addEventHandler(ActionEvent.ACTION, event1 -> {
             nameEntryField.getText();
             writeToScoresFile(nameEntryField.getText());
             nameEntryWindow.close();
             System.out.println("nameEntryButton pressed action in GetName method");
+            nameEntryButton.setDisable(true);
         });
 
-        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
+        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
+            if (event1.getCode() == KeyCode.ENTER) {
                 nameEntryField.getText();
                 writeToScoresFile(nameEntryField.getText());
                 nameEntryWindow.close();
                 System.out.println("Enter pressed");
+                nameEntryButton.setDisable(true);
             }
 
         });

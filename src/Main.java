@@ -174,16 +174,15 @@ public class Main extends Application {
         });
 
         //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
-        nameEntryButton.addEventHandler(ActionEvent.ACTION, event -> {
-
+        nameEntryButton.addEventHandler(ActionEvent.ACTION, event2 -> {
             System.out.println("name has been entered");
             currentHighScores.ResetHighScoresToDisplay();
             layout.setContent(currentHighScores);
         });
 
 
-        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event -> {
-            if (event.getCode() == KeyCode.ENTER) {
+        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event2 -> {
+            if (event2.getCode() == KeyCode.ENTER) {
                 currentHighScores.ResetHighScoresToDisplay();
                 layout.setContent(currentHighScores);
             }

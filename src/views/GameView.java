@@ -4,6 +4,7 @@ import javafx.animation.AnimationTimer;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -23,13 +24,14 @@ import java.util.*;
 public class GameView extends Pane {
 
     private int usersCombinedScore;
-    private final int healthAtStart = 4; //elude hulk mis alguses kaasa antakse,MUUDA KUI VAJA!
+    private final int healthAtStart = 5; //elude hulk mis alguses kaasa antakse,MUUDA KUI VAJA!
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
     private int maximumFoodAllowed = 25;
     public AnimationTimer animationTimer;
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
     public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
+    private Image healthoMeter = new Image("images/techno-heart.png");
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
@@ -176,6 +178,7 @@ public class GameView extends Pane {
                 gc.setFill( Color.RED );
                 gc.setStroke( Color.DARKBLUE );
                 String pointsText = "Health Remaining:" + (healthRemaining);
+                gc.drawImage(healthoMeter, 360, 36);
                 gc.fillText( pointsText, 360, 36 );
                 gc.strokeText( pointsText, 360, 36 );
 

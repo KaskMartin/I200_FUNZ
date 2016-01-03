@@ -29,7 +29,7 @@ public class HelpView extends Pane {
         instructions.setTextAlignment(TextAlignment.JUSTIFY);
         instructions.setText("1. Vali endale tegelaskuju Seadete menüüst.\n2. Vaikimisi kasutab Mängija 1 klahve Q ja W ning Mängija 2 <- ja ->" +
                 "\n3. Püüa toitu kasutades klahve liikumiseks paremale või vasakule.\n4. Püüa ainult tervislikku toitu, see annab sulle plusspunkte.\n5." +
-                " Halva toidu püüdmine vähendab elusid. Mäng lõppeb, kui elud otsa saavad."+
+                " Halva toidu püüdmine vähendab elusid. Mängu alguses on 5 elu, mäng lõppeb, kui elud otsa saavad."+
                 "\n6. Menüüs lühikäskluste aktiveerimiseks vajuta klahvi Alt\n\n\nMängu autorid: Martin Kask, Kersti Miller, Aet Udusaar 2015");
 
         this.getChildren().addAll(settingsHelp, instructions);
