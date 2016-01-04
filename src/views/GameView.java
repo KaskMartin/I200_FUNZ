@@ -35,18 +35,29 @@ public class GameView extends Pane {
     private Image healthoMeter = new Image("images/techno-heart_5.png");
 
     public void setHealthoMeter(int healthLeft) {
-        if (healthLeft==0)
+        switch (healthLeft) {
+        case 0:
             this.healthoMeter = new Image("images/techno-heart_0.png");
-        else if (healthLeft==1)
+            break;
+        case 1:
             this.healthoMeter = new Image("images/techno-heart_1.png");
-        else if (healthLeft==2)
+            break;
+        case 2:
             this.healthoMeter = new Image("images/techno-heart_2.png");
-        else if (healthLeft==3)
+            break;
+        case 3:
             this.healthoMeter = new Image("images/techno-heart_3.png");
-        else if (healthLeft==4)
+            break;
+        case 4:
             this.healthoMeter = new Image("images/techno-heart_4.png");
-        else if (healthLeft==5)
+            break;
+        case 5:
             this.healthoMeter = new Image("images/techno-heart_5.png");
+            break;
+        default:
+            System.out.println("Invalid Switch Input for healthLeft method");
+            break;
+        }
     }
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
@@ -172,8 +183,8 @@ public class GameView extends Pane {
                             PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
                         }
                         else {
-                            healthRemaining--;
-                            setHealthoMeter(healthRemaining);//kui toit oli paha, vähendame elusid
+                            healthRemaining--;//kui toit oli paha, vähendame elusid
+                            setHealthoMeter(healthRemaining);//uuenda elude näitamise mõõdikut
                             PlaySound("src/sounds/249615__vincentm400__confirm.mp3");
                         }
                         foodIter.remove(); //viska toit minema
