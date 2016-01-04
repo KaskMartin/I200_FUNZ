@@ -5,6 +5,7 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -31,7 +32,22 @@ public class GameView extends Pane {
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
     public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
-    private Image healthoMeter = new Image("images/techno-heart.png");
+    private Image healthoMeter = new Image("images/techno-heart_5.png");
+
+    public void setHealthoMeter(int healthLeft) {
+        if (healthLeft==0)
+            this.healthoMeter = new Image("images/techno-heart_0.png");
+        else if (healthLeft==1)
+            this.healthoMeter = new Image("images/techno-heart_1.png");
+        else if (healthLeft==2)
+            this.healthoMeter = new Image("images/techno-heart_2.png");
+        else if (healthLeft==3)
+            this.healthoMeter = new Image("images/techno-heart_3.png");
+        else if (healthLeft==4)
+            this.healthoMeter = new Image("images/techno-heart_4.png");
+        else if (healthLeft==5)
+            this.healthoMeter = new Image("images/techno-heart_5.png");
+    }
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
@@ -110,7 +126,7 @@ public class GameView extends Pane {
                 if (foodList.size() < maximumFoodAllowed)
                     foodList.add(new Food());
             }
-        }, 0, 800);
+        }, 0, 600);
 
         animationTimer = new AnimationTimer()
         {
@@ -136,9 +152,12 @@ public class GameView extends Pane {
                 if (input.contains(user2.getMoveRight())&& user2.getPositionX()<720)
                     user2.addVelocity(150,0);
 
+                grassSprite.render(gc);
                 //liigutame kasutajaid
                 user2.update(elapsedTime);
                 user1.update(elapsedTime);
+                user1.render(gc);
+                user2.render(gc);
 
                 // kokkupõrgete avastamine ja nendele vastavad tegevused
                 Iterator<Food> foodIter = foodList.iterator();
@@ -153,7 +172,8 @@ public class GameView extends Pane {
                             PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
                         }
                         else {
-                            healthRemaining--; //kui toit oli paha, vähendame elusid
+                            healthRemaining--;
+                            setHealthoMeter(healthRemaining);//kui toit oli paha, vähendame elusid
                             PlaySound("src/sounds/249615__vincentm400__confirm.mp3");
                         }
                         foodIter.remove(); //viska toit minema
@@ -168,17 +188,12 @@ public class GameView extends Pane {
                     foodSprite.update(elapsedTime);
                 }
 
-                // render
+                // Näita elusid, mis järgi on
+                gc.drawImage(healthoMeter, 360, 36);
 
-                grassSprite.render(gc);
-                user1.render(gc);
-                user2.render(gc);
-
-                // Näita halva skoori suurust
                 gc.setFill( Color.RED );
                 gc.setStroke( Color.DARKBLUE );
                 String pointsText = "Health Remaining:" + (healthRemaining);
-                gc.drawImage(healthoMeter, 360, 36);
                 gc.fillText( pointsText, 360, 36 );
                 gc.strokeText( pointsText, 360, 36 );
 
