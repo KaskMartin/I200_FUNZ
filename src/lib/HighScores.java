@@ -1,12 +1,18 @@
 package lib;
 
 import javafx.event.ActionEvent;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
 import java.io.*;
 import java.util.*;
 
@@ -82,24 +88,32 @@ public class HighScores {
     //Nime k?simise dialoog, vormindust vaja muuta veel
     private static void getName() {
         Stage nameEntryWindow = new Stage();
+        nameEntryWindow.initStyle(StageStyle.UNDECORATED);
         BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
+        label.setFont(Font.font(16));
+        label.setAlignment(Pos.CENTER);
+        nameEntryButton.setAlignment(Pos.CENTER);
 
         //SIIA Meetod kuidas koma välistada
 
         nameEntryButton.addEventHandler(ActionEvent.ACTION, event1 -> {
             nameEntryText = nameEntryField.getText();
+            checkName();
             nameEntryWindow.close();
             writeToScoresFile(nameEntryText);
+            nameEntryField.setText("");
             System.out.println("nameEntryButton pressed action in GetName method");
         });
 
         nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
             if (event1.getCode() == KeyCode.ENTER) {
                 nameEntryText = nameEntryField.getText();
+                checkName();
                 nameEntryWindow.close();
                 writeToScoresFile(nameEntryText);
                 System.out.println("Enter pressed");
+                nameEntryField.setText("");
                 event1.consume();
             }
 
@@ -108,9 +122,19 @@ public class HighScores {
         borderPane.setTop(label);
         borderPane.setCenter(nameEntryField);
         borderPane.setBottom(nameEntryButton);
-        Scene getNameWindowScene = new Scene(borderPane, 200, 100);
+        Scene getNameWindowScene = new Scene(borderPane, 200, 100, Color.ALICEBLUE);
         nameEntryWindow.setScene(getNameWindowScene);
         nameEntryWindow.show();
+    }
+
+    public static String checkName() {
+        String nameToCheck = nameEntryText.replaceAll("[^a-zA-Z0-9]","");
+        StringBuilder str = new StringBuilder(nameToCheck);
+        str.setLength(15);
+        str.append(' ');
+        nameToCheck = str.toString();
+
+        return nameEntryText = nameToCheck;
     }
 
     //vajalik, et faili kirjutades uus tulemus �igesse kohta l�heks
