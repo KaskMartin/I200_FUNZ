@@ -19,7 +19,7 @@ public class HighScoreView extends Pane {
         String highScoresToDisplay = HighScores.printOutHighScores();
         text.setText(highScoresToDisplay);
         text.setTranslateX(50);
-        text.setTranslateY(155);
+        text.setTranslateY(160);
         text.setFont(theFontSmall);
     }
 

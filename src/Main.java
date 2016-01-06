@@ -11,8 +11,8 @@ import javafx.scene.Scene;
 import views.*;
 import lib.HighScores;
 import java.io.File;
-import static lib.HighScores.nameEntryButton;
-import static lib.HighScores.nameEntryField;
+
+import static lib.HighScores.*;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -176,6 +176,12 @@ public class Main extends Application {
         //idee poolest tahaksime et edetabel uuendaks ennast kui uus skoor on sisestatud. HETKEL EI TÖÖTA!
         nameEntryButton.addEventHandler(ActionEvent.ACTION, event2 -> {
             System.out.println("name has been entered (CLICK OK)");
+            nameEntryText = nameEntryField.getText();
+            checkName();
+            nameEntryWindow.close();
+            writeToScoresFile(nameEntryText);
+            printOutHighScores();
+            nameEntryField.setText("");
             currentHighScores.ResetHighScoresToDisplay();
             layout.setContent(currentHighScores);
         });
@@ -183,6 +189,12 @@ public class Main extends Application {
         nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event2 -> {
             if (event2.getCode() == KeyCode.ENTER) {
                 System.out.println("name has been entered (ENTER)");
+                nameEntryText = nameEntryField.getText();
+                checkName();
+                nameEntryWindow.close();
+                writeToScoresFile(nameEntryText);
+                printOutHighScores();
+                nameEntryField.setText("");
                 currentHighScores.ResetHighScoresToDisplay();
                 layout.setContent(currentHighScores);
             }

@@ -1,18 +1,12 @@
 package lib;
 
-import javafx.event.ActionEvent;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-
 import java.io.*;
 import java.util.*;
 
@@ -23,33 +17,13 @@ public class HighScores {
     private static int MAX_SCORES = 10;
     public static Button nameEntryButton = new Button("OK");
     public static TextField nameEntryField = new TextField();
-    private static String nameEntryText;
-
-
-    //Tulemuste kuvamine, vajalik HighScoreViews
-    public static String printOutHighScores() {
-        String textToDisplay = "";
-        getResults();
-        if (highScoresList != null) {
-            //print NIMI vahe mingi siia ja SKOOR
-            for (int i = 0; i < highScoresList.length; i++) {
-                textToDisplay += (i + 1) + ". " + highScoresList[i][0] + " " + highScoresList[i][1] + "\n";
-            }
-
-        } else {
-            textToDisplay = "Tulemusi ei leitud";
-        }
-        //set textToDisplay font !!!
-
-        return textToDisplay;
-    }
-
+    public static String nameEntryText;
+    public static Stage nameEntryWindow = new Stage();
 
     //M?nguskoori lisamine, seda meetodit kasutame main classis
     public static void addScore(int gameScore) {
         score = gameScore;
         getName();
-        getResults();
     }
 
     //Tulemuste laadimine failist
@@ -86,39 +60,12 @@ public class HighScores {
     }
 
     //Nime k?simise dialoog, vormindust vaja muuta veel
-    private static void getName() {
-        Stage nameEntryWindow = new Stage();
-        nameEntryWindow.initStyle(StageStyle.UNDECORATED);
+    public static void getName() {
         BorderPane borderPane = new BorderPane();
         Label label = new Label("Sisesta oma nimi");
         label.setFont(Font.font(16));
         label.setAlignment(Pos.CENTER);
         nameEntryButton.setAlignment(Pos.CENTER);
-
-        //SIIA Meetod kuidas koma välistada
-
-        nameEntryButton.addEventHandler(ActionEvent.ACTION, event1 -> {
-            nameEntryText = nameEntryField.getText();
-            checkName();
-            nameEntryWindow.close();
-            writeToScoresFile(nameEntryText);
-            nameEntryField.setText("");
-            System.out.println("nameEntryButton pressed action in GetName method");
-        });
-
-        nameEntryField.addEventHandler(KeyEvent.KEY_PRESSED, event1 -> {
-            if (event1.getCode() == KeyCode.ENTER) {
-                nameEntryText = nameEntryField.getText();
-                checkName();
-                nameEntryWindow.close();
-                writeToScoresFile(nameEntryText);
-                System.out.println("Enter pressed");
-                nameEntryField.setText("");
-                event1.consume();
-            }
-
-        });
-
         borderPane.setTop(label);
         borderPane.setCenter(nameEntryField);
         borderPane.setBottom(nameEntryButton);
@@ -127,19 +74,19 @@ public class HighScores {
         nameEntryWindow.show();
     }
 
+    //võtab sisestatud nimest välja kõik muu, mis ei ole täht või number
     public static String checkName() {
         String nameToCheck = nameEntryText.replaceAll("[^a-zA-Z0-9]","");
         StringBuilder str = new StringBuilder(nameToCheck);
         str.setLength(15);
         str.append(' ');
         nameToCheck = str.toString();
-
         return nameEntryText = nameToCheck;
     }
 
     //vajalik, et faili kirjutades uus tulemus �igesse kohta l�heks
     private static int lowestScoreRowNumber() {
-        getResults();
+        //getResults();
         if (highScoresList!= null) {
             int i = highScoresList.length;
             for (String b[]:highScoresList) {
@@ -153,7 +100,7 @@ public class HighScores {
     }
 
     //Tulemuste faili kirjutamine
-    private static void writeToScoresFile(String name) {
+    public static void writeToScoresFile(String name) {
         index = lowestScoreRowNumber();
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(fileName));
@@ -179,6 +126,23 @@ public class HighScores {
             printWriter.close();
         } catch (IOException e) {
         }
+    }
+
+    //Tulemuste kuvamine, vajalik HighScoreViews
+    public static String printOutHighScores() {
+        String textToDisplay = "";
+        getResults();
+        if (highScoresList != null) {
+            for (int i = 0; i < highScoresList.length; i++) {
+                textToDisplay += (i + 1) + ". " + highScoresList[i][0] + " " + highScoresList[i][1] + "\n";
+            }
+
+        } else {
+            textToDisplay = "Tulemusi ei leitud";
+        }
+        //set textToDisplay font !!!
+
+        return textToDisplay;
     }
 
 }
