@@ -91,13 +91,13 @@ public class GameView extends Pane {
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
         user1.setImage("images/kasutaja1sinine.png");
         user1.setPosition(200, 355);
-        user1.setMoveLeft("LEFT");
-        user1.setMoveRight("RIGHT");
+        user1.setMoveLeft("Q");
+        user1.setMoveRight("W");
 
         user2.setImage("images/kasutaja2punane.png");
         user2.setPosition(600, 365);
-        user2.setMoveLeft("Q");
-        user2.setMoveRight("W");
+        user2.setMoveLeft("LEFT");
+        user2.setMoveRight("RIGHT");
 
         this.setOnKeyPressed(e -> {
             String code = e.getCode().toString();
