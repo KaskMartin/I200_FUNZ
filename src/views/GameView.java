@@ -5,7 +5,6 @@ import javafx.beans.property.SimpleBooleanProperty;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -34,8 +33,8 @@ public class GameView extends Pane {
     public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
     private Image healthoMeter = new Image("images/techno-heart_5.png");
 
-    public void setHealthoMeter(int healthLeft) {
-        switch (healthLeft) {
+    public void setHealthoMeter() {
+        switch (healthRemaining) {
         case 0:
             this.healthoMeter = new Image("images/techno-heart_0.png");
             break;
@@ -184,7 +183,7 @@ public class GameView extends Pane {
                         }
                         else {
                             healthRemaining--;//kui toit oli paha, vähendame elusid
-                            setHealthoMeter(healthRemaining);//uuenda elude näitamise mõõdikut
+                            setHealthoMeter();//uuenda elude näitamise mõõdikut
                             PlaySound("src/sounds/249615__vincentm400__confirm.mp3");
                         }
                         foodIter.remove(); //viska toit minema
@@ -202,18 +201,18 @@ public class GameView extends Pane {
                 // Näita elusid, mis järgi on
                 gc.drawImage(healthoMeter, 360, 36);
 
-                gc.setFill( Color.RED );
-                gc.setStroke( Color.DARKBLUE );
-                String pointsText = "Health Remaining:" + (healthRemaining);
-                gc.fillText( pointsText, 360, 36 );
-                gc.strokeText( pointsText, 360, 36 );
+             // gc.setFill( Color.RED );
+             // gc.setStroke( Color.DARKBLUE );
+             // String pointsText = "Health Remaining:" + (healthRemaining);
+             // gc.fillText( pointsText, 360, 36 );
+             // gc.strokeText( pointsText, 360, 36 );
 
                 // Näita hea skoori suurust
                 String goodPointsText = "Score:" + (usersCombinedScore);
                 gc.setFill( Color.GREEN );
                 gc.setStroke( Color.BLACK );
-                gc.fillText( goodPointsText, 360, 72 );
-                gc.strokeText( goodPointsText, 360, 72 );
+                gc.fillText( goodPointsText, 360, 36 );
+                gc.strokeText( goodPointsText, 360, 36 );
 
                 /** MEGA TÄHTIS!!! Lõpetab mängu kui elud otsa saavad. Muudab m2ngLbi SimpleBooleanProperty variably, millele
                  * on ehitatud kuulaja Main meetodi jaoks. Sealt käivitub HighScoreide kuvamine
@@ -237,8 +236,11 @@ public class GameView extends Pane {
         foodList = new ArrayList<Food>();
         usersCombinedScore = 0;
         healthRemaining = healthAtStart;
+        setHealthoMeter();
         user1.setPosition(200, 365);
         user2.setPosition(600, 365);
+        user1.setVelocity(0, 0);
+        user2.setVelocity(0, 0);
         animationTimer.start();
         gameOver.set(false);
     }
