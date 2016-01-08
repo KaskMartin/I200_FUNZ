@@ -179,7 +179,7 @@ public class GameView extends Pane {
                     if ( user1.intersects(foodSprite)|| user2.intersects(foodSprite) )
                     {
                         if (foodSprite.good) {
-                            usersCombinedScore =+ 10; //kui toit oli tervislik suurendame skoori
+                            usersCombinedScore += 10; //kui toit oli tervislik suurendame skoori
                             PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
                         }
                         else {
