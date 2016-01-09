@@ -11,10 +11,8 @@ import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import lib.Food;
-import lib.LongValue;
-import lib.Sprite;
-import lib.User;
+import lib.*;
+
 import java.io.File;
 import java.util.*;
 
@@ -27,6 +25,7 @@ public class GameView extends Pane {
     private final int healthAtStart = 5; //elude hulk mis alguses kaasa antakse,MUUDA KUI VAJA!
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
     private int maximumFoodAllowed = 25;
+    private int maximumPotionAllowed = 1;
     public AnimationTimer animationTimer;
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
@@ -61,6 +60,7 @@ public class GameView extends Pane {
 
     public SimpleBooleanProperty gameOver = new SimpleBooleanProperty(); //Mängu lõppu jälgiv boolean
     ArrayList<Food> foodList = new ArrayList<Food>(); //Alla sadava toidu konteiner
+    ArrayList<Potion> potionsList = new ArrayList<Potion>(); //Alla sadava rohupurgi konteiner
     public ArrayList<String> input = new ArrayList<String>(); //klahvivajutuste konteiner
 
     public int getUsersCombinedScore() {
@@ -138,6 +138,14 @@ public class GameView extends Pane {
             }
         }, 0, 600);
 
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                if (potionsList.size() < maximumPotionAllowed)
+                    potionsList.add(new Potion());
+            }
+        }, 0, 1000);
+
         animationTimer = new AnimationTimer()
         {
             public void handle(long currentNanoTime)
@@ -168,6 +176,26 @@ public class GameView extends Pane {
                 user1.update(elapsedTime);
                 user1.render(gc);
                 user2.render(gc);
+
+                // kokkupõrgete avastamine ja nendele vastavad tegevused
+                Iterator<Potion> potionIter = potionsList.iterator();
+                while ( potionIter.hasNext() ) {
+                    Potion potionSprite = potionIter.next();
+                    potionSprite.render(gc);
+                    if ( user1.intersects(potionSprite)|| user2.intersects(potionSprite) )
+                    {
+                        if (healthRemaining < healthAtStart) {
+                            healthRemaining++;
+                            System.out.println("Yey, you got a brand new heart");
+                        }
+                        setHealthoMeter();
+                        potionIter.remove();
+                    }
+                    else if ( potionSprite.intersects(grassSprite)) {
+                        potionIter.remove();
+                    }
+                    potionSprite.update(elapsedTime);
+                }
 
                 // kokkupõrgete avastamine ja nendele vastavad tegevused
                 Iterator<Food> foodIter = foodList.iterator();
@@ -234,6 +262,7 @@ public class GameView extends Pane {
 
     public void resetGame() {
         foodList = new ArrayList<Food>();
+        potionsList = new ArrayList<Potion>();
         usersCombinedScore = 0;
         healthRemaining = healthAtStart;
         setHealthoMeter();
@@ -243,5 +272,6 @@ public class GameView extends Pane {
         user2.setVelocity(0, 0);
         animationTimer.start();
         gameOver.set(false);
+        System.out.println("Game has been reset");
     }
 }
