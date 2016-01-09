@@ -34,6 +34,27 @@ public class GameView extends Pane {
     public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
     private Image healthoMeter = new Image("images/techno-heart_5.png");
     private double fallingStuffSpeed = 90;
+    private double level1Threshold = 75;
+    private double level1Speed = 95;
+    private double level2Threshold = 150;
+    private double level2Speed = 100;
+    private double level3Threshold = 250;
+    private double level3Speed = 105;
+    private double level4Threshold = 375;
+    private double level4Speed = 110;
+    private double level5Threshold = 500;
+    private double level5Speed = 115;
+    private double level6Threshold = 600;
+    private double level6Speed = 120;
+    private double level7Threshold = 725;
+    private double level7Speed = 125;
+    private double level8Threshold = 850;
+    private double level8Speed = 130;
+    private double level9Threshold = 925;
+    private double level9Speed = 135;
+    private double level10Threshold = 1100;
+    private double level10Speed = 140;
+    private double nextLevelAt = level1Threshold;
 
     public void setHealthoMeter() {
         switch (healthRemaining) {
@@ -135,28 +156,24 @@ public class GameView extends Pane {
         //See on toiduloopija, mis lisav toitu meie foodList-i
         Timer timer = new Timer();
 
-        public TimerTask FoodThrowingTask () {
-            TimerTask foodThrowingTask = new TimerTask() {
-                @Override
-                public void run() {
-                    if (foodList.size() < maximumFoodAllowed)
-                        foodList.add(new Food());
-                }
-            };
-            return foodThrowingTask;
+        class FoodThrowingTask extends TimerTask {
+            @Override
+            public void run() {
+                if (foodList.size() < maximumFoodAllowed)
+                    foodList.add(new Food());
+            }
         }
 
-
-        TimerTask healthPotionFallingTask = new TimerTask() {
+        class HealthPotionFallingTask extends TimerTask {
             @Override
             public void run() {
                 if (potionsList.size() < maximumPotionAllowed)
                     potionsList.add(new Potion());
             }
-        };
+        }
 
-        timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 600);
-        timer.scheduleAtFixedRate(healthPotionFallingTask, 5000, 10000);
+        timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 600);
+        timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 5000, 10000);
 
         animationTimer = new AnimationTimer()
         {
@@ -190,29 +207,65 @@ public class GameView extends Pane {
                 user2.render(gc);
 
                 //LEVELITE haldus
-                if (currentLevel == 0 && usersCombinedScore > 75){
+
+                if (currentLevel == 0 && usersCombinedScore > level1Threshold){
                     currentLevel++;
-                    fallingStuffSpeed = 95;
+                    timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 1000);
+                    fallingStuffSpeed = level1Speed;
+                    nextLevelAt = level2Threshold;
                 }
-                else if (currentLevel == 1 && usersCombinedScore > 150){
+                else if (currentLevel == 1 && usersCombinedScore > level2Threshold){
                     currentLevel++;
-                    fallingStuffSpeed = 100;
-                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                    fallingStuffSpeed = level2Speed;
+                    timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 1000);
+                    nextLevelAt = level3Threshold;
                 }
-                else if (currentLevel == 2 && usersCombinedScore > 250){
+                else if (currentLevel == 2 && usersCombinedScore > level3Threshold){
                     currentLevel++;
-                    fallingStuffSpeed = 105;
-                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                    fallingStuffSpeed = level3Speed;
+                    nextLevelAt = level4Threshold;
                 }
-                else if (currentLevel == 3 && usersCombinedScore > 375){
+                else if (currentLevel == 3 && usersCombinedScore > level4Threshold){
                     currentLevel++;
-                    fallingStuffSpeed = 110;
-                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                    fallingStuffSpeed = level4Speed;
+                    timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 1000);
+                    nextLevelAt = level5Threshold;
                 }
-                else if (currentLevel == 4 && usersCombinedScore > 500){
+                else if (currentLevel == 4 && usersCombinedScore > level5Threshold){
                     currentLevel++;
-                    fallingStuffSpeed = 115;
-                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                    fallingStuffSpeed = level5Speed;
+                    nextLevelAt = level6Threshold;
+                    timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 0, 10000);
+                }
+                else if (currentLevel == 5 && usersCombinedScore > level6Threshold){
+                    currentLevel++;
+                    fallingStuffSpeed = level6Speed;
+                    timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 1000);
+                    nextLevelAt = level7Threshold;
+                }
+                else if (currentLevel == 6 && usersCombinedScore > level7Threshold){
+                    currentLevel++;
+                    fallingStuffSpeed = level7Speed;
+                    nextLevelAt = level8Threshold;
+                }
+                else if (currentLevel == 7 && usersCombinedScore > level8Threshold){
+                    currentLevel++;
+                    fallingStuffSpeed = level8Speed;
+                    timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 1000);
+                    nextLevelAt = level9Threshold;
+                    timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 0, 10000);
+                }
+                else if (currentLevel == 8 && usersCombinedScore > level9Threshold){
+                    currentLevel++;
+                    fallingStuffSpeed = level9Speed;
+                    nextLevelAt = level10Threshold;
+                }
+                else if (currentLevel == 9 && usersCombinedScore > level10Threshold){
+                    currentLevel++;
+                    fallingStuffSpeed = level10Speed;
+                    timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 500);
+                    timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 0, 5000);
+                    nextLevelAt = 9999;
                 }
 
                 // kokkupõrgete avastamine ja nendele vastavad tegevused
@@ -278,20 +331,21 @@ public class GameView extends Pane {
                 }
 
                 // Näita elusid, mis järgi on
-                gc.drawImage(healthoMeter, 360, 36);
+                gc.drawImage(healthoMeter,140, 8);
 
-             // gc.setFill( Color.RED );
-             // gc.setStroke( Color.DARKBLUE );
-             // String pointsText = "Health Remaining:" + (healthRemaining);
-             // gc.fillText( pointsText, 360, 36 );
-             // gc.strokeText( pointsText, 360, 36 );
-
-                // Näita hea skoori suurust
-                String goodPointsText = "Score:" + (usersCombinedScore);
+                //Näita levelit ja skoori mis vaja järgmiseks
                 gc.setFill( Color.GREEN );
                 gc.setStroke( Color.BLACK );
-                gc.fillText( goodPointsText, 360, 36 );
-                gc.strokeText( goodPointsText, 360, 36 );
+                String pointsText = "TASE: " + currentLevel + " (järgmine: " + nextLevelAt + " punkti)";
+                gc.fillText( pointsText, 260, 36 );
+                gc.strokeText( pointsText, 260, 36 );
+
+                // Näita hea skoori suurust
+                String goodPointsText = "PUNKTE:" + (usersCombinedScore);
+                gc.setFill( Color.PURPLE );
+                gc.setStroke( Color.DARKBLUE );
+                gc.fillText( goodPointsText, 400, 62 );
+                gc.strokeText( goodPointsText, 400, 62 );
 
                 /** MEGA TÄHTIS!!! Lõpetab mängu kui elud otsa saavad. Muudab m2ngLbi SimpleBooleanProperty variably, millele
                  * on ehitatud kuulaja Main meetodi jaoks. Sealt käivitub HighScoreide kuvamine

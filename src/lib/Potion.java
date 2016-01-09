@@ -37,7 +37,7 @@ public class Potion extends Sprite {
 
     public void update(double time)
     {
-        positionY += velocityY * time;
+        positionY += fallingStuffSpeed * time;
         positionX = startingX + 100*Math.sin(positionY/40);
         angle += rotation * time;
     }

@@ -21,4 +21,10 @@ public class Food extends Sprite {
         else
             this.setImage(badFood[random.nextInt(badFood.length)]);
     }
+
+    public void update(double time)
+    {
+        positionX += velocityX * time;
+        positionY += fallingStuffSpeed * time;
+    }
 }
