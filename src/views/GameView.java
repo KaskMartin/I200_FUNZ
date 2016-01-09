@@ -24,8 +24,8 @@ public class GameView extends Pane {
     private int usersCombinedScore;
     private final int healthAtStart = 5; //elude hulk mis alguses kaasa antakse,MUUDA KUI VAJA!
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
-    private int maximumFoodAllowed = 25;
-    private int maximumPotionAllowed = 1;
+    private int maximumFoodAllowed = 50;
+    private int maximumPotionAllowed = 2;
     public AnimationTimer animationTimer;
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
@@ -130,21 +130,24 @@ public class GameView extends Pane {
 
         //See on toiduloopija, mis lisav toitu meie foodList-i
         Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
+        TimerTask foodThrowingTask= new TimerTask() {
             @Override
             public void run() {
                 if (foodList.size() < maximumFoodAllowed)
                     foodList.add(new Food());
             }
-        }, 0, 600);
+        };
 
-        timer.scheduleAtFixedRate(new TimerTask() {
+        TimerTask healthPotionFallingTask = new TimerTask() {
             @Override
             public void run() {
                 if (potionsList.size() < maximumPotionAllowed)
                     potionsList.add(new Potion());
             }
-        }, 0, 1000);
+        };
+
+        timer.scheduleAtFixedRate(foodThrowingTask, 0, 600);
+        timer.scheduleAtFixedRate(healthPotionFallingTask, 5000, 10000);
 
         animationTimer = new AnimationTimer()
         {
