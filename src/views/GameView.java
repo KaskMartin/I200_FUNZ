@@ -29,6 +29,7 @@ public class GameView extends Pane {
     private int startingLevel = 0;
     private int currentLevel = 0;
     public AnimationTimer animationTimer;
+    public Timer timer = new Timer();
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
     public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
@@ -106,6 +107,22 @@ public class GameView extends Pane {
             }
     }
 
+    class FoodThrowingTask extends TimerTask {
+        @Override
+        public void run() {
+            if (foodList.size() < maximumFoodAllowed)
+                foodList.add(new Food());
+        }
+    }
+
+    class HealthPotionFallingTask extends TimerTask {
+        @Override
+        public void run() {
+            if (potionsList.size() < maximumPotionAllowed)
+                potionsList.add(new Potion());
+        }
+    }
+
     //Konstruktor mängu objekti loomiseks
     public GameView() {
         this.setHeight(600);
@@ -154,26 +171,8 @@ public class GameView extends Pane {
         LongValue lastNanoTime = new LongValue( System.nanoTime() );
 
         //See on toiduloopija, mis lisav toitu meie foodList-i
-        Timer timer = new Timer();
-
-        class FoodThrowingTask extends TimerTask {
-            @Override
-            public void run() {
-                if (foodList.size() < maximumFoodAllowed)
-                    foodList.add(new Food());
-            }
-        }
-
-        class HealthPotionFallingTask extends TimerTask {
-            @Override
-            public void run() {
-                if (potionsList.size() < maximumPotionAllowed)
-                    potionsList.add(new Potion());
-            }
-        }
-
-        timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 600);
-        timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 5000, 10000);
+        //timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 600);
+        //timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 5000, 10000);
 
         animationTimer = new AnimationTimer()
         {
@@ -366,6 +365,13 @@ public class GameView extends Pane {
     }
 
     public void resetGame() {
+        try {
+            timer.cancel();
+            }
+        catch (IllegalStateException e){};
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 600);
+        timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 5000, 10000);
         foodList = new ArrayList<Food>();
         potionsList = new ArrayList<Potion>();
         usersCombinedScore = 0;

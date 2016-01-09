@@ -11,11 +11,12 @@ public class Food extends Sprite {
     public Boolean good;
     Random random = new Random();
     public double fallingStuffSpeed = 90;
+    private double randomSpeedElement = random.nextInt(25);
 
     public Food() {
         good = random.nextBoolean();
         this.setPosition( 32+random.nextInt(736), 0 ); //positioon 32-768
-        this.setVelocity(0, fallingStuffSpeed+random.nextInt(25));
+        this.setVelocity(0, fallingStuffSpeed+randomSpeedElement);
         if (good)
             this.setImage(goodFood[random.nextInt(goodFood.length)]);
         else
@@ -25,6 +26,6 @@ public class Food extends Sprite {
     public void update(double time)
     {
         positionX += velocityX * time;
-        positionY += fallingStuffSpeed * time;
+        positionY += (fallingStuffSpeed+randomSpeedElement) * time;
     }
 }
