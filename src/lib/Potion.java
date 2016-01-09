@@ -16,6 +16,7 @@ public class Potion extends Sprite {
     private double startingX;
     private double angle = 0;
     public double rotation = 35;
+    public double fallingStuffSpeed = 90;
 
     private void rotate(GraphicsContext gc, double angle, double px, double py) {
         Rotate r = new Rotate(angle, px, py);
@@ -45,6 +46,6 @@ public class Potion extends Sprite {
         this.setImage(image);
         startingX = 100+random.nextInt(600); //positsioon 100-700
         this.setPosition( startingX, 0 );
-        this.setVelocity(0, 100);
+        this.setVelocity(0, fallingStuffSpeed+10);
     }
 }

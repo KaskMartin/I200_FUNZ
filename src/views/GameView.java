@@ -26,11 +26,14 @@ public class GameView extends Pane {
     private int healthRemaining = healthAtStart; //elude hulk mis järgi on, kui see =0, siis mäng läbi!!
     private int maximumFoodAllowed = 50;
     private int maximumPotionAllowed = 2;
+    private int startingLevel = 0;
+    private int currentLevel = 0;
     public AnimationTimer animationTimer;
     public User user1 = new User(0, 38, 75, 16);
     public User user2 = new User(63, 35, 101, 17);
     public Font theFont = Font.font( "Tahoma", FontWeight.BOLD, 24 );
     private Image healthoMeter = new Image("images/techno-heart_5.png");
+    private double fallingStuffSpeed = 90;
 
     public void setHealthoMeter() {
         switch (healthRemaining) {
@@ -86,6 +89,7 @@ public class GameView extends Pane {
     public GameView() {
         this.setHeight(600);
         this.setWidth(800);
+        this.currentLevel = startingLevel;
 
         //kasutajad, loome kasutades collision box muutujate modifitseerimisega konstruktorit
         user1.setImage("images/kasutaja1sinine.png");
@@ -130,13 +134,18 @@ public class GameView extends Pane {
 
         //See on toiduloopija, mis lisav toitu meie foodList-i
         Timer timer = new Timer();
-        TimerTask foodThrowingTask= new TimerTask() {
-            @Override
-            public void run() {
-                if (foodList.size() < maximumFoodAllowed)
-                    foodList.add(new Food());
-            }
-        };
+
+        public TimerTask FoodThrowingTask () {
+            TimerTask foodThrowingTask = new TimerTask() {
+                @Override
+                public void run() {
+                    if (foodList.size() < maximumFoodAllowed)
+                        foodList.add(new Food());
+                }
+            };
+            return foodThrowingTask;
+        }
+
 
         TimerTask healthPotionFallingTask = new TimerTask() {
             @Override
@@ -146,7 +155,7 @@ public class GameView extends Pane {
             }
         };
 
-        timer.scheduleAtFixedRate(foodThrowingTask, 0, 600);
+        timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 600);
         timer.scheduleAtFixedRate(healthPotionFallingTask, 5000, 10000);
 
         animationTimer = new AnimationTimer()
@@ -180,24 +189,57 @@ public class GameView extends Pane {
                 user1.render(gc);
                 user2.render(gc);
 
+                //LEVELITE haldus
+                if (currentLevel == 0 && usersCombinedScore > 75){
+                    currentLevel++;
+                    fallingStuffSpeed = 95;
+                }
+                else if (currentLevel == 1 && usersCombinedScore > 150){
+                    currentLevel++;
+                    fallingStuffSpeed = 100;
+                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                }
+                else if (currentLevel == 2 && usersCombinedScore > 250){
+                    currentLevel++;
+                    fallingStuffSpeed = 105;
+                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                }
+                else if (currentLevel == 3 && usersCombinedScore > 375){
+                    currentLevel++;
+                    fallingStuffSpeed = 110;
+                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                }
+                else if (currentLevel == 4 && usersCombinedScore > 500){
+                    currentLevel++;
+                    fallingStuffSpeed = 115;
+                    timer.scheduleAtFixedRate(FoodThrowingTask(), 0, 2000);
+                }
+
                 // kokkupõrgete avastamine ja nendele vastavad tegevused
                 Iterator<Potion> potionIter = potionsList.iterator();
                 while ( potionIter.hasNext() ) {
-                    Potion potionSprite = potionIter.next();
-                    potionSprite.render(gc);
-                    if ( user1.intersects(potionSprite)|| user2.intersects(potionSprite) )
-                    {
-                        if (healthRemaining < healthAtStart) {
-                            healthRemaining++;
-                            System.out.println("Yey, you got a brand new heart");
+                    try {
+                        Potion potionSprite = potionIter.next();
+                        potionSprite.fallingStuffSpeed = fallingStuffSpeed;
+                        potionSprite.render(gc);
+                        if ( user1.intersects(potionSprite)|| user2.intersects(potionSprite) )
+                        {
+                            if (healthRemaining < healthAtStart) {
+                                healthRemaining++;
+                                System.out.println("Yey, you got a brand new heart");
+                            }
+                            setHealthoMeter();
+                            potionIter.remove();
                         }
-                        setHealthoMeter();
-                        potionIter.remove();
+                        else if ( potionSprite.intersects(grassSprite)) {
+                            potionIter.remove();
+                        }
+                        potionSprite.update(elapsedTime);
                     }
-                    else if ( potionSprite.intersects(grassSprite)) {
-                        potionIter.remove();
+                    catch (ConcurrentModificationException e) {
+                        System.out.println("Mitu asja sai korraga otsa. Pole erilist probleemi.");
+                        break;
                     }
-                    potionSprite.update(elapsedTime);
                 }
 
                 // kokkupõrgete avastamine ja nendele vastavad tegevused
@@ -206,6 +248,7 @@ public class GameView extends Pane {
                 {
                     try {Food foodSprite = foodIter.next();
                         foodSprite.render(gc);
+                        foodSprite.fallingStuffSpeed = fallingStuffSpeed;
                         if ( user1.intersects(foodSprite)|| user2.intersects(foodSprite) )
                         {
                             if (foodSprite.good) {
@@ -272,6 +315,8 @@ public class GameView extends Pane {
         foodList = new ArrayList<Food>();
         potionsList = new ArrayList<Potion>();
         usersCombinedScore = 0;
+        fallingStuffSpeed = 90;
+        currentLevel = startingLevel;
         healthRemaining = healthAtStart;
         setHealthoMeter();
         user1.setPosition(200, 365);
