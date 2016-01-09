@@ -204,29 +204,34 @@ public class GameView extends Pane {
                 Iterator<Food> foodIter = foodList.iterator();
                 while ( foodIter.hasNext() )
                 {
-                    Food foodSprite = foodIter.next();
-                    foodSprite.render(gc);
-                    if ( user1.intersects(foodSprite)|| user2.intersects(foodSprite) )
-                    {
-                        if (foodSprite.good) {
-                            usersCombinedScore += 10; //kui toit oli tervislik suurendame skoori
-                            PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
+                    try {Food foodSprite = foodIter.next();
+                        foodSprite.render(gc);
+                        if ( user1.intersects(foodSprite)|| user2.intersects(foodSprite) )
+                        {
+                            if (foodSprite.good) {
+                                usersCombinedScore += 10; //kui toit oli tervislik suurendame skoori
+                                PlaySound("src/sounds/213424__taira-komori__short-pickup03.mp3");
+                            }
+                            else {
+                                healthRemaining--;//kui toit oli paha, vähendame elusid
+                                setHealthoMeter();//uuenda elude näitamise mõõdikut
+                                PlaySound("src/sounds/249615__vincentm400__confirm.mp3");
+                            }
+                            foodIter.remove(); //viska toit minema
                         }
-                        else {
-                            healthRemaining--;//kui toit oli paha, vähendame elusid
-                            setHealthoMeter();//uuenda elude näitamise mõõdikut
-                            PlaySound("src/sounds/249615__vincentm400__confirm.mp3");
+                        else if ( foodSprite.intersects(grassSprite)) {
+                            foodIter.remove();
+                            if (foodSprite.good) {
+                                usersCombinedScore--;
+                                PlaySound("src/sounds/149899__animationisaac__box-crash.mp3");
+                            }
                         }
-                        foodIter.remove(); //viska toit minema
+                        foodSprite.update(elapsedTime);
                     }
-                    else if ( foodSprite.intersects(grassSprite)) {
-                        foodIter.remove();
-                        if (foodSprite.good) {
-                            usersCombinedScore--;
-                            PlaySound("src/sounds/149899__animationisaac__box-crash.mp3");
-                        }
+                    catch (ConcurrentModificationException e) {
+                        System.out.println("Mitu asja sai korraga otsa. Pole erilist probleemi.");
+                        break;
                     }
-                    foodSprite.update(elapsedTime);
                 }
 
                 // Näita elusid, mis järgi on
