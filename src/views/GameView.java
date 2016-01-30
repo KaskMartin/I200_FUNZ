@@ -362,13 +362,14 @@ public class GameView extends Pane {
 
     public void stopGame() {
             animationTimer.stop();
+            input = new ArrayList<String>();
     }
 
     public void resetGame() {
         try {
             timer.cancel();
             }
-        catch (IllegalStateException e){};
+        catch (IllegalStateException e){}
         timer = new Timer();
         timer.scheduleAtFixedRate(new FoodThrowingTask(), 0, 600);
         timer.scheduleAtFixedRate(new HealthPotionFallingTask(), 5000, 10000);
